@@ -12,4 +12,6 @@ public class User {
         this.email = email;
     }
 
+    //method: getBooked(): List<Booking>
+    //method: getFavorite(): FavoritedTrips
 }
