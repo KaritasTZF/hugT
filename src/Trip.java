@@ -1,4 +1,4 @@
-package hugT;
+package hugT.src;
 
 import java.util.ArrayList; //Til þess að geyma lista af object okkar
 
@@ -9,7 +9,7 @@ public class Trip {
     private ArrayList<TripItem> items; //Listi af TripItems, listinn heitir items
 
     //Constructor to initialize Trip object
-    public void Trip() {
+    public Trip() {
 
     }
 
