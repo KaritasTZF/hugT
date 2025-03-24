@@ -1,4 +1,4 @@
-package main.Model;
+package project.Model;
 
 public class Booking {
     private int userID;

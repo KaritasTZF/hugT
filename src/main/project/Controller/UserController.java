@@ -1,4 +1,4 @@
-package main.Controller;
+package project.Controller;
 
 public class UserController {
 

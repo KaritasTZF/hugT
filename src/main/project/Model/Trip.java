@@ -1,4 +1,4 @@
-package main.Model;
+package project.Model;
 
 import java.time.LocalDate;
 import java.util.ArrayList; //Til þess að geyma lista af object okkar

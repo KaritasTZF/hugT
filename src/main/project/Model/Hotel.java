@@ -1,11 +1,9 @@
-package main.Model;
+package project.Model;
 
 import java.time.LocalDate;
 
-public class Flight {
+public class Hotel {
     // attributes hér
-    private String from;
-    private String to;
     private int people;
     private int days;
     private LocalDate startDate;
@@ -14,31 +12,13 @@ public class Flight {
     private String location;
 
     // Constructor
-    public Flight(String from, String to, int people, int days, LocalDate startDate, LocalDate endDate, double price, String location) {
-        this.from = from;
-        this.to = to;
+    public Hotel(int people, int days, LocalDate startDate, LocalDate endDate, double price, String location) {
         this.people = people;
         this.days = days;
         this.startDate = startDate;
         this.endDate = endDate;
         this.price = price;
         this.location = location;
-    }
-
-    public String getFrom() {
-        return from;
-    }
-
-    public void setFrom(String from) {
-        this.from = from;
-    }
-
-    public String getTo() {
-        return to;
-    }
-
-    public void setTo(String to) {
-        this.to = to;
     }
 
     public int getPeople() {
@@ -88,6 +68,5 @@ public class Flight {
     public void setLocation(String location) {
         this.location = location;
     }
-
     // methods hér. Aðallega getterar fyrir hvert attribute.
 }
