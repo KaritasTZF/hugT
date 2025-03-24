@@ -1,4 +1,4 @@
-package Model;
+package main.Model;
 
 import java.util.ArrayList; //Til þess að geyma lista af object okkar
 
