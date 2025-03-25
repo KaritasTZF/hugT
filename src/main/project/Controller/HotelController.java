@@ -14,7 +14,7 @@ public class HotelController {
     public List<Hotel> searchHotel(Date date, String location, int people) {
         // Kallar á aðferðina í SearchController sem sækir hótel
         List<Hotel> hotels = searchController.findAvailableHotels(date, location, people);
-        // Hér gætirðu gert frekari úrvinnslu ef þarf
+        // Hér vantar kannski frekari úrvinnslu, átta mig ekki alveg á því
         return hotels;
     }
 }
