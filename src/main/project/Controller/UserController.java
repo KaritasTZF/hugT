@@ -18,6 +18,7 @@ public class UserController {
             System.out.println("New user created: " + newUser.getName());
             System.out.println("User ID: " + newUser.getUserID());
             System.out.println("Email: " + newUser.getEmail());
+            //Veit ekki hvort þörf er á þessum prentlínum
         } else {
             System.out.println("User already exists. Doing nothing.");
         }
