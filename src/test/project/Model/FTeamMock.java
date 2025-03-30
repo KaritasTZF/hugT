@@ -4,22 +4,23 @@ import java.time.LocalDate;
 
 public class FTeamMock {
     //Mock database values
-    String[] flugdataTo = {"Reykjavík", "Egilsstaðir", "Ísafjörður"};
-    String[] flugdataFrom = {"Akureyri", "Egilsstaðir", "Ísafjörður"};
-    int flugdataMaxPeople = 50;
-    int flugdataDays = 2;
-    LocalDate flugdataStart = LocalDate.parse("2025-05-12");
-    LocalDate flugdataEnd = LocalDate.parse("2025-05-14");
-    int flugdataMaxPrice = 24000;
-    String flugdataLoc = "Akureyri";
+    String[] to = {"Reykjavík", "Egilsstaðir", "Ísafjörður"};
+    String[] from = {"Akureyri", "Ísafjörður", "Egilsstaðir"};
+    int seatsAvailable = 50;
+    int days = 2;
+    LocalDate startDate = LocalDate.parse("2025-05-12");
+    LocalDate endDate = LocalDate.parse("2025-05-14");
+    int maxPrice = 24000; //in isk
+    String location = "Akureyri";
 
     public FlightDB flightDB;
 
-    //Constructor
+    //Constructor, creates a FlightDB object with above example data
     public FTeamMock() {
         flightDB = new FlightDB();
+
         for (int i = 0; i<3; i++) {
-            flightDB.createFlight(flugdataTo[i],flugdataFrom[i],flugdataMaxPeople,flugdataDays,flugdataStart,flugdataEnd,flugdataMaxPrice,flugdataLoc);
+            flightDB.createFlight(to[i],from[i],seatsAvailable,days,startDate,endDate,maxPrice,location);
         }
     }
 }

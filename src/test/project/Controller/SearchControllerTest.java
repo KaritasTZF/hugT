@@ -19,6 +19,8 @@ public class SearchControllerTest {
     void setUp() {
         FTeamMock fteam = new FTeamMock();
         FlightDB flightDB = fteam.flightDB;
+        //FlightDB object with example data stored in FTeamMock
+        // null values for hotelDB and dayTourDB
         sc = new SearchController(flightDB,null,null);
     }
 
@@ -29,7 +31,7 @@ public class SearchControllerTest {
     }
 
     // FlightFindParameters:
-    // assert that all flights returned have the matching parameters
+    // assert that all flights returned have the searched-for parameters
     @Test
     void testFlightFindParametersTo() {
         sc.setTo("Reykjavík");
@@ -90,8 +92,9 @@ public class SearchControllerTest {
         }
     }
 
-    // FlightFindAll:
-    // assert that there does not exist a flight not returned that matches parameters
+    // testFlightFindAll:
+    // assert that there does not exist a flight with searched-for parameters
+    // that was not returned
     @Test
     void testFlightFindAllTo() {
         sc.setTo("Reykjavík");
