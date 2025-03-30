@@ -6,7 +6,7 @@ public class Flight {
     // attributes hér
     private String from;
     private String to;
-    private int people;
+    private int availableSeats;
     private int days;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -14,10 +14,10 @@ public class Flight {
     private String location;
 
     // Constructor
-    public Flight(String from, String to, int people, int days, LocalDate startDate, LocalDate endDate, double price, String location) {
+    public Flight(String from, String to, int availableSeats, int days, LocalDate startDate, LocalDate endDate, double price, String location) {
         this.from = from;
         this.to = to;
-        this.people = people;
+        this.availableSeats = availableSeats;
         this.days = days;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -41,12 +41,12 @@ public class Flight {
         this.to = to;
     }
 
-    public int getPeople() {
-        return this.people;
+    public int getavailableSeats() {
+        return this.availableSeats;
     }
 
-    public void setPeople(int people) {
-        this.people = people;
+    public void setavailableSeats(int availableSeats) {
+        this.availableSeats = availableSeats;
     }
 
     public int getDays() {
