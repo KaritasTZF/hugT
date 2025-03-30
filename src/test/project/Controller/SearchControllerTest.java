@@ -3,13 +3,17 @@ package project.Controller;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import project.Model.*;
+import project.Model.FTeamMock;
+import project.Model.Flight;
+import project.Model.FlightDB;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SearchControllerTest {
     SearchController sc;
@@ -64,23 +68,23 @@ public class SearchControllerTest {
 
     @Test
     void testFlightFindParametersStartDate() {
-        LocalDate date = LocalDate.parse("2025-05-12");
-        sc.setStartDate(date);
+        LocalDateTime dateTime = LocalDate.parse("2025-05-12").atStartOfDay();
+        sc.setStartDate(dateTime.toLocalDate());
         ArrayList<Flight> flights = sc.findAvailableFlights();
 
         for (Flight flight : flights) {
-            assertTrue(flight.getDate().isEqual(date) || flight.getDate().isAfter(date));
+            assertTrue(flight.getStartDateTime().isEqual(dateTime) || flight.getStartDateTime().isAfter(dateTime));
         }
     }
 
     @Test
     void testFlightFindParametersEndDate() {
-        LocalDate date = LocalDate.parse("2025-05-14");
-        sc.setEndDate(date);
+        LocalDateTime dateTime = LocalDate.parse("2025-05-14").atTime(23,59);
+        sc.setEndDate(dateTime.toLocalDate());
         ArrayList<Flight> flights = sc.findAvailableFlights();
 
         for (Flight flight : flights) {
-            assertTrue(flight.getDate().isEqual(date) || flight.getDate().isBefore(date));
+            assertTrue(flight.getEndDateTime().isEqual(dateTime) || flight.getEndDateTime().isBefore(dateTime));
         }
     }
 
@@ -135,12 +139,12 @@ public class SearchControllerTest {
 
     @Test
     void testFlightFindAllStartDate() {
-        LocalDate date = LocalDate.parse("2025-05-12");
-        sc.setStartDate(date);
+        LocalDateTime dateTime = LocalDate.parse("2025-05-12").atStartOfDay();
+        sc.setStartDate(dateTime.toLocalDate());
         ArrayList<Flight> returnedFlights = sc.findAvailableFlights();
 
         for (Flight flight : flightDB.getFlightList()) {
-            if (flight.getDate().isEqual(date) || flight.getDate().isAfter(date)) {
+            if (flight.getStartDateTime().isEqual(dateTime) || flight.getStartDateTime().isAfter(dateTime)) {
                 assertTrue(returnedFlights.contains(flight));
             }
         }
@@ -148,12 +152,12 @@ public class SearchControllerTest {
 
     @Test
     void testFlightFindAllEndDate() {
-        LocalDate date = LocalDate.parse("2025-05-14");
-        sc.setEndDate(date);
+        LocalDateTime dateTime = LocalDate.parse("2025-05-14").atTime(23,59);
+        sc.setEndDate(dateTime.toLocalDate());
         ArrayList<Flight> returnedFlights = sc.findAvailableFlights();
 
         for (Flight flight : flightDB.getFlightList()) {
-            if (flight.getDate().isEqual(date) || flight.getDate().isBefore(date)) {
+            if (flight.getEndDateTime().isEqual(dateTime) || flight.getEndDateTime().isBefore(dateTime)) {
                 assertTrue(returnedFlights.contains(flight));
             }
         }

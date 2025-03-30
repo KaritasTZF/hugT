@@ -1,17 +1,15 @@
 package project.Model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class FTeamMock {
     //Mock database values
     String[] to = {"Reykjavík", "Egilsstaðir", "Ísafjörður"};
     String[] from = {"Akureyri", "Ísafjörður", "Egilsstaðir"};
     int seatsAvailable = 50;
-    int days = 2;
-    LocalDate startDate = LocalDate.parse("2025-05-12");
-    LocalDate endDate = LocalDate.parse("2025-05-14");
-    int maxPrice = 24000; //in isk
-    String location = "Akureyri";
+    LocalDateTime startDateTime = LocalDateTime.parse("2025-05-12T10:00:00");
+    LocalDateTime endDateTime = LocalDateTime.parse("2025-05-14T10:23:59");
+    int price = 24000; //in isk
 
     public FlightDB flightDB;
 
@@ -20,7 +18,7 @@ public class FTeamMock {
         flightDB = new FlightDB();
 
         for (int i = 0; i<3; i++) {
-            flightDB.createFlight(to[i],from[i],seatsAvailable,days,startDate,endDate,maxPrice,location);
+            flightDB.createFlight(to[i],from[i],seatsAvailable,startDateTime, endDateTime,price);
         }
     }
 }

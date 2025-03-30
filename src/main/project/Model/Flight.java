@@ -1,25 +1,22 @@
 package project.Model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Flight {
     private String from;
     private String to;
     private int availableSeats;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
-    private LocalDate date;
+    private LocalDateTime startDateTime;
+    private LocalDateTime endDateTime;
     private int price;
 
     // Constructor
-    public Flight(String from, String to, int availableSeats, LocalDateTime startTime, LocalDateTime endTime, LocalDate date, int price) {
+    public Flight(String from, String to, int availableSeats, LocalDateTime startDateTime, LocalDateTime endTime, int price) {
         this.from = from;
         this.to = to;
         this.availableSeats = availableSeats;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.date = date;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endTime;
         this.price = price;
     }
 
@@ -47,28 +44,20 @@ public class Flight {
         this.availableSeats = availableSeats;
     }
 
-    public LocalDate getDate() {
-        return this.date;
+    public LocalDateTime getStartDateTime() {
+        return this.startDateTime;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setStartDateTime(LocalDateTime startDateTime) {
+        this.startDateTime= startDateTime;
     }
 
-    public LocalDateTime getStartTime() {
-        return this.startTime;
+    public LocalDateTime getEndDateTime() {
+        return this.endDateTime;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime= startTime;
-    }
-
-    public LocalDateTime getEndTime() {
-        return this.endTime;
-    }
-
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
+    public void setEndDateTime(LocalDateTime endDateTime) {
+        this.endDateTime = endDateTime;
     }
 
     public int getPrice() {
