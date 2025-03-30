@@ -4,15 +4,15 @@ import java.time.LocalDate;
 import java.util.ArrayList; //Til þess að geyma lista af object okkar
 
 public class Trip {
-    private String tripID;
-    private int people;
-    private int days;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private double price;
-    private ArrayList<Flight> flightItems; //Listi af Flight,listinn heitir flightItems (gamalt frá TripItems)
-    private ArrayList<Hotel> hotelItems; //Listi af Hotel, listinn heitir hotelItems (gamalt frá TripItems)
-    private ArrayList<DayTour> dayTourItems; //Listi af DayTour, listinn heitir dayTourItems (gamalt frá TripItems)
+    private String tripID=null;
+    private int people=null;
+    private int days=null;
+    private LocalDate startDate=null;
+    private LocalDate endDate=null;
+    private double price=null;
+    private ArrayList<Flight> flightItems=null; //Listi af Flight,listinn heitir flightItems (gamalt frá TripItems)
+    private ArrayList<Hotel> hotelItems=null; //Listi af Hotel, listinn heitir hotelItems (gamalt frá TripItems)
+    private ArrayList<DayTour> dayTourItems=null; //Listi af DayTour, listinn heitir dayTourItems (gamalt frá TripItems)
 
     //Constructor to initialize Trip object
     public Trip(
@@ -46,7 +46,7 @@ public class Trip {
     public void setTripID(String tripID) {
         this.tripID = tripID;
     }
-    
+
     //skilar fjöldi manns
     public int getPeople() {
         return this.people;
