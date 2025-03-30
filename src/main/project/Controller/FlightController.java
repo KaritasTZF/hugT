@@ -1,8 +1,9 @@
 package project.Controller;
 
 import project.Model.Flight;
-import java.util.Date;
-import java.util.List;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class FlightController {
 
@@ -16,10 +17,13 @@ public class FlightController {
     //searchFlight(date, departure, arrival, people): List<Flight>
     //Kallar á SearchController til að sækja tiltæk flug.
 
-    public List<Flight> searchFlight(Date date, String departure, String arrival, int people) {
-        // Kallar á SearchController-aðgerðina
-        List<Flight> flights = searchController.findAvailableFlights(date, departure, arrival, people);
-        // Fæ villu fyrir parametrana - Þarf að laga!
-        return flights;
+    public ArrayList<Flight> searchFlight(LocalDate startDate,LocalDate endDate, String departure, String arrival, int people) {
+        searchController.setFrom(departure);
+        searchController.setTo(arrival);
+        searchController.setStartDate(startDate);
+        searchController.setEndDate(endDate);
+        searchController.setPeople(people);
+        // Kallar á SearchController-aðgerðina sem leitar að flugum
+        return searchController.findAvailableFlights();
     }
 }

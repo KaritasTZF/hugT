@@ -64,21 +64,23 @@ public class SearchControllerTest {
 
     @Test
     void testFlightFindParametersStartDate() {
-        sc.setStartDate(LocalDate.parse("2025-05-12"));
+        LocalDate date = LocalDate.parse("2025-05-12");
+        sc.setStartDate(date);
         ArrayList<Flight> flights = sc.findAvailableFlights();
 
         for (Flight flight : flights) {
-            assertEquals(flight.getStartDate(),LocalDate.parse("2025-05-12"));
+            assertTrue(flight.getDate().isEqual(date) || flight.getDate().isAfter(date));
         }
     }
 
     @Test
     void testFlightFindParametersEndDate() {
-        sc.setEndDate(LocalDate.parse("2025-05-14"));
+        LocalDate date = LocalDate.parse("2025-05-14");
+        sc.setEndDate(date);
         ArrayList<Flight> flights = sc.findAvailableFlights();
 
         for (Flight flight : flights) {
-            assertEquals(flight.getEndDate(),LocalDate.parse("2025-05-14"));
+            assertTrue(flight.getDate().isEqual(date) || flight.getDate().isBefore(date));
         }
     }
 
@@ -133,11 +135,12 @@ public class SearchControllerTest {
 
     @Test
     void testFlightFindAllStartDate() {
-        sc.setStartDate(LocalDate.parse("2025-05-12"));
+        LocalDate date = LocalDate.parse("2025-05-12");
+        sc.setStartDate(date);
         ArrayList<Flight> returnedFlights = sc.findAvailableFlights();
 
         for (Flight flight : flightDB.getFlightList()) {
-            if (Objects.equals(flight.getStartDate(), LocalDate.parse("2025-05-12"))) {
+            if (flight.getDate().isEqual(date) || flight.getDate().isAfter(date)) {
                 assertTrue(returnedFlights.contains(flight));
             }
         }
@@ -145,11 +148,12 @@ public class SearchControllerTest {
 
     @Test
     void testFlightFindAllEndDate() {
-        sc.setEndDate(LocalDate.parse("2025-05-14"));
+        LocalDate date = LocalDate.parse("2025-05-14");
+        sc.setEndDate(date);
         ArrayList<Flight> returnedFlights = sc.findAvailableFlights();
 
         for (Flight flight : flightDB.getFlightList()) {
-            if (Objects.equals(flight.getEndDate(), LocalDate.parse("2025-05-14"))) {
+            if (flight.getDate().isEqual(date) || flight.getDate().isBefore(date)) {
                 assertTrue(returnedFlights.contains(flight));
             }
         }

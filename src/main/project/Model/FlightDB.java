@@ -1,16 +1,18 @@
 package project.Model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class FlightDB {
-    private ArrayList<Flight> flightList;
+    private final ArrayList<Flight> flightList;
 
     public FlightDB() {
+        flightList = new ArrayList<>();
     }
 
-    public void createFlight(String flugdataTo, String flugdataFrom, int flugdataMaxPeople, int flugdataDays, LocalDate flugdataStart, LocalDate flugdataEnd, int flugdataMaxPrice, String flugdataLoc) {
-        flightList.add(new Flight(flugdataTo,flugdataFrom,flugdataMaxPeople,flugdataDays,flugdataStart,flugdataEnd,flugdataMaxPrice,flugdataLoc));
+    public void createFlight(String from, String to, int availableSeats, LocalDateTime startTime, LocalDateTime endTime, LocalDate date, int price) {
+        flightList.add(new Flight(from,to, availableSeats,startTime,endTime, date,price));
     }
 
     public ArrayList<Flight> getFlightList(){

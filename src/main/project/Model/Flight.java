@@ -1,25 +1,25 @@
 package project.Model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Flight {
-    // attributes hér
     private String from;
     private String to;
     private int availableSeats;
-    private int days;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private double price;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+    private LocalDate date;
+    private int price;
 
     // Constructor
-    public Flight(String from, String to, int availableSeats, int days, LocalDate startDate, LocalDate endDate, double price) {
+    public Flight(String from, String to, int availableSeats, LocalDateTime startTime, LocalDateTime endTime, LocalDate date, int price) {
         this.from = from;
         this.to = to;
         this.availableSeats = availableSeats;
-        this.days = days;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.date = date;
         this.price = price;
     }
 
@@ -47,35 +47,35 @@ public class Flight {
         this.availableSeats = availableSeats;
     }
 
-    public int getDays() {
-        return this.days;
+    public LocalDate getDate() {
+        return this.date;
     }
 
-    public void setDays(int days) {
-        this.days = days;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
-    public LocalDate getStartDate() {
-        return this.startDate;
+    public LocalDateTime getStartTime() {
+        return this.startTime;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime= startTime;
     }
 
-    public LocalDate getEndDate() {
-        return this.endDate;
+    public LocalDateTime getEndTime() {
+        return this.endTime;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return this.price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 }

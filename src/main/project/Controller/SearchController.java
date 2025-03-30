@@ -79,14 +79,14 @@ public class SearchController {
 
     //Leitar eftir flug í flightDB
     public ArrayList<Flight> findAvailableFlights() {
-      ArrayList<Flight> flightDBList = flightDB.getFlightList();
-      ArrayList<Flight> flightReturnList= new ArrayList<Flight>();
+        ArrayList<Flight> flightDBList = flightDB.getFlightList();
+        ArrayList<Flight> flightReturnList= new ArrayList<Flight>();
 
         for (Flight flight : flightDBList) {
             if (Objects.equals(flight.getFrom(), from)) {
                 if (Objects.equals(flight.getTo(), to)) {
-                    if (Objects.equals(flight.getStartDate(), startDate)) {
-                        if (Objects.equals(flight.getEndDate(), endDate)) {
+                    if (flight.getDate().isBefore(endDate) || flight.getDate().isEqual(endDate)) {
+                        if (flight.getDate().isAfter(startDate) || flight.getDate().isEqual(startDate)) {
                             if (flight.getavailableSeats() >= people) {
                                 if (flight.getPrice() <= maxPrice) {
                                     flightReturnList.add(flight);
@@ -97,7 +97,7 @@ public class SearchController {
                 }
             }
         }
-      return flightReturnList;
+        return flightReturnList;
     }
 
     //Leitar eftir hotel í hotelDB
@@ -129,8 +129,8 @@ public class SearchController {
         for (DayTour dayTour : dayTourDBList) {
             if (Objects.equals(dayTour.getPeople(), people)) {
                 if (Objects.equals(dayTour.getLocation(), location)) {
-                    if (dayTour.getDate().isAfter(startDate)) {
-                        if (dayTour.getDate().isBefore(endDate)) {
+                    if (dayTour.getDate().isAfter(startDate) || dayTour.getDate().isEqual(startDate)) {
+                        if (dayTour.getDate().isBefore(endDate) || dayTour.getDate().isEqual(endDate)) {
                             if (dayTour.getPrice() <= maxPrice) {
                                 dayTourReturnList.add(dayTour);
                             }

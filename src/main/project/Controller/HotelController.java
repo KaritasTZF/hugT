@@ -1,7 +1,9 @@
 package project.Controller;
+
 import project.Model.Hotel;
-import java.util.Date;
-import java.util.List;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class HotelController {
 
@@ -11,10 +13,12 @@ public class HotelController {
         this.searchController = searchController;
     }
 
-    public List<Hotel> searchHotel(Date date, String location, int people) {
+    public ArrayList<Hotel> searchHotel(LocalDate startDate, LocalDate endDate, String location, int people) {
         // Kallar á aðferðina í SearchController sem sækir hótel
-        List<Hotel> hotels = searchController.findAvailableHotels(date, location, people);
-        // Hér vantar kannski frekari úrvinnslu, átta mig ekki alveg á því
-        return hotels;
+        searchController.setStartDate(startDate);
+        searchController.setEndDate(endDate);
+        searchController.setLocation(location);
+        searchController.setPeople(people);
+        return searchController.findAvailableHotels();
     }
 }
