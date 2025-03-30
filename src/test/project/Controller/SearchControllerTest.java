@@ -11,7 +11,7 @@ import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SearchControllerFlightTest {
+public class SearchControllerTest {
     SearchController sc;
     FlightDB flightDB;
 
