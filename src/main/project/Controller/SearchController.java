@@ -30,6 +30,43 @@ public class SearchController {
       return this.from;
     }
 
+    public void setTo(String to) {
+        this.to = to;
+    }
+    public String getTo() {
+        return this.to;
+    }
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+    public LocalDate getStartDate() {
+        return this.startDate;
+    }
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+    public LocalDate getEndDate() {
+        return this.endDate;
+    }
+    public void setMaxPrice(int maxPrice) {
+        this.maxPrice = maxPrice;
+    }
+    public int getMaxPrice() {
+        return this.maxPrice;
+    }
+    public void setPeople(int people) {
+        this.people = people;
+    }
+    public int getPeople() {
+        return this.people;
+    }
+    public void setLocation(String location) {
+        this.location = location;
+    }
+    public String getLocation() {
+        return this.location;
+    }
+
     //Leitar eftir flug í flightDB
     public ArrayList<Flight> findAvailableFlights() {
       ArrayList<Flight> flightDBList = flightDB.getFlightList();
