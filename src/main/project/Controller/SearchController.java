@@ -29,7 +29,6 @@ public class SearchController {
     public String getFrom() {
       return this.from;
     }
-
     public void setTo(String to) {
         this.to = to;
     }
@@ -73,10 +72,20 @@ public class SearchController {
       ArrayList<Flight> flightReturnList= new ArrayList<Flight>();
 
       for (int i = 0; i< flightDBList.size();i++) {
-        if (Objects.equals(flightDBList.get(i).getFrom(), from)) {
-          // TODO +if fyrir hvert parameter
-          flightReturnList.add(flightDBList.get(i));
-        }
+          Flight flight = flightDBList.get(i);
+          if (Objects.equals(flight.getFrom(), from)) {
+             if (Objects.equals(flight.getTo(), to)) {
+                if (Objects.equals(flight.getStartDate(), startDate)) {
+                    if (Objects.equals(flight.getEndDate(), endDate)) {
+                        if (flight.getavailableSeats() >= people) {
+                            if (flight.getPrice() <= maxPrice) {
+                                flightReturnList.add(flight);
+                            }
+                        }
+                    }
+                }
+             }
+          }
       }
       return flightReturnList;
     }
