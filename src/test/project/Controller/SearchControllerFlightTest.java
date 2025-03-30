@@ -11,7 +11,7 @@ import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SearchControllerTest {
+public class SearchControllerFlightTest {
     SearchController sc;
     FlightDB flightDB;
 
@@ -19,7 +19,7 @@ public class SearchControllerTest {
     void setUp() {
         FTeamMock fteam = new FTeamMock();
         FlightDB flightDB = fteam.flightDB;
-        sc = new SearchController(flightDB);
+        sc = new SearchController(flightDB,null,null);
     }
 
     @AfterEach
@@ -87,16 +87,6 @@ public class SearchControllerTest {
 
         for (Flight flight : flights) {
             assertTrue(flight.getPrice()>=100000);
-        }
-    }
-
-    @Test
-    void testFlightFindParametersLocation() {
-        sc.setLocation("Akureyri");
-        ArrayList<Flight> flights = sc.findAvailableFlights();
-
-        for (Flight flight : flights) {
-            assertEquals(flight.getLocation(),"Akureyri");
         }
     }
 
@@ -169,18 +159,6 @@ public class SearchControllerTest {
 
         for (Flight flight : flightDB.getFlightList()) {
             if (flight.getPrice() <= 100000) {
-                assertTrue(returnedFlights.contains(flight));
-            }
-        }
-    }
-
-    @Test
-    void testFlightFindAllLocation() {
-        sc.setLocation("Reykjavík");
-        ArrayList<Flight> returnedFlights = sc.findAvailableFlights();
-
-        for (Flight flight : flightDB.getFlightList()) {
-            if (Objects.equals(flight.getLocation(), "Reykjavík")) {
                 assertTrue(returnedFlights.contains(flight));
             }
         }

@@ -1,25 +1,30 @@
 package project.Controller;
 
-import project.Model.Flight;
-import project.Model.FlightDB;
+import project.Model.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class SearchController {
-    private String from = null;
-    private String to = null;
+    private String from = null; // flights only
+    private String to = null; // flights only
     private LocalDate startDate= null;
     private LocalDate endDate= null;
     private int maxPrice= 0;
     private int people= 0;
-    private String location= null;
-    private final FlightDB flightDB;
+    private int rooms = 0; //hotels only
+    private String location= null; //hotels and dayTours
 
-    // flightDB er þegar til, þurfum ekki að constructa nýtt alltaf
-    public SearchController(FlightDB flightDB){
+    private final FlightDB flightDB;
+    private final HotelDB hotelDB;
+    private final DayTourDB dayTourDB;
+
+    // DFH- DB er þegar til, þurfum ekki að constructa nýtt alltaf
+    public SearchController(FlightDB flightDB, HotelDB hotelDB, DayTourDB dayTourDB){
         this.flightDB = flightDB;
+        this.hotelDB = hotelDB;
+        this.dayTourDB = dayTourDB;
     }
 
     //setterar og getterar
@@ -65,6 +70,12 @@ public class SearchController {
     public String getLocation() {
         return this.location;
     }
+    public void setRooms(int rooms) {
+        this.rooms = rooms;
+    }
+    public int getRooms() {
+        return this.rooms;
+    }
 
     //Leitar eftir flug í flightDB
     public ArrayList<Flight> findAvailableFlights() {
@@ -87,6 +98,48 @@ public class SearchController {
             }
         }
       return flightReturnList;
+    }
+
+    //Leitar eftir hotel í hotelDB
+    public ArrayList<Hotel> findAvailableHotels() {
+        ArrayList<Hotel> hotelDBList = hotelDB.getHotelList();
+        ArrayList<Hotel> hotelReturnList= new ArrayList<Hotel>();
+
+        for (Hotel hotel : hotelDBList) {
+            if (Objects.equals(hotel.getRooms(), rooms)) {
+                if (Objects.equals(hotel.getLocation(), location)) {
+                    if (Objects.equals(hotel.getStartDate(), startDate)) {
+                        if (Objects.equals(hotel.getEndDate(), endDate)) {
+                            if (hotel.getPrice() <= maxPrice) {
+                                hotelReturnList.add(hotel);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return hotelReturnList;
+    }
+
+    //Leitar eftir dayTour í dayTourDB
+    public ArrayList<DayTour> findAvailableDayTours() {
+        ArrayList<DayTour> dayTourDBList = dayTourDB.getDayTourList();
+        ArrayList<DayTour> dayTourReturnList= new ArrayList<DayTour>();
+
+        for (DayTour dayTour : dayTourDBList) {
+            if (Objects.equals(dayTour.getPeople(), people)) {
+                if (Objects.equals(dayTour.getLocation(), location)) {
+                    if (dayTour.getDate().isAfter(startDate)) {
+                        if (dayTour.getDate().isBefore(endDate)) {
+                            if (dayTour.getPrice() <= maxPrice) {
+                                dayTourReturnList.add(dayTour);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return dayTourReturnList;
     }
 
 }

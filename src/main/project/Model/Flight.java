@@ -11,10 +11,9 @@ public class Flight {
     private LocalDate startDate;
     private LocalDate endDate;
     private double price;
-    private String location;
 
     // Constructor
-    public Flight(String from, String to, int availableSeats, int days, LocalDate startDate, LocalDate endDate, double price, String location) {
+    public Flight(String from, String to, int availableSeats, int days, LocalDate startDate, LocalDate endDate, double price) {
         this.from = from;
         this.to = to;
         this.availableSeats = availableSeats;
@@ -22,7 +21,6 @@ public class Flight {
         this.startDate = startDate;
         this.endDate = endDate;
         this.price = price;
-        this.location = location;
     }
 
     public String getFrom() {
@@ -80,14 +78,4 @@ public class Flight {
     public void setPrice(double price) {
         this.price = price;
     }
-
-    public String getLocation() {
-        return this.location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    // methods hér. Aðallega getterar fyrir hvert attribute.
 }

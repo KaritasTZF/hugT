@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Hotel {
     // attributes hér
-    private int people;
+    private int rooms;
     private int days;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -12,8 +12,8 @@ public class Hotel {
     private String location;
 
     // Constructor
-    public Hotel(int people, int days, LocalDate startDate, LocalDate endDate, double price, String location) {
-        this.people = people;
+    public Hotel(int rooms, int days, LocalDate startDate, LocalDate endDate, double price, String location) {
+        this.rooms = rooms;
         this.days = days;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -21,12 +21,12 @@ public class Hotel {
         this.location = location;
     }
 
-    public int getPeople() {
-        return this.people;
+    public int getRooms() {
+        return this.rooms;
     }
 
-    public void setPeople(int people) {
-        this.people = people;
+    public void setRooms(int rooms) {
+        this.rooms = rooms;
     }
 
     public int getDays() {
@@ -68,5 +68,4 @@ public class Hotel {
     public void setLocation(String location) {
         this.location = location;
     }
-    // methods hér. Aðallega getterar fyrir hvert attribute.
 }

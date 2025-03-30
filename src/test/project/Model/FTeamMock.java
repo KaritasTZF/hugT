@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class FTeamMock {
     //Mock database values
     String[] flugdataTo = {"Reykjavík", "Egilsstaðir", "Ísafjörður"};
-    String flugdataFrom = "Akureyri";
+    String[] flugdataFrom = {"Akureyri", "Egilsstaðir", "Ísafjörður"};
     int flugdataMaxPeople = 50;
     int flugdataDays = 2;
     LocalDate flugdataStart = LocalDate.parse("2025-05-12");
@@ -19,7 +19,7 @@ public class FTeamMock {
     public FTeamMock() {
         flightDB = new FlightDB();
         for (int i = 0; i<3; i++) {
-            flightDB.createFlight(flugdataTo[i],flugdataFrom,flugdataMaxPeople,flugdataDays,flugdataStart,flugdataEnd,flugdataMaxPrice,flugdataLoc);
+            flightDB.createFlight(flugdataTo[i],flugdataFrom[i],flugdataMaxPeople,flugdataDays,flugdataStart,flugdataEnd,flugdataMaxPrice,flugdataLoc);
         }
     }
 }
