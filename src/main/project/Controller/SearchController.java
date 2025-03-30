@@ -15,7 +15,7 @@ public class SearchController {
     private int maxPrice= 0;
     private int people= 0;
     private String location= null;
-    private FlightDB flightDB;
+    private final FlightDB flightDB;
 
     // flightDB er þegar til, þurfum ekki að constructa nýtt alltaf
     public SearchController(FlightDB flightDB){
@@ -71,22 +71,21 @@ public class SearchController {
       ArrayList<Flight> flightDBList = flightDB.getFlightList();
       ArrayList<Flight> flightReturnList= new ArrayList<Flight>();
 
-      for (int i = 0; i< flightDBList.size();i++) {
-          Flight flight = flightDBList.get(i);
-          if (Objects.equals(flight.getFrom(), from)) {
-             if (Objects.equals(flight.getTo(), to)) {
-                if (Objects.equals(flight.getStartDate(), startDate)) {
-                    if (Objects.equals(flight.getEndDate(), endDate)) {
-                        if (flight.getavailableSeats() >= people) {
-                            if (flight.getPrice() <= maxPrice) {
-                                flightReturnList.add(flight);
+        for (Flight flight : flightDBList) {
+            if (Objects.equals(flight.getFrom(), from)) {
+                if (Objects.equals(flight.getTo(), to)) {
+                    if (Objects.equals(flight.getStartDate(), startDate)) {
+                        if (Objects.equals(flight.getEndDate(), endDate)) {
+                            if (flight.getavailableSeats() >= people) {
+                                if (flight.getPrice() <= maxPrice) {
+                                    flightReturnList.add(flight);
+                                }
                             }
                         }
                     }
                 }
-             }
-          }
-      }
+            }
+        }
       return flightReturnList;
     }
 

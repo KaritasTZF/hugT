@@ -3,10 +3,12 @@ package project.Controller;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import project.Model.Flight;
-import project.Model.FlightDB;
+import project.Model.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SearchControllerTest {
     SearchController sc;
@@ -14,7 +16,8 @@ public class SearchControllerTest {
 
     @BeforeEach
     void setUp() {
-        flightDB = new FlightDB();
+        FTeamMock fteam = new FTeamMock();
+        FlightDB flightDB = fteam.flightDB;
         sc = new SearchController(flightDB);
     }
 
@@ -25,15 +28,55 @@ public class SearchControllerTest {
     }
 
     @Test
-    void testFlightSetter() {
+    void testFlightFinder() {
         sc.setFrom("Reykjavík");
         ArrayList<Flight> flights = new ArrayList<Flight>();
         flights = sc.findAvailableFlights();
 
-        for (int i = 0; i< flights.size();i++) {
-            if (flights.get(i).getFrom()!="Reykjavík") {
-                System.out.println(flights.get(i).getFrom());
-            }
-          }
+        for (Flight flight : flights) {
+            assertEquals(flight.getFrom(), "Reykjavík");
+        }
+    }
+
+    @Test
+    void testSetGetFrom() {
+        sc.setFrom("test");
+        assertEquals(sc.getFrom(),"test");
+    }
+
+    @Test
+    void testSetGetTo() {
+        sc.setTo("test");
+        assertEquals(sc.getTo(),"test");
+    }
+
+    @Test
+    void testSetGetStartDate() {
+        sc.setStartDate(LocalDate.parse("2001-11-22"));
+        assertEquals(sc.getStartDate(),LocalDate.parse("2001-11-22"));
+    }
+
+    @Test
+    void testSetGetEndDate() {
+        sc.setEndDate(LocalDate.parse("2001-11-22"));
+        assertEquals(sc.getEndDate(),LocalDate.parse("2001-11-22"));
+    }
+
+    @Test
+    void testSetGetMaxPrice() {
+        sc.setMaxPrice(1);
+        assertEquals(sc.getMaxPrice(),1);
+    }
+
+    @Test
+    void testSetGetPeople() {
+        sc.setPeople(100);
+        assertEquals(sc.getPeople(),100);
+    }
+
+    @Test
+    void testSetGetLocation() {
+        sc.setLocation("test");
+        assertEquals(sc.getLocation(),"test");
     }
 }
