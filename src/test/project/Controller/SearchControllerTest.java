@@ -86,7 +86,7 @@ public class SearchControllerTest {
         ArrayList<Flight> flights = sc.findAvailableFlights();
 
         for (Flight flight : flights) {
-            assertTrue(sc.getMaxPrice()>=100000);
+            assertTrue(flight.getPrice()>=100000);
         }
     }
 
@@ -96,7 +96,7 @@ public class SearchControllerTest {
         ArrayList<Flight> flights = sc.findAvailableFlights();
 
         for (Flight flight : flights) {
-            assertEquals(sc.getLocation(),"Akureyri");
+            assertEquals(flight.getLocation(),"Akureyri");
         }
     }
 
