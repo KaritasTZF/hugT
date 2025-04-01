@@ -5,11 +5,11 @@ import java.util.ArrayList; //Til þess að geyma lista af object okkar
 
 public class Trip {
     private String tripID=null;
-    private int people=null;
-    private int days=null;
+    private int people=0;
+    private int days=0;
     private LocalDate startDate=null;
     private LocalDate endDate=null;
-    private double price=null;
+    private int price=0;
     private ArrayList<Flight> flightItems=null; //Listi af Flight,listinn heitir flightItems (gamalt frá TripItems)
     private ArrayList<Hotel> hotelItems=null; //Listi af Hotel, listinn heitir hotelItems (gamalt frá TripItems)
     private ArrayList<DayTour> dayTourItems=null; //Listi af DayTour, listinn heitir dayTourItems (gamalt frá TripItems)
@@ -21,7 +21,7 @@ public class Trip {
       int days,
       LocalDate startDate,
       LocalDate endDate,
-      double price,
+      int price,
       ArrayList<Flight> flightItems,
       ArrayList<Hotel> hotelItems,
       ArrayList<DayTour> dayTourItems
@@ -86,7 +86,7 @@ public class Trip {
         return this.price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
