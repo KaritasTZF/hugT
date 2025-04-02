@@ -1,5 +1,8 @@
 package project.Controller;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import project.Model.*;
 
 import java.time.LocalDate;
@@ -7,14 +10,22 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class SearchController {
-    private String from = null; // flights only
-    private String to = null; // flights only
-    private LocalDate startDate= null;
-    private LocalDate endDate= null;
-    private int maxPrice= 0;
-    private int people= 0;
-    private int rooms = 0; //hotels only
-    private String location= null; //hotels and dayTours
+    @FXML TextField fromField;
+    @FXML TextField toField;
+    @FXML TextField priceField;
+    @FXML TextField peopleField;
+    @FXML TextField locationField;
+    @FXML TextField roomsField;
+    @FXML DatePicker startDateField;
+    @FXML DatePicker endDateField;
+    private String from = fromField.getText(); // flights only
+    private String to = toField.getText(); // flights only
+    private LocalDate startDate= startDateField.getValue();
+    private LocalDate endDate= endDateField.getValue();
+    private int maxPrice= Integer.parseInt(priceField.getText());
+    private int people= Integer.parseInt(peopleField.getText());
+    private int rooms = Integer.parseInt(roomsField.getText()); //hotels only
+    private String location= locationField.getText(); //hotels and dayTours
 
     private final FlightDB flightDB;
     private final HotelDB hotelDB;
