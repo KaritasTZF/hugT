@@ -35,7 +35,6 @@ public class UserController {
         }
     }
 
-    // (Val) Uppfæra notanda
     public void updateUser(User updatedUser) {
         if (this.user != null) {
             // Setja inn ný gildi ef vill
