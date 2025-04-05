@@ -1,8 +1,12 @@
 package project.Controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import project.Model.*;
 
 import java.time.LocalDate;
@@ -33,6 +37,11 @@ public class SearchController {
 
     public SearchController(){
     }
+
+    public void initialize() {
+        //TODO stilla DB
+    }
+
     public void setFlightDB(FlightDB flightDB) {
         this.flightDB = flightDB;
     }
@@ -156,6 +165,18 @@ public class SearchController {
             }
         }
         return dayTourReturnList;
+    }
+
+    public void goToWelcome() {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Welcome.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) fromField.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
 }
