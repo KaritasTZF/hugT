@@ -1,8 +1,12 @@
 package project.Controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import project.Model.*;
 
 import java.time.LocalDate;
@@ -18,23 +22,33 @@ public class SearchController {
     @FXML TextField roomsField;
     @FXML DatePicker startDateField;
     @FXML DatePicker endDateField;
-    private String from = fromField.getText(); // flights only
-    private String to = toField.getText(); // flights only
-    private LocalDate startDate= startDateField.getValue();
-    private LocalDate endDate= endDateField.getValue();
-    private int maxPrice= Integer.parseInt(priceField.getText());
-    private int people= Integer.parseInt(peopleField.getText());
-    private int rooms = Integer.parseInt(roomsField.getText()); //hotels only
-    private String location= locationField.getText(); //hotels and dayTours
+    private String from;// = fromField.getText(); // flights only
+    private String to;// = toField.getText(); // flights only
+    private LocalDate startDate;//= startDateField.getValue();
+    private LocalDate endDate;//= endDateField.getValue();
+    private int maxPrice;//= Integer.parseInt(priceField.getText());
+    private int people;//= Integer.parseInt(peopleField.getText());
+    private int rooms;// = Integer.parseInt(roomsField.getText()); //hotels only
+    private String location;//= locationField.getText(); //hotels and dayTours
 
-    private final FlightDB flightDB;
-    private final HotelDB hotelDB;
-    private final DayTourDB dayTourDB;
+    private FlightDB flightDB;
+    private HotelDB hotelDB;
+    private DayTourDB dayTourDB;
 
-    // DFH- DB er þegar til, þurfum ekki að constructa nýtt alltaf
-    public SearchController(FlightDB flightDB, HotelDB hotelDB, DayTourDB dayTourDB){
+    public SearchController(){
+    }
+
+    public void initialize() {
+        //TODO stilla DB
+    }
+
+    public void setFlightDB(FlightDB flightDB) {
         this.flightDB = flightDB;
+    }
+    public void setHotelDB(HotelDB hotelDB) {
         this.hotelDB = hotelDB;
+    }
+    public void setDayTourDB(DayTourDB dayTourDB) {
         this.dayTourDB = dayTourDB;
     }
 
@@ -151,6 +165,18 @@ public class SearchController {
             }
         }
         return dayTourReturnList;
+    }
+
+    public void goToWelcome() {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Welcome.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) fromField.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
 }
