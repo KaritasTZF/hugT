@@ -36,7 +36,7 @@ public class WelcomeController {
         }
     }
 
-    public void goToBooking() {
-        //Open Booking.fxml <- ekki ennþá til
+    public void goToBookings() {
+        //Open Bookings.fxml <- ekki ennþá til
     }
 }

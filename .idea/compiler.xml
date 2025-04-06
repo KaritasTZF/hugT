@@ -10,4 +10,9 @@
       </profile>
     </annotationProcessing>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="hugT" options="--add-exports com.example.hbv4d/com.example.hbv4d.utils=project" />
+    </option>
+  </component>
 </project>

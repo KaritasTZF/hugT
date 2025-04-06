@@ -26,7 +26,6 @@ public class SearchControllerTest {
         //FlightDB object with example data stored in FTeamMock
         // null values for hotelDB and dayTourDB
         sc = new SearchController();
-        sc.setFlightDB(flightDB);
     }
 
     @AfterEach

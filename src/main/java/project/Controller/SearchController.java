@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import project.Model.*;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class SearchController {
+    @FXML Label SearchResults;
     @FXML TextField fromField;
     @FXML TextField toField;
     @FXML TextField priceField;
@@ -23,7 +25,7 @@ public class SearchController {
     @FXML DatePicker startDateField;
     @FXML DatePicker endDateField;
     private String from;// = fromField.getText(); // flights only
-    private String to;// = toField.getText(); // flights only
+    private String to;// = toField.getText();
     private LocalDate startDate;//= startDateField.getValue();
     private LocalDate endDate;//= endDateField.getValue();
     private int maxPrice;//= Integer.parseInt(priceField.getText());
@@ -31,26 +33,16 @@ public class SearchController {
     private int rooms;// = Integer.parseInt(roomsField.getText()); //hotels only
     private String location;//= locationField.getText(); //hotels and dayTours
 
-    private FlightDB flightDB;
-    private HotelDB hotelDB;
-    private DayTourDB dayTourDB;
+    private final FlightDB flightDB;
+    private final HotelDB hotelDB;
+    private final DayTourDB dayTourDB;
 
-    public SearchController(){
+    public SearchController() {
+        this.flightDB = new FlightDB();
+        this.hotelDB = new HotelDB();
+        this.dayTourDB = new DayTourDB();
     }
 
-    public void initialize() {
-        //TODO stilla DB
-    }
-
-    public void setFlightDB(FlightDB flightDB) {
-        this.flightDB = flightDB;
-    }
-    public void setHotelDB(HotelDB hotelDB) {
-        this.hotelDB = hotelDB;
-    }
-    public void setDayTourDB(DayTourDB dayTourDB) {
-        this.dayTourDB = dayTourDB;
-    }
 
     //setterar og getterar
     public void setFrom(String from) {
@@ -100,6 +92,11 @@ public class SearchController {
     }
     public int getRooms() {
         return this.rooms;
+    }
+
+    //Ákveður hvaða
+    public void onSearch() {
+
     }
 
     //Leitar eftir flug í flightDB
