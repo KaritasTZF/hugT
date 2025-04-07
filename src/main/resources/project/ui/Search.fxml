@@ -10,26 +10,12 @@
          <children>
             <Label layoutX="73.0" layoutY="425.0" text="My Trip" />
             <Button fx:id="checkoutButton" layoutX="73.0" layoutY="634.0" mnemonicParsing="false" text="Checkout" />
-            <TableView layoutX="73.0" layoutY="455.0" prefHeight="164.0" prefWidth="440.0">
-              <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
-                  <TableColumn prefWidth="75.0" text="Column X" />
-                  <TableColumn prefWidth="75.0" text="Column X" />
-              </columns>
-            </TableView>
             <AnchorPane layoutX="73.0" layoutY="53.0" prefHeight="330.0" prefWidth="526.0">
                <children>
-                  <Label fx:id="SearchResultsText" layoutX="7.0" layoutY="5.0" text="Results" />
-                  <TableView layoutY="27.0" prefHeight="218.0" prefWidth="440.0">
-                    <columns>
-                      <TableColumn fx:id="ResultC1" prefWidth="75.0" />
-                      <TableColumn fx:id="ResultC2" prefWidth="75.0" />
-                        <TableColumn fx:id="ResultC3" prefWidth="75.0" />
-                    </columns>
-                  </TableView>
+                  <Label fx:id="ResultLabel" layoutX="7.0" layoutY="5.0" text="Flights" />
                   <Button fx:id="AddToTripButton" layoutX="7.0" layoutY="267.0" mnemonicParsing="false" text="Add to Trip" />
                   <Button fx:id="SkipButton" layoutX="113.0" layoutY="267.0" mnemonicParsing="false" text="Skip" />
+                  <ListView fx:id="ResultsListView" layoutY="23.0" prefHeight="200.0" prefWidth="526.0" />
                </children>
             </AnchorPane>
          </children>
@@ -49,25 +35,22 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <Label text="From:" GridPane.rowIndex="0" />
                   <Label text="To:" GridPane.rowIndex="1" />
                   <Label text="Start Date:" GridPane.rowIndex="2" />
                   <Label text="End Date:" GridPane.rowIndex="3" />
-                  <Label text="Price:" GridPane.rowIndex="4" />
+                  <Label text="Max price:" GridPane.rowIndex="4" />
                   <Label text="People:" GridPane.rowIndex="5" />
-                  <Label text="Location:" GridPane.rowIndex="6" />
-                  <TextField fx:id="fromField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                  <TextField fx:id="toField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="priceField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField fx:id="peopleField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <TextField fx:id="locationField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <DatePicker fx:id="startDateField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <DatePicker fx:id="endDateField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField fx:id="roomsField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                  <Label text="Rooms:" GridPane.rowIndex="7" />
+                  <ComboBox fx:id="peopleField" onAction="#updatePeople" promptText="1" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <DatePicker fx:id="startDateField" onAction="#updateStartDate" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <DatePicker fx:id="endDateField" onAction="#updateEndDate" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <ComboBox fx:id="roomsField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Label text="Rooms:" GridPane.rowIndex="6" />
+                  <Slider fx:id="priceField" max="10000.0" value="10000.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <ComboBox fx:id="fromField" editable="true" prefWidth="150.0" GridPane.columnIndex="1" />
+                  <ComboBox fx:id="toField" editable="true" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
                <padding>
                   <Insets bottom="20.0" left="10.0" right="20.0" top="20.0" />

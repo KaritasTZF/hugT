@@ -9,10 +9,13 @@
         <module name="hugT" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="HBV-4D" target="21" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="hugT" options="" />
+      <module name="hugT" options="--add-exports Hotel.Search/software=project --add-exports Hotel.Search/software.objects=project" />
     </option>
   </component>
 </project>

@@ -18,7 +18,7 @@ public class FTeamMock {
         flightDB = new FlightDB();
 
         for (int i = 0; i<3; i++) {
-            flightDB.createFlight(to[i],from[i],seatsAvailable,startDateTime, endDateTime,price);
+            flightDB.createFlight(to[i],from[i],null,seatsAvailable,null, null,price);
         }
     }
 }

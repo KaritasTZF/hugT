@@ -24,6 +24,6 @@ public class FlightController {
         searchController.setEndDate(endDate);
         searchController.setPeople(people);
         // Kallar á SearchController-aðgerðina sem leitar að flugum
-        return searchController.findAvailableFlights();
+        return searchController.findAvailableFlights(departure,arrival,startDate);
     }
 }

@@ -9,7 +9,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class HotelDB {
-    private ArrayList<Hotel> hotelList= new ArrayList<>();
+    private final ArrayList<Hotel> hotelList = new ArrayList<>();
     private Search search; //frá 4H
 
     public HotelDB() {

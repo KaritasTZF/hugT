@@ -1,41 +1,82 @@
 package project.Controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import project.Model.*;
+import project.ui.FlightItem;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
+
 public class SearchController {
+
+    private static final ObservableList<String> Flocations = FXCollections.observableArrayList(
+            "Keflavík",     //FH
+            "Ísafjörður",   //FH
+            "Reykjavík",    //FH
+            "Akureyri",     //FH
+            "Egilsstaðir",  //FH
+            "Vestmannaeyjar",//FH
+            "Selfoss",      //FH
+            "Ólafsvík",     //F
+            "Blönduós",     //F
+            "Selfoss",      //F
+            "Höfn í Hornafirði",//F
+            "Vopnafjörður", //F
+            "Vatnajökull"   //F
+    );
+
+    private static final ObservableList<String> Hlocations = FXCollections.observableList(Arrays.asList(
+            "Borganes",     //H
+            "Keflavík",     //FH
+            "Vík",          //H
+            "Mývatnssveit", //H
+            "Ísafjörður",   //FH
+            "Sauðárkrókur", //H
+            "Flúðir",       //H
+            "Grindavík",    //H
+            "Snæfellsnes",  //H
+            "Hvolsvöllur",  //H
+            "Siglufjörður", //H
+            "Reykjavík",    //FH
+            "Akureyri",     //FH
+            "Egilsstaðir",  //FH
+            "Vestmannaeyjar",//FH
+            "Selfoss"      ));
+
     //Changing fxml elements
     @FXML private Button checkoutButton;
-    @FXML private Label SearchResults;
-    @FXML private TextField fromField;
-    @FXML private TextField toField;
-    @FXML private TextField priceField;
-    @FXML private TextField peopleField;
-    @FXML private TextField locationField;
-    @FXML private TextField roomsField;
+    @FXML private Label ResultLabel;
+    @FXML private ComboBox<String> fromField;
+    @FXML private ComboBox<String> toField;
+    @FXML private Slider priceField;
+    @FXML private ComboBox<Integer> peopleField;
+    @FXML private ComboBox<Integer> roomsField;
     @FXML private DatePicker startDateField;
     @FXML private DatePicker endDateField;
+    @FXML private ListView<HBox> ResultsListView;
+
 
     //Search parameters
-    private String from;// = fromField.getText(); // flights only
-    private String location;// virkar sem to fyrir flight
-    private LocalDate startDate;//= startDateField.getValue();
-    private LocalDate endDate;//= endDateField.getValue();
-    private int maxPrice;//= Integer.parseInt(priceField.getText());
-    private int people;//= Integer.parseInt(peopleField.getText());
-    private int rooms;// = Integer.parseInt(roomsField.getText()); //hotels only
+    private String from;            // flights only
+    private String location;        // virkar sem to fyrir flight
+    private LocalDate startDate;    // ATH 4H tekur bara 3 checkIn dagsetningsar, sjá Readme þeirra
+    private LocalDate endDate;      //
+    private int maxPrice;           // D&H; 4F er ekki með verð
+    private int people;             // Flights only; 4D notar ekki fjöldi manns
+    private int rooms;              // hotels only
+
 
     private final FlightDB flightDB;
     private final HotelDB hotelDB;
@@ -44,8 +85,17 @@ public class SearchController {
 
     public SearchController() {
         this.flightDB = new FlightDB();
-        this.hotelDB = new HotelDB(); //initializes en leitar ekki strax
-        this.dayTourDB = new DayTourDB(); // leitar strax
+        this.hotelDB = new HotelDB();
+        this.dayTourDB = new DayTourDB();
+        initComboBox();
+    }
+
+    public void initComboBox() {
+
+        fromField = new ComboBox<>(Flocations);
+        fromField.getItems(Flocations);
+        toField = new ComboBox<>(Flocations);
+        fromField.setPromptText("Depart from");
     }
 
     //setterar og getterar
@@ -63,6 +113,7 @@ public class SearchController {
     }
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
+        System.out.println("startDate set: "+startDate);
     }
     public LocalDate getStartDate() {
         return this.startDate;
@@ -160,9 +211,30 @@ public class SearchController {
 
     //Ákveður hvað að gera
     public void onSearch() {
+        System.out.println("searching...");
+        ResultsListView.getItems().removeAll();
         switch(status) {
             case Status.FROMFLIGHT:
-                //
+                System.out.println("searching Flights");
+                updateFrom();
+                updateTo();
+                updateStartDate();
+                if (from != null && location != null && startDate != null) {
+                    ArrayList<Flight> flightsArrayList = findAvailableFlights(from,location,startDate);
+                    System.out.println("created list");
+                    for (Flight flight: flightsArrayList) {
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/FlightItem.fxml"));
+                            Parent flightItem =loader.load();
+                            FlightItem controller =loader.getController();
+                            controller.setData(flight);
+                            ResultsListView.getItems().add((HBox)flightItem);
+
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
                 break;
             case Status.TOFLIGHT:
                 //
@@ -175,6 +247,16 @@ public class SearchController {
                 break;
         }
     }
+
+    //Input TextFields
+    public void updateFrom() {setFrom(fromField.getValue());}
+    public void updateTo() {setLocation(toField.getValue());}
+    public void updatePrice() {setMaxPrice((int) priceField.getValue());}
+    public void updatePeople() {setPeople((int) peopleField.getValue());}
+    public void updateStartDate() {setStartDate(startDateField.getValue());}
+    public void updateEndDate() {setEndDate(endDateField.getValue());}
+
+
     //Back takki
     public void goToWelcome() {
         try{
@@ -190,5 +272,13 @@ public class SearchController {
 
     private enum Status {
         FROMFLIGHT, HOTEL, DAYTOUR, TOFLIGHT;
+    }
+
+    private void updateStatus(Status newStatus) {
+        //change Input fields, ResultsTable, ResultsLabel
+    }
+
+    public void skipStatus() {
+        //case status, veldur næsta og kallar á updateStatus
     }
 }

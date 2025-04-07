@@ -3,7 +3,7 @@ package project.Model;
 import vidmot.Tengja_gogn;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +15,8 @@ public class FlightDB {
 
     }
 
-    public void createFlight(String from, String to, int availableSeats, LocalDateTime startTime, LocalDateTime endTime, int price) {
-        flightList.add(new Flight(from,to, availableSeats,startTime,endTime,price));
+    public void createFlight(String from, String to, LocalDate date, int availableSeats, LocalTime startTime, LocalTime endTime, int price) {
+        flightList.add(new Flight(from,to, date, availableSeats,startTime,endTime,price));
     }
 
     public ArrayList<Flight> getFlightList(String from, String to, LocalDate date){
@@ -32,11 +32,11 @@ public class FlightDB {
                 String[] splitString = flightString.split("[→|+]");
                 String fromResult = splitString[0].trim();
                 String toResult = splitString[1].trim();
-                LocalDateTime startTime = LocalDateTime.parse(splitString[2].trim(),formatter);
-                LocalDateTime endTime = LocalDateTime.parse(splitString[3].trim(),formatter);
+                LocalTime startTime = LocalTime.parse(splitString[2].trim(),formatter);
+                LocalTime endTime = LocalTime.parse(splitString[3].trim(),formatter);
 
                 //TODO er ekki að implementa Seats alveg strax, set 100 á alla. 4F er ekki með price, setjum eins 20000 á allt
-                createFlight(fromResult,toResult,100,startTime,endTime,20000);
+                createFlight(fromResult,toResult,date,100,startTime,endTime,20000);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
