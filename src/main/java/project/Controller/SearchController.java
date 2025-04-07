@@ -15,7 +15,6 @@ import project.ui.FlightItem;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 
 
@@ -37,7 +36,7 @@ public class SearchController {
             "Vatnajökull"   //F
     );
 
-    private static final ObservableList<String> Hlocations = FXCollections.observableList(Arrays.asList(
+    private static final ObservableList<String> Hlocations = FXCollections.observableArrayList(
             "Borganes",     //H
             "Keflavík",     //FH
             "Vík",          //H
@@ -53,7 +52,7 @@ public class SearchController {
             "Akureyri",     //FH
             "Egilsstaðir",  //FH
             "Vestmannaeyjar",//FH
-            "Selfoss"      ));
+            "Selfoss"      );
 
     //Changing fxml elements
     @FXML private Button checkoutButton;
@@ -91,10 +90,11 @@ public class SearchController {
     }
 
     public void initComboBox() {
-
-        fromField = new ComboBox<>(Flocations);
-        fromField.getItems(Flocations);
-        toField = new ComboBox<>(Flocations);
+        ObservableList<String> options = FXCollections.observableArrayList("Reykjavík","Akureyri");
+        final ComboBox testBox = new ComboBox(options);
+        fromField = new ComboBox(Flocations);
+        //fromField.getItems(Flocations);
+        toField = new ComboBox(Flocations);
         fromField.setPromptText("Depart from");
     }
 
