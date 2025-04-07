@@ -95,26 +95,26 @@ public class SearchController {
     //Searching methods
 
     //Leitar eftir flug í flightDB
-    public ArrayList<Flight> findAvailableFlights() {
-        ArrayList<Flight> flightDBList = flightDB.getFlightList();
-        ArrayList<Flight> flightReturnList= new ArrayList<>();
-
-        for (Flight flight : flightDBList) {
-            if (Objects.equals(flight.getFrom(), from)) {
-                if (Objects.equals(flight.getTo(), location)) {
-                    if (flight.getStartDateTime().isBefore(endDate.atTime(23,59)) || flight.getStartDateTime().isEqual(endDate.atTime(23,59))) {
-                        if (flight.getEndDateTime().isAfter(startDate.atStartOfDay()) || flight.getEndDateTime().isEqual(startDate.atStartOfDay())) {
-                            if (flight.getavailableSeats() >= people) {
-                                if (flight.getPrice() <= maxPrice) {
-                                    flightReturnList.add(flight);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return flightReturnList;
+    public ArrayList<Flight> findAvailableFlights(String fromLoc, String toLoc, LocalDate date) {
+//        ArrayList<Flight> flightDBList = flightDB.getFlightList();
+//        ArrayList<Flight> flightReturnList= new ArrayList<>();
+//
+//        for (Flight flight : flightDBList) {
+//            if (Objects.equals(flight.getFrom(), from)) {
+//                if (Objects.equals(flight.getTo(), location)) {
+//                    if (flight.getStartDateTime().isBefore(endDate.atTime(23,59)) || flight.getStartDateTime().isEqual(endDate.atTime(23,59))) {
+//                        if (flight.getEndDateTime().isAfter(startDate.atStartOfDay()) || flight.getEndDateTime().isEqual(startDate.atStartOfDay())) {
+//                            if (flight.getavailableSeats() >= people) {
+//                                if (flight.getPrice() <= maxPrice) {
+//                                    flightReturnList.add(flight);
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+        return flightDB.getFlightList(fromLoc, toLoc, date);
     }
 
     //Leitar eftir hotel í hotelDB

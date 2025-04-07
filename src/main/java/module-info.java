@@ -4,6 +4,7 @@ module project {
     requires javafx.fxml;
     requires java.sql;
     requires Hotel.Search;
+    requires Saeti;
     opens project.Controller to javafx.fxml;
     opens project.Model to javafx.fxml;
     opens project.ui to javafx.graphics;
