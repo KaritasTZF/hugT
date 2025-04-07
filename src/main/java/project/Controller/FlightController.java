@@ -19,7 +19,7 @@ public class FlightController {
 
     public ArrayList<Flight> searchFlight(LocalDate startDate,LocalDate endDate, String departure, String arrival, int people) {
         searchController.setFrom(departure);
-        searchController.setTo(arrival);
+        searchController.setLocation(arrival);
         searchController.setStartDate(startDate);
         searchController.setEndDate(endDate);
         searchController.setPeople(people);

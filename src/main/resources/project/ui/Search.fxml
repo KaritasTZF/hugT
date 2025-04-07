@@ -74,7 +74,7 @@
                </padding>
             </GridPane>
             <Label layoutX="26.0" layoutY="45.0" text="Please fill in your requirements." />
-            <Button fx:id="searchButton" layoutX="296.0" layoutY="384.0" mnemonicParsing="false" text="Search" />
+            <Button fx:id="searchButton" layoutX="296.0" layoutY="384.0" mnemonicParsing="false" onAction="#onSearch" text="Search" />
             <Button fx:id="backButton" mnemonicParsing="false" onAction="#goToWelcome" text="Back" />
          </children></AnchorPane>
    </children>

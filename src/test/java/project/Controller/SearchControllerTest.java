@@ -38,7 +38,7 @@ public class SearchControllerTest {
     // assert that all flights returned have the searched-for parameters
     @Test
     void testFlightFindParametersTo() {
-        sc.setTo("Reykjavík");
+        sc.setLocation("Reykjavík");
         ArrayList<Flight> flights = sc.findAvailableFlights();
 
         for (Flight flight : flights) {
@@ -103,7 +103,7 @@ public class SearchControllerTest {
     // that was not returned
     @Test
     void testFlightFindAllTo() {
-        sc.setTo("Reykjavík");
+        sc.setLocation("Reykjavík");
         ArrayList<Flight> returnedFlights = sc.findAvailableFlights();
 
         for (Flight flight : flightDB.getFlightList()) {
@@ -184,8 +184,8 @@ public class SearchControllerTest {
 
     @Test
     void testSetGetTo() {
-        sc.setTo("test");
-        assertEquals(sc.getTo(),"test");
+        sc.setLocation("test");
+        assertEquals(sc.getLocation(),"test");
     }
 
     @Test
