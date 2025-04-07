@@ -44,8 +44,8 @@ public class SearchController {
 
     public SearchController() {
         this.flightDB = new FlightDB();
-        this.hotelDB = new HotelDB();
-        this.dayTourDB = new DayTourDB();
+        this.hotelDB = new HotelDB(); //initializes en leitar ekki strax
+        this.dayTourDB = new DayTourDB(); // leitar strax
     }
 
     //setterar og getterar
@@ -119,21 +119,22 @@ public class SearchController {
 
     //Leitar eftir hotel í hotelDB
     public ArrayList<Hotel> findAvailableHotels() {
-        ArrayList<Hotel> hotelDBList = hotelDB.getHotelList();
-        ArrayList<Hotel> hotelReturnList= new ArrayList<>();
-
-        for (Hotel hotel : hotelDBList) {
-            if (Objects.equals(hotel.getRooms(), rooms)) {
-                if (Objects.equals(hotel.getStartDate(), startDate)) {
-                    if (Objects.equals(hotel.getEndDate(), endDate)) {
-                        if (hotel.getPrice() <= maxPrice) {
-                            hotelReturnList.add(hotel);
-                        }
-                    }
-                }
-            }
-        }
-        return hotelReturnList;
+        //4H skilar bara sorteðan lista.
+//        ArrayList<Hotel> hotelDBList = hotelDB.getHotelList();
+//        ArrayList<Hotel> hotelReturnList= new ArrayList<>();
+//
+//        for (Hotel hotel : hotelDBList) {
+//            if (Objects.equals(hotel.getRooms(), rooms)) {
+//                if (Objects.equals(hotel.getStartDate(), startDate)) {
+//                    if (Objects.equals(hotel.getEndDate(), endDate)) {
+//                        if (hotel.getPrice() <= maxPrice) {
+//                            hotelReturnList.add(hotel);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+        return hotelDB.getHotelList(this.location, this.startDate, this.endDate, this.people, this.maxPrice);
     }
 
     //Leitar eftir dayTour í dayTourDB

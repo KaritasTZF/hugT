@@ -12,7 +12,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="hugT" options="--add-exports com.example.hbv4d/com.example.hbv4d.utils=project" />
+      <module name="hugT" options="" />
     </option>
   </component>
 </project>
