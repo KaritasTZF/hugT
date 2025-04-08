@@ -9,7 +9,7 @@ public class DayTour {
     private LocalDate date;
     private LocalDateTime timeStart;
     private LocalDateTime timeEnd;
-    private double price;
+    private int price;
     private String location;
 
     // Constructor
@@ -18,7 +18,7 @@ public class DayTour {
       LocalDate date, 
       LocalDateTime timeStart, 
       LocalDateTime timeEnd, 
-      double price,
+      int price,
       String location
       ) {
         this.people = people;
@@ -61,11 +61,11 @@ public class DayTour {
         this.timeEnd = timeEnd;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return this.price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

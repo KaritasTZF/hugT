@@ -4,41 +4,46 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox prefHeight="50.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ui.HotelItem">
+<HBox onMouseClicked="#handleSelection" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ui.HotelItem">
    <children>
-      <Label fx:id="nameLabel" text="name">
+      <Label text="Hotel: ">
          <padding>
-            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
          </padding>
       </Label>
-      <Label fx:id="locLabel" minWidth="50.0" text="location">
+      <Label fx:id="nameLabel" text="name">
          <padding>
-            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+         </padding>
+      </Label>
+      <Label fx:id="locLabel" minWidth="50.0" text="loc">
+         <padding>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
          </padding>
       </Label>
       <Label fx:id="startDateLabel" minWidth="50.0" text="startDate">
          <padding>
-            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
          </padding>
       </Label>
       <Label fx:id="endDateLabel" minWidth="50.0" text="endDate">
          <padding>
-            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
          </padding>
       </Label>
       <Label fx:id="peopleLabel" minWidth="50.0" text="people">
          <padding>
-            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
          </padding>
       </Label>
       <Label fx:id="priceLabel" minWidth="50.0" text="price">
          <padding>
-            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
          </padding>
       </Label>
-      <Label fx:id="roomsLabel" text="(rooms)">
+      <Label fx:id="roomsLabel" text="r">
          <padding>
-            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
          </padding>
       </Label>
    </children>

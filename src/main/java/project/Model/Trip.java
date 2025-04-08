@@ -1,7 +1,8 @@
 package project.Model;
 
 import java.time.LocalDate;
-import java.util.ArrayList; //Til þess að geyma lista af object okkar
+import java.util.ArrayList;
+import java.util.UUID;
 
 public class Trip {
     private String tripID=null;
@@ -10,41 +11,19 @@ public class Trip {
     private LocalDate startDate=null;
     private LocalDate endDate=null;
     private int price=0;
-    private ArrayList<Flight> flightItems=null; //Listi af Flight,listinn heitir flightItems (gamalt frá TripItems)
-    private ArrayList<Hotel> hotelItems=null; //Listi af Hotel, listinn heitir hotelItems (gamalt frá TripItems)
-    private ArrayList<DayTour> dayTourItems=null; //Listi af DayTour, listinn heitir dayTourItems (gamalt frá TripItems)
+    private ArrayList<Flight> flightItems=new ArrayList<>(); //Listi af Flight,listinn heitir flightItems (gamalt frá TripItems)
+    private ArrayList<Hotel> hotelItems=new ArrayList<>(); //Listi af Hotel, listinn heitir hotelItems (gamalt frá TripItems)
+    private ArrayList<DayTour> dayTourItems=new ArrayList<>(); //Listi af DayTour, listinn heitir dayTourItems (gamalt frá TripItems)
 
     //Constructor to initialize Trip object
-    public Trip(
-      String tripID,
-      int people,
-      int days,
-      LocalDate startDate,
-      LocalDate endDate,
-      int price,
-      ArrayList<Flight> flightItems,
-      ArrayList<Hotel> hotelItems,
-      ArrayList<DayTour> dayTourItems
-    ) {
-        this.tripID = tripID;
-        this.people = people;
-        this.days = days;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.price = price;
-        this.flightItems = flightItems;
-        this.hotelItems = hotelItems;
-        this.dayTourItems = dayTourItems;
+    public Trip() {
+        this.tripID = UUID.randomUUID().toString();
     }
 
     //Methods: getterar ------------------------------------
     // skilar tripID
     public String getTripID() {
         return this.tripID;
-    }
-
-    public void setTripID(String tripID) {
-        this.tripID = tripID;
     }
 
     //skilar fjöldi manns
@@ -83,11 +62,17 @@ public class Trip {
 
     //skilar verð
     public double getPrice() {
-        return this.price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
+        Integer totalPrice = 0;
+        for (Flight f: flightItems) {
+            totalPrice += f.getPrice();
+        }
+        for (Hotel h: hotelItems) {
+            totalPrice +=h.getPrice();
+        }
+        for (DayTour dt: dayTourItems) {
+            totalPrice += dt.getPrice();
+        }
+        return totalPrice;
     }
 
     public ArrayList<Flight> getFlightItems() {
@@ -113,4 +98,8 @@ public class Trip {
     public void setDayTourItems(ArrayList<DayTour> dayTourItems) {
         this.dayTourItems = dayTourItems;
     }
+
+    public void addFlightItem(Flight flight) {this.flightItems.add(flight);}
+    public void addHotelItem(Hotel hotel) {this.hotelItems.add(hotel);}
+    public void addDayTourItem(DayTour dayTour) {this.dayTourItems.add(dayTour);}
 }

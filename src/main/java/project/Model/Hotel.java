@@ -8,11 +8,11 @@ public class Hotel {
     private int days;
     private LocalDate startDate;
     private LocalDate endDate;
-    private double price;
+    private int price;
     private String location;
 
     // Constructor
-    public Hotel(int rooms, int days, LocalDate startDate, LocalDate endDate, double price, String location) {
+    public Hotel(int rooms, int days, LocalDate startDate, LocalDate endDate, int price, String location) {
         this.rooms = rooms;
         this.days = days;
         this.startDate = startDate;
@@ -53,11 +53,11 @@ public class Hotel {
         this.endDate = endDate;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return this.price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

@@ -2,6 +2,7 @@ package project.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import project.Controller.SearchController;
 import project.Model.Flight;
 
 public class FlightItem {
@@ -13,9 +14,11 @@ public class FlightItem {
     @FXML private Label priceLabel;
 
     private Flight flight;
+    private SearchController sc;
 
-    public void setData(Flight flight) {
+    public void setData(Flight flight, SearchController sc) {
         this.flight = flight;
+        this.sc = sc;
         fromLabel.setText(flight.getFrom());
         toLabel.setText(flight.getTo());
         depLabel.setText(flight.getStartTime().toString());
@@ -25,4 +28,8 @@ public class FlightItem {
     }
 
     public Flight getFlight() {return this.flight;}
+
+    public void handleSelection(javafx.scene.input.MouseEvent mouseEvent) {
+        this.sc.handleFlightSelection(this.flight);
+    }
 }

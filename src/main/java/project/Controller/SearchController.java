@@ -41,7 +41,8 @@ public class SearchController {
     @FXML private DatePicker endDateField;
     @FXML private GridPane gridPane;
     @FXML private ListView<HBox> ResultsListView;
-    @FXML private Label searchMesageLabel;          //for error message to fill in fields
+    @FXML private ListView<HBox> MyTripListView;
+    @FXML private Label totalPriceLabel;
 
 
     //Search parameters
@@ -58,7 +59,10 @@ public class SearchController {
     private final HotelDB hotelDB;
     private final DayTourDB dayTourDB;
     private Status status = Status.FROMFLIGHT;
-    private Trip myTrip;
+    private final Trip myTrip=new Trip();
+    private Flight selectedFItem;
+    private Hotel selectedHItem;
+    private DayTour selectedDTItem;
 
     public SearchController() {
         this.flightDB = new FlightDB();
@@ -186,18 +190,8 @@ public class SearchController {
                 updateStartDate();
                 if (from != null && location != null && startDate != null) {
                     ArrayList<Flight> flightsArrayList = findAvailableFlights(from,location,startDate);
-                    for (Flight flight: flightsArrayList) {
-                        try {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/FlightItem.fxml"));
-                            Parent flightItem =loader.load();
-                            FlightItem controller =loader.getController();
-                            controller.setData(flight);
-                            ResultsListView.getItems().add((HBox)flightItem);
-
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
+                    //TODO null checking
+                    loadFlightsToList(ResultsListView,flightsArrayList);
                 }
                 break;
             case Status.TOFLIGHT:
@@ -206,18 +200,7 @@ public class SearchController {
                 updateEndDate();
                 if (from != null && location != null && endDate != null) {
                     ArrayList<Flight> flightsArrayList = findAvailableFlights(location,from,endDate);
-                    for (Flight flight: flightsArrayList) {
-                        try {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/FlightItem.fxml"));
-                            Parent flightItem =loader.load();
-                            FlightItem controller =loader.getController();
-                            controller.setData(flight);
-                            ResultsListView.getItems().add((HBox)flightItem);
-
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
+                    loadFlightsToList(ResultsListView,flightsArrayList);
                 }
                 break;
             case Status.HOTEL:
@@ -229,17 +212,7 @@ public class SearchController {
                 // tjekka að leit sé ekki alveg tóm. people&price hafa default gildi.
                 if (location != null && endDate != null && startDate != null) {
                     ArrayList<Hotel> hotelsArrayList = findAvailableHotels();
-                    for (Hotel hotel: hotelsArrayList) {
-                        try {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/HotelItem.fxml"));
-                            Parent hotelItem =loader.load();
-                            HotelItem controller =loader.getController();
-                            controller.setData(hotel);
-                            ResultsListView.getItems().add((HBox)hotelItem);
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
+                    loadHotelsToList(ResultsListView,hotelsArrayList);
                 }
                 break;
             case Status.DAYTOUR:
@@ -249,17 +222,7 @@ public class SearchController {
                 updateTo();
                 if (location != null && endDate != null && startDate != null) {
                     ArrayList<DayTour> dayToursArrayList = findAvailableDayTours();
-                    for (DayTour dayTour: dayToursArrayList) {
-                        try {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/DayTourItem.fxml"));
-                            Parent dayTourItem =loader.load();
-                            DayTourItem controller =loader.getController();
-                            controller.setData(dayTour);
-                            ResultsListView.getItems().add((HBox)dayTourItem);
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
+                    loadDayToursToList(ResultsListView,dayToursArrayList);
                 }
                 break;
         }
@@ -291,9 +254,54 @@ public class SearchController {
         FROMFLIGHT, HOTEL, DAYTOUR, TOFLIGHT;
     }
 
-    //change Input fields, ResultsListView, ResultsLabel
+    //helper to load flights onto list
+    private void loadFlightsToList(ListView<HBox> listView, ArrayList<Flight> flightArrayList) {
+        for (Flight flight: flightArrayList ) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/FlightItem.fxml"));
+                Parent flightItem = loader.load();
+                FlightItem controller = loader.getController();
+                controller.setData(flight, this);
+                listView.getItems().add((HBox) flightItem);
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+    private void loadHotelsToList(ListView<HBox> listView, ArrayList<Hotel> hotelArrayList) {
+        for (Hotel hotel: hotelArrayList) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/HotelItem.fxml"));
+                Parent hotelItem = loader.load();
+                HotelItem controller = loader.getController();
+                controller.setData(hotel, this);
+                listView.getItems().add((HBox) hotelItem);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+    private void loadDayToursToList(ListView<HBox> listView, ArrayList<DayTour> dayTourArrayList) {
+        for (DayTour dayTour: dayTourArrayList) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/DayTourItem.fxml"));
+                Parent dayTourItem =loader.load();
+                DayTourItem controller =loader.getController();
+                controller.setData(dayTour,this);
+                listView.getItems().add((HBox)dayTourItem);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    //Helper, change Input fields, ResultsListView, ResultsLabel
     private void updateStatus() {
         ResultsListView.getItems().clear();
+        selectedDTItem = null;
+        selectedFItem = null;
+        selectedHItem = null;
         switch (status) {
             case FROMFLIGHT:
                 ResultLabel.setText("Return flights: ");
@@ -340,13 +348,38 @@ public class SearchController {
 
     }
 
+    //Helper, add items to MyTrip list
+    public void updateMyTripList(){
+        MyTripListView.getItems().clear();
+        loadFlightsToList(MyTripListView, myTrip.getFlightItems());
+        loadHotelsToList(MyTripListView,myTrip.getHotelItems());
+        loadDayToursToList(MyTripListView,myTrip.getDayTourItems());
+        totalPriceLabel.setText("Total Price: "+ myTrip.getPrice()+" kr.");
+    }
+
     //kallar á updateStatus
     public void handleSkip() {
         updateStatus();
     }
 
+    //Tekur við selected items
+    public void handleFlightSelection(Flight flight) {selectedFItem = flight;}
+    public void handleHotelSelection(Hotel hotel) {selectedHItem = hotel;}
+    public void handleDayTourSelection(DayTour dayTour) {selectedDTItem = dayTour;}
+
     //finnur hvað er valið í ResultsListView og setur það inn í Trip item
     public void addToMyTrip() {
-
+        switch (status) {
+            case FROMFLIGHT, TOFLIGHT:
+                myTrip.addFlightItem(selectedFItem);
+                break;
+            case HOTEL:
+                myTrip.addHotelItem(selectedHItem);
+                break;
+            case DAYTOUR:
+                myTrip.addDayTourItem(selectedDTItem);
+                break;
+        }
+        updateMyTripList();
     }
 }
