@@ -14,6 +14,8 @@ public class BookingController {
     // Gagnateljari til að útbúa einstakt bookingID
     private int bookingCounter = 1;
 
+    private BookingController bookingController;
+
     // Lista af Trips; notað til að "leita" að réttu Trip hlutnum.
     private final List<Trip> trips = new ArrayList<>();
 
@@ -61,6 +63,9 @@ public class BookingController {
         return null;
     }
 
+    public void setBookingController(BookingController bookingController) {
+        this.bookingController = bookingController;
+    }
 
     private int generateConfirmationNumber() {
         Random rand = new Random();

@@ -1,17 +1,14 @@
 package project.Controller;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+
 import project.Model.User;
 
 public class UserController {
 
     private User user;
-    private final BookingController bookingController; //Stofna BC fyrir samskipti við BC
+    private BookingController bookingController; //Stofna BC fyrir samskipti við BC
 
     //Smíða Bookingcontroller f. samskipti á milli
-    public UserController(BookingController bookingController) {
+    public UserController() {
         this.bookingController = bookingController;
     }
 
