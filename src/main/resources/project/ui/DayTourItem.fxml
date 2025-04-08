@@ -4,36 +4,36 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox onMouseClicked="#handleSelection" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ui.DayTourItem">
+<HBox onMouseClicked="#handleSelection" prefHeight="22.0" prefWidth="525.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ui.DayTourItem">
    <children>
       <Label text="Day Tour: ">
          <padding>
-            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+            <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
          </padding>
       </Label>
       <Label fx:id="nameLabel" text="Long Name Company">
          <padding>
-            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+            <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
          </padding>
       </Label>
       <Label fx:id="dateLabel" minWidth="50.0" text="date">
          <padding>
-            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+            <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
          </padding>
       </Label>
       <Label fx:id="toLabel" minWidth="50.0" text="to">
          <padding>
-            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+            <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
          </padding>
       </Label>
       <Label fx:id="priceLabel" minWidth="50.0" text="price">
          <padding>
-            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+            <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
          </padding>
       </Label>
       <Label fx:id="timeLabel" minWidth="50.0" text="(time)">
          <padding>
-            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+            <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
          </padding>
       </Label>
    </children>

@@ -7,8 +7,7 @@ import project.Model.Flight;
 public class FlightItem {
     @FXML private Label fromLabel;
     @FXML private Label toLabel;
-    @FXML private Label depLabel;
-    @FXML private Label arrLabel;
+    @FXML private Label timeLabel;
     @FXML private Label dateLabel;
     @FXML private Label priceLabel;
 
@@ -19,10 +18,9 @@ public class FlightItem {
         this.flight = flight;
         fromLabel.setText(flight.getFrom());
         toLabel.setText(flight.getTo());
-        depLabel.setText(flight.getStartTime().toString());
-        arrLabel.setText(flight.getEndTime().toString());
+        timeLabel.setText(STR."\{flight.getStartTime().toString()} - \{flight.getEndTime().toString()}");
         dateLabel.setText(flight.getDate().toString());
-        priceLabel.setText(String.valueOf(flight.getPrice()));
+        priceLabel.setText(STR."\{flight.getPrice()} kr.");
     }
     public void setView(SearchViewController view) {
         this.view = view;

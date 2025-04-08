@@ -22,7 +22,7 @@ public class SearchViewController {
     @FXML
     private Button checkoutButton;
     @FXML private Button skipButton;
-    @FXML private Label ResultLabel=new Label("Flights: ");
+    @FXML private Label ResultLabel=new Label("Flights: Departure - Arrival, Date, Time, Price");
     @FXML private Label fromLabel;
     @FXML private Label toLabel;
     @FXML private Label startDateLabel;
