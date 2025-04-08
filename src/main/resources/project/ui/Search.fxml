@@ -6,14 +6,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.Controller.SearchController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ui.SearchViewController">
    <children>
       <AnchorPane layoutX="384.0" layoutY="-6.0" prefHeight="700.0" prefWidth="619.0">
          <children>
             <AnchorPane layoutX="73.0" layoutY="53.0" prefHeight="330.0" prefWidth="526.0">
                <children>
                   <Label fx:id="ResultLabel" layoutX="7.0" layoutY="5.0" text="Flights" />
-                  <Button fx:id="AddToTripButton" layoutX="7.0" layoutY="267.0" mnemonicParsing="false" onAction="#addToMyTrip" text="Add to Trip" />
+                  <Button layoutX="7.0" layoutY="267.0" mnemonicParsing="false" onAction="#addToMyTrip" text="Add to Trip" />
                   <Button fx:id="skipButton" layoutX="113.0" layoutY="267.0" mnemonicParsing="false" onAction="#handleSkip" text="Next" />
                   <ListView fx:id="ResultsListView" layoutY="23.0" prefHeight="236.0" prefWidth="526.0" />
                </children>
@@ -51,6 +51,9 @@
                   <Label fx:id="priceLabel" text="Max price:" GridPane.rowIndex="3" />
                   <Label fx:id="peopleLabel" text="People:" GridPane.rowIndex="4" />
                    <ComboBox fx:id="peopleField" onAction="#updatePeople" promptText="1" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                       <value>
+                           <Integer fx:value="1" />
+                       </value>
                        <items>
                            <FXCollections fx:factory="observableArrayList">
                                <Integer fx:value="1" />
@@ -66,6 +69,9 @@
                    </ComboBox>
                    <DatePicker fx:id="startDateField" onAction="#updateStartDate" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                    <ComboBox fx:id="roomsField" promptText="1" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                       <value>
+                           <Integer fx:value="1" />
+                       </value>
                        <items>
                            <FXCollections fx:factory="observableArrayList">
                                <Integer fx:value="1" />

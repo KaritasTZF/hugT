@@ -2,7 +2,6 @@ package project.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import project.Controller.SearchController;
 import project.Model.DayTour;
 
 public class DayTourItem {
@@ -13,7 +12,7 @@ public class DayTourItem {
     @FXML private Label timeLabel;
 
     private DayTour dayTour;
-    private SearchController sc;
+    private SearchViewController view;
 
     public void setData(DayTour dayTour) {
         this.dayTour = dayTour;
@@ -23,15 +22,16 @@ public class DayTourItem {
         //timeLabel.setText(String.valueOf(dayTour.getTime()));
         //nameLabel.setText(dayTour.getName());
     }
-    public void setSc(SearchController sc) {
-        this.sc = sc;
+    public void setView(SearchViewController view) {
+        this.view = view;
     }
 
     public DayTour getDayTour() {return this.dayTour;}
 
     public void handleSelection() {
-        if (sc !=null) {
-            sc.handleDayTourSelection(dayTour);
+        if (view !=null) {
+            this.view.handleDayTourSelection(this.dayTour);
         }
+
     }
 }
