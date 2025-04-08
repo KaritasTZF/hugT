@@ -52,8 +52,8 @@ public class SearchController {
 
     public SearchController() {
         this.flightDB = new FlightDB();
-        this.hotelDB = null;//new HotelDB();
-        this.dayTourDB = null;//new DayTourDB();
+        this.hotelDB = new HotelDB();
+        this.dayTourDB = new DayTourDB();
     }
 
     //setterar og getterar
