@@ -21,7 +21,7 @@
             <AnchorPane layoutX="73.0" layoutY="383.0" prefHeight="278.0" prefWidth="526.0">
                <children>
                   <Label layoutX="6.0" layoutY="13.0" text="My Trip" />
-                  <Button fx:id="checkoutButton" layoutX="13.0" layoutY="238.0" mnemonicParsing="false" text="Checkout" />
+                  <Button fx:id="checkoutButton" layoutX="13.0" layoutY="238.0" mnemonicParsing="false" onAction="#goToCheckout" text="Checkout" />
                   <ListView fx:id="MyTripListView" layoutY="31.0" prefHeight="200.0" prefWidth="526.0" />
                   <Label fx:id="totalPriceLabel" layoutX="397.0" layoutY="242.0" text="Total Price: 0 kr," />
                </children>

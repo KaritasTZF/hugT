@@ -16,9 +16,8 @@ public class FlightItem {
     private Flight flight;
     private SearchController sc;
 
-    public void setData(Flight flight, SearchController sc) {
+    public void setData(Flight flight) {
         this.flight = flight;
-        this.sc = sc;
         fromLabel.setText(flight.getFrom());
         toLabel.setText(flight.getTo());
         depLabel.setText(flight.getStartTime().toString());
@@ -26,10 +25,15 @@ public class FlightItem {
         dateLabel.setText(flight.getDate().toString());
         priceLabel.setText(String.valueOf(flight.getPrice()));
     }
+    public void setSc(SearchController sc) {
+        this.sc = sc;
+    }
 
     public Flight getFlight() {return this.flight;}
 
-    public void handleSelection(javafx.scene.input.MouseEvent mouseEvent) {
-        this.sc.handleFlightSelection(this.flight);
+    public void handleSelection() {
+        if (sc !=null) {
+            this.sc.handleFlightSelection(this.flight);
+        }
     }
 }

@@ -17,9 +17,8 @@ public class HotelItem {
     private Hotel hotel;
     private SearchController sc;
 
-    public void setData(Hotel hotel, SearchController sc){
+    public void setData(Hotel hotel){
         this.hotel = hotel;
-        this.sc = sc;
         //nameLabel.setText(hotel.getName());
         locLabel.setText(hotel.getLocation());
         //peopleLabel.setText(hotel.getPeople()); <-room property
@@ -28,11 +27,17 @@ public class HotelItem {
         priceLabel.setText(String.valueOf(hotel.getPrice()));
         //roomsLabel.setText( <-rooms thing
     }
+    public void setSc(SearchController sc) {
+        this.sc = sc;
+    }
+
     //TODO: laga rooms stuff
     public Hotel getHotel() {return this.hotel;}
 
     @FXML
-    public void handleSelection(javafx.scene.input.MouseEvent mouseEvent) {
-        this.sc.handleHotelSelection(this.hotel);
+    public void handleSelection() {
+        if (sc !=null) {
+            this.sc.handleHotelSelection(this.hotel);
+        }
     }
 }

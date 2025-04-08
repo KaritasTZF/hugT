@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ui.CheckoutController">
+   <children>
+      <ListView fx:id="tripList" layoutX="24.0" layoutY="57.0" prefHeight="135.0" prefWidth="552.0" />
+      <Label layoutX="22.0" layoutY="30.0" text="Trip checkout">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="totalPriceLabel" layoutX="24.0" layoutY="192.0" text="Total price: 0kr," />
+      <Label fx:id="flavorLabel" layoutX="382.0" layoutY="35.0" text="Enjoy your &quot;sunny&quot; trip to (location)!" />
+      <Label fx:id="datesLabel" layoutX="24.0" layoutY="210.0" text="From startDate to endDate, N days." />
+      <Label fx:id="peopleLabel" layoutX="24.0" layoutY="228.0" text="N people." />
+      <Label layoutX="392.0" layoutY="246.0" text="Enter your credit card information:" />
+      <TextField fx:id="ccField" layoutX="425.0" layoutY="264.0" promptText="XXXX XXXX XXXX XXXX" />
+      <TextField fx:id="cvvField" layoutX="392.0" layoutY="301.0" prefHeight="26.0" prefWidth="40.0" promptText="CVV" />
+      <ComboBox fx:id="mmField" layoutX="436.0" layoutY="301.0" prefHeight="26.0" promptText="MM" visibleRowCount="12">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <Integer fx:value="01" />
+               <Integer fx:value="02" />
+               <Integer fx:value="03" />
+               <Integer fx:value="04" />
+               <Integer fx:value="05" />
+               <Integer fx:value="06" />
+               <Integer fx:value="07" />
+               <Integer fx:value="08" />
+               <Integer fx:value="09" />
+               <Integer fx:value="10" />
+               <Integer fx:value="11" />
+               <Integer fx:value="12" />
+            </FXCollections>
+         </items>
+      </ComboBox>
+      <ComboBox fx:id="yyField" layoutX="506.0" layoutY="301.0" prefHeight="26.0" promptText="YYYY">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <Integer fx:value="2025" />
+               <Integer fx:value="2026" />
+               <Integer fx:value="2027" />
+               <Integer fx:value="2028" />
+               <Integer fx:value="2029" />
+               <Integer fx:value="2030" />
+               <Integer fx:value="2031" />
+               <Integer fx:value="2032" />
+               <Integer fx:value="2033" />
+               <Integer fx:value="2034" />
+            </FXCollections>
+         </items>
+      </ComboBox>
+      <Button fx:id="bookButton" layoutX="532.0" layoutY="347.0" mnemonicParsing="false" onAction="#book" text="Book" />
+      <Button fx:id="cancelButton" layoutX="24.0" layoutY="347.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+   </children>
+</AnchorPane>

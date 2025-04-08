@@ -15,19 +15,23 @@ public class DayTourItem {
     private DayTour dayTour;
     private SearchController sc;
 
-    public void setData(DayTour dayTour, SearchController sc) {
+    public void setData(DayTour dayTour) {
         this.dayTour = dayTour;
-        this.sc = sc;
         toLabel.setText(dayTour.getLocation());
         dateLabel.setText(dayTour.getDate().toString());
         priceLabel.setText(String.valueOf(dayTour.getPrice()));
         //timeLabel.setText(String.valueOf(dayTour.getTime()));
         //nameLabel.setText(dayTour.getName());
     }
+    public void setSc(SearchController sc) {
+        this.sc = sc;
+    }
 
     public DayTour getDayTour() {return this.dayTour;}
 
     public void handleSelection() {
-        sc.handleDayTourSelection(dayTour);
+        if (sc !=null) {
+            sc.handleDayTourSelection(dayTour);
+        }
     }
 }
