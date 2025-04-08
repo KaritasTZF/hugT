@@ -62,6 +62,20 @@ public class CheckoutController {
                 throw new RuntimeException(e);
             }
         }
+        if (trip.getHotelItems() != null && !trip.getHotelItems().isEmpty()) {
+            flavorLabel.setText("Enjoy your \"sunny\" trip to "+trip.getHotelItems().getFirst().getLocation()+"!");
+        }
+        totalPriceLabel.setText("Total price: "+trip.getPrice()+" kr.");
+        if (trip.getStartDate() != null) {
+            datesLabel.setText("From "+trip.getStartDate()+" to "+trip.getEndDate()+", "+trip.getDays()+" days.");
+        } else {
+            datesLabel.setVisible(false);
+        }
+        if (trip.getPeople()>1) {
+            peopleLabel.setText("An "+trip.getPeople()+"-person trip.");
+        } else {
+            peopleLabel.setText("A "+trip.getPeople()+"-person trip.");
+        }
     }
 
     public void book() {

@@ -50,7 +50,7 @@ public class Trip {
     }
 
     //skilar verð
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
