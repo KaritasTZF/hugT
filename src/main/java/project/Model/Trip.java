@@ -1,15 +1,16 @@
 package project.Model;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.UUID;
 
 public class Trip {
-    private String tripID=null;
-    private int people=0;
-    private int days=0;
-    private LocalDate startDate=null;
-    private LocalDate endDate=null;
+    private final String tripID;
+    private int people;
+    private int days;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private int price=0;
     private ArrayList<Flight> flightItems=new ArrayList<>(); //Listi af Flight,listinn heitir flightItems (gamalt frá TripItems)
     private ArrayList<Hotel> hotelItems=new ArrayList<>(); //Listi af Hotel, listinn heitir hotelItems (gamalt frá TripItems)
@@ -37,42 +38,20 @@ public class Trip {
 
     //skilar fjöldi dags.
     public int getDays() {
-        return this.days;
-    }
-
-    public void setDays(int days) {
-        this.days = days;
+        return days;
     }
 
     public LocalDate getStartDate() {
         return this.startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
     public LocalDate getEndDate() {
         return this.endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
     //skilar verð
     public double getPrice() {
-        Integer totalPrice = 0;
-        for (Flight f: flightItems) {
-            totalPrice += f.getPrice();
-        }
-        for (Hotel h: hotelItems) {
-            totalPrice +=h.getPrice();
-        }
-        for (DayTour dt: dayTourItems) {
-            totalPrice += dt.getPrice();
-        }
-        return totalPrice;
+        return price;
     }
 
     public ArrayList<Flight> getFlightItems() {
@@ -99,7 +78,48 @@ public class Trip {
         this.dayTourItems = dayTourItems;
     }
 
-    public void addFlightItem(Flight flight) {this.flightItems.add(flight);}
-    public void addHotelItem(Hotel hotel) {this.hotelItems.add(hotel);}
-    public void addDayTourItem(DayTour dayTour) {this.dayTourItems.add(dayTour);}
+    //Helper; all attributes are defined by the F/D/H lists
+    private void updateInfo() {
+        startDate = flightItems.getFirst().getDate();
+        endDate = startDate;
+        price = 0;
+        for (Flight f: flightItems) {
+            price += f.getPrice();
+            if (f.getDate().isBefore(startDate)) {
+                startDate = f.getDate();
+            } else if (f.getDate().isAfter(endDate)) {
+                endDate = f.getDate();
+            }
+        }
+        for (Hotel h: hotelItems) {
+            price +=h.getPrice();
+            if (h.getStartDate().isBefore(startDate)) {
+                startDate = h.getStartDate();
+            } else if (h.getEndDate().isAfter(endDate)) {
+                endDate = h.getEndDate();
+            }
+        }
+        for (DayTour dt: dayTourItems) {
+            price += dt.getPrice();
+            if (dt.getDate().isBefore(startDate)) {
+                startDate = dt.getDate();
+            } else if (dt.getDate().isAfter(endDate)) {
+                endDate = dt.getDate();
+            }
+        }
+        this.days = (int) ChronoUnit.DAYS.between(startDate,endDate);
+    }
+
+    public void addFlightItem(Flight flight) {
+        this.flightItems.add(flight);
+        updateInfo();
+    }
+    public void addHotelItem(Hotel hotel) {
+        this.hotelItems.add(hotel);
+        updateInfo();
+    }
+    public void addDayTourItem(DayTour dayTour) {
+        this.dayTourItems.add(dayTour);
+        updateInfo();
+    }
 }

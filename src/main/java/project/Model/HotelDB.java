@@ -5,7 +5,6 @@ import software.objects.Search;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class HotelDB {
@@ -21,8 +20,8 @@ public class HotelDB {
         }
     }
 
-    public void createHotel(int rooms, int days, LocalDate start, LocalDate end, int price, String location) {
-        hotelList.add(new Hotel(rooms,days,start,end,price,location));
+    public void createHotel(String name, int rooms, LocalDate start, LocalDate end, int price, String location) {
+        hotelList.add(new Hotel(name, rooms,start,end,price,location));
     }
 
     public ArrayList<Hotel> getHotelList(
@@ -39,7 +38,7 @@ public class HotelDB {
         // þ.a. þessi rooms, checkIn/OutDate eru placeholders
         //ATH 4H og við erum með klasa sem heita bæði Hotel. þá er software.objects alltaf notað til að kalla á 4H Hotel.
         for (software.objects.Hotel hotel: availableHotels) {
-            createHotel(1, (int) ChronoUnit.DAYS.between(checkInDate, checkOutDate),checkInDate,checkOutDate,hotel.getCheapestRoom(), hotel.getLocation());
+            createHotel(hotel.getName(),1,checkInDate,checkOutDate,hotel.getCheapestRoom(), hotel.getLocation());
         }
         return hotelList;
     }
