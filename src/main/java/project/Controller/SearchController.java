@@ -12,6 +12,7 @@ import project.Model.*;
 import project.ui.DayTourItem;
 import project.ui.FlightItem;
 import project.ui.HotelItem;
+import project.ui.DayTourItem;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -348,5 +349,9 @@ public class SearchController {
     //finnur hvað er valið í ResultsListView og setur það inn í Trip item
     public void addToMyTrip() {
 
+    }
+
+    public void addToMyTrip() {
+        //finnur hvað er valið í ResultsListView og setur það inn í Trip item
     }
 }

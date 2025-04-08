@@ -45,6 +45,7 @@
                   <Label fx:id="priceLabel" text="Max price:" GridPane.rowIndex="3" />
                   <Label fx:id="peopleLabel" text="People:" GridPane.rowIndex="4" />
                    <ComboBox fx:id="peopleField" onAction="#updatePeople" promptText="1" GridPane.columnIndex="1" GridPane.rowIndex="4">
+
                        <items>
                            <FXCollections fx:factory="observableArrayList">
                                <Integer fx:value="1" />
@@ -60,6 +61,7 @@
                    </ComboBox>
                    <DatePicker fx:id="startDateField" onAction="#updateStartDate" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                    <ComboBox fx:id="roomsField" promptText="1" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5">
+
                        <items>
                            <FXCollections fx:factory="observableArrayList">
                                <Integer fx:value="1" />
@@ -69,7 +71,6 @@
                            </FXCollections>
                        </items>
                    </ComboBox>
-
                    <Label fx:id="roomsLabel" text="Rooms:" visible="false" GridPane.rowIndex="5" />
                    <Slider fx:id="priceSlider" max="10000.0" value="10000.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                    <ComboBox fx:id="fromField" prefWidth="150.0" GridPane.columnIndex="1">
