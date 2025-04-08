@@ -62,9 +62,15 @@ public class CheckoutController {
                 throw new RuntimeException(e);
             }
         }
-        flavorLabel.setText("Enjoy your \"sunny\" trip to "+trip.getHotelItems().getFirst().getLocation()+"!");
+        if (trip.getHotelItems() != null && !trip.getHotelItems().isEmpty()) {
+            flavorLabel.setText("Enjoy your \"sunny\" trip to "+trip.getHotelItems().getFirst().getLocation()+"!");
+        }
         totalPriceLabel.setText("Total price: "+trip.getPrice()+" kr.");
-        datesLabel.setText("From "+trip.getStartDate()+" to "+trip.getEndDate()+" endDate, "+trip.getDays()+" days.");
+        if (trip.getStartDate() != null) {
+            datesLabel.setText("From "+trip.getStartDate()+" to "+trip.getEndDate()+", "+trip.getDays()+" days.");
+        } else {
+            datesLabel.setVisible(false);
+        }
         if (trip.getPeople()>1) {
             peopleLabel.setText("An "+trip.getPeople()+"-person trip.");
         } else {

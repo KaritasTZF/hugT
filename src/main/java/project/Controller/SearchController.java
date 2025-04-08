@@ -67,8 +67,8 @@ public class SearchController {
 
     public SearchController() {
         this.flightDB = new FlightDB();
-        this.hotelDB = new HotelDB();
-        this.dayTourDB = new DayTourDB();
+        this.hotelDB = null;//new HotelDB();
+        this.dayTourDB = null;//ew DayTourDB();
     }
 
     //setterar og getterar
@@ -253,7 +253,6 @@ public class SearchController {
                 gridPane.setRowIndex(endDateField,2);
                 endDateLabel.setVisible(true);
                 endDateField.setVisible(true);
-                skipButton.setText("Skip Return Flight");
                 this.status = Status.TOFLIGHT;
                 break;
 
@@ -268,7 +267,6 @@ public class SearchController {
                 gridPane.setRowIndex(startDateField,1);
                 startDateField.setVisible(true);
                 startDateLabel.setVisible(true);
-                skipButton.setText("Skip Hotel");
                 this.status = Status.HOTEL;
                 break;
 
@@ -277,7 +275,7 @@ public class SearchController {
                 roomsLabel.setVisible(false);
                 roomsField.setVisible(false);
                 skipButton.setVisible(false);
-                skipButton.setText("Skip Day Tours");
+                checkoutButton.setVisible(true);
                 this.status = Status.DAYTOUR;
                 break;
 
@@ -376,16 +374,18 @@ public class SearchController {
 
     //Áfram takki
     public void goToCheckout() {
-        try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Checkout.fxml"));
-            Parent root = loader.load();
-            CheckoutController controller = loader.getController();
-            controller.setTrip(myTrip);
-            Stage stage = (Stage) fromField.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        }catch(Exception e){
-            throw new RuntimeException(e);
+        if (MyTripListView.getItems() !=null){
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Checkout.fxml"));
+                Parent root = loader.load();
+                CheckoutController controller = loader.getController();
+                controller.setTrip(myTrip);
+                Stage stage = (Stage) fromField.getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            }catch(Exception e){
+                throw new RuntimeException(e);
+            }
         }
     }
 
