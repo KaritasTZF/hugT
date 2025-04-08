@@ -19,9 +19,9 @@ public class HotelItem {
 
     public void setData(Hotel hotel){
         this.hotel = hotel;
-        //nameLabel.setText(hotel.getName());
+        nameLabel.setText(hotel.getName());
         locLabel.setText(hotel.getLocation());
-        //peopleLabel.setText(hotel.getPeople()); <-room property
+        // peopleLabel.setText(hotel);
         startDateLabel.setText(hotel.getStartDate().toString());
         endDateLabel.setText(hotel.getEndDate().toString());
         priceLabel.setText(String.valueOf(hotel.getPrice()));

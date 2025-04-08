@@ -183,7 +183,7 @@ public class SearchController {
     public void updateFrom() {setFrom(fromField.getValue());}
     public void updateTo() {setLocation(toField.getValue());}
     public void updatePrice() {setMaxPrice((int) priceSlider.getValue());}
-    public void updatePeople() {setPeople((int) peopleField.getValue());}
+    public void updatePeople() {setPeople(peopleField.getValue());}
     public void updateStartDate() {setStartDate(startDateField.getValue());}
     public void updateEndDate() {setEndDate(endDateField.getValue());}
 
@@ -209,6 +209,7 @@ public class SearchController {
     }
     private void loadHotelsToList(ListView<HBox> listView, ArrayList<Hotel> hotelArrayList) {
         for (Hotel hotel: hotelArrayList) {
+            System.out.println(hotel.getName());
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/HotelItem.fxml"));
                 Parent hotelItem = loader.load();
