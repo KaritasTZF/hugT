@@ -16,7 +16,7 @@
                <children>
                   <Label fx:id="ResultLabel" layoutX="7.0" layoutY="5.0" text="Flights" />
                   <Button fx:id="AddToTripButton" layoutX="7.0" layoutY="267.0" mnemonicParsing="false" text="Add to Trip" />
-                  <Button fx:id="SkipButton" layoutX="113.0" layoutY="267.0" mnemonicParsing="false" text="Skip" />
+                  <Button fx:id="skipButton" layoutX="113.0" layoutY="267.0" mnemonicParsing="false" onAction="#handleSkip" text="Skip" />
                   <ListView fx:id="ResultsListView" layoutY="23.0" prefHeight="200.0" prefWidth="526.0" />
                </children>
             </AnchorPane>
@@ -24,7 +24,7 @@
       </AnchorPane>
       <AnchorPane layoutX="6.0" prefHeight="429.0" prefWidth="370.0">
          <children>
-            <GridPane hgap="10.0" layoutX="14.0" layoutY="54.0" prefHeight="329.0" prefWidth="355.0" vgap="10.0">
+            <GridPane fx:id="gridPane" hgap="10.0" layoutX="14.0" layoutY="54.0" prefHeight="329.0" prefWidth="355.0" vgap="10.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -39,13 +39,12 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="From:" GridPane.rowIndex="0" />
-                  <Label text="To:" GridPane.rowIndex="1" />
-                  <Label text="Start Date:" GridPane.rowIndex="2" />
-                  <Label text="End Date:" GridPane.rowIndex="3" />
-                  <Label text="Max price:" GridPane.rowIndex="4" />
-                  <Label text="People:" GridPane.rowIndex="5" />
-                   <ComboBox fx:id="peopleField" onAction="#updatePeople" promptText="1" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <Label fx:id="fromLabel" text="From:" GridPane.rowIndex="0" />
+                  <Label fx:id="toLabel" text="To:" GridPane.rowIndex="1" />
+                  <Label fx:id="startDateLabel" text="Start Date:" GridPane.rowIndex="2" />
+                  <Label fx:id="priceLabel" text="Max price:" GridPane.rowIndex="3" />
+                  <Label fx:id="peopleLabel" text="People:" GridPane.rowIndex="4" />
+                   <ComboBox fx:id="peopleField" onAction="#updatePeople" promptText="1" GridPane.columnIndex="1" GridPane.rowIndex="4">
                        <items>
                            <FXCollections fx:factory="observableArrayList">
                                <Integer fx:value="1" />
@@ -60,8 +59,7 @@
                        </items>
                    </ComboBox>
                    <DatePicker fx:id="startDateField" onAction="#updateStartDate" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                   <DatePicker fx:id="endDateField" onAction="#updateEndDate" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                   <ComboBox fx:id="roomsField" GridPane.columnIndex="1" GridPane.rowIndex="6" >
+                   <ComboBox fx:id="roomsField" promptText="1" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5">
                        <items>
                            <FXCollections fx:factory="observableArrayList">
                                <Integer fx:value="1" />
@@ -72,8 +70,8 @@
                        </items>
                    </ComboBox>
 
-                   <Label text="Rooms:" GridPane.rowIndex="6" />
-                   <Slider fx:id="priceField" max="10000.0" value="10000.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                   <Label fx:id="roomsLabel" text="Rooms:" visible="false" GridPane.rowIndex="5" />
+                   <Slider fx:id="priceSlider" max="10000.0" value="10000.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                    <ComboBox fx:id="fromField" prefWidth="150.0" GridPane.columnIndex="1">
                        <items>
                            <FXCollections fx:factory="observableArrayList">
@@ -101,6 +99,8 @@
                            </FXCollections>
                        </items>
                    </ComboBox>
+                  <Label fx:id="endDateLabel" text="End Date:" visible="false" GridPane.rowIndex="5" />
+                   <DatePicker fx:id="endDateField" onAction="#updateEndDate" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                </children>
                <padding>
                   <Insets bottom="20.0" left="10.0" right="20.0" top="20.0" />

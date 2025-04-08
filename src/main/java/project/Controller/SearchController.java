@@ -5,12 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import project.Model.*;
+import project.ui.DayTourItem;
 import project.ui.FlightItem;
 import project.ui.HotelItem;
-import project.ui.DayTourItem;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -22,14 +23,23 @@ public class SearchController {
 
     //Changing fxml elements
     @FXML private Button checkoutButton;
-    @FXML private Label ResultLabel;
+    @FXML private Button skipButton;
+    @FXML private Label ResultLabel=new Label("Flights: ");
+    @FXML private Label fromLabel;
+    @FXML private Label toLabel;
+    @FXML private Label startDateLabel;
+    @FXML private Label endDateLabel;
+    @FXML private Label priceLabel;
+    @FXML private Label peopleLabel;
+    @FXML private Label roomsLabel;
     @FXML private ComboBox<String> fromField;
     @FXML private ComboBox<String> toField;
-    @FXML private Slider priceField;
+    @FXML private Slider priceSlider;
     @FXML private ComboBox<Integer> peopleField;
     @FXML private ComboBox<Integer> roomsField;
     @FXML private DatePicker startDateField;
     @FXML private DatePicker endDateField;
+    @FXML private GridPane gridPane;
     @FXML private ListView<HBox> ResultsListView;
     @FXML private Label searchMesageLabel;          //for error message to fill in fields
 
@@ -258,7 +268,7 @@ public class SearchController {
     //Input TextFields
     public void updateFrom() {setFrom(fromField.getValue());}
     public void updateTo() {setLocation(toField.getValue());}
-    public void updatePrice() {setMaxPrice((int) priceField.getValue());}
+    public void updatePrice() {setMaxPrice((int) priceSlider.getValue());}
     public void updatePeople() {setPeople((int) peopleField.getValue());}
     public void updateStartDate() {setStartDate(startDateField.getValue());}
     public void updateEndDate() {setEndDate(endDateField.getValue());}
@@ -281,15 +291,62 @@ public class SearchController {
         FROMFLIGHT, HOTEL, DAYTOUR, TOFLIGHT;
     }
 
-    private void updateStatus(Status newStatus) {
-        //change Input fields, ResultsTable, ResultsLabel
+    //change Input fields, ResultsListView, ResultsLabel
+    private void updateStatus() {
+        ResultsListView.getItems().clear();
+        switch (status) {
+            case FROMFLIGHT:
+                ResultLabel.setText("Return flights: ");
+                startDateLabel.setVisible(false);
+                startDateField.setVisible(false);
+                gridPane.setRowIndex(fromField,1);
+                gridPane.setRowIndex(toField,0);
+                gridPane.setRowIndex(endDateLabel,2);
+                gridPane.setRowIndex(endDateField,2);
+                endDateLabel.setVisible(true);
+                endDateField.setVisible(true);
+                skipButton.setText("Skip Return Flight");
+                this.status = Status.TOFLIGHT;
+                break;
+
+            case TOFLIGHT:
+                ResultLabel.setText("Hotels:");
+                roomsField.setVisible(true);
+                roomsLabel.setVisible(true);
+                fromField.setVisible(false);
+                toLabel.setVisible(false);
+                fromLabel.setText("Location:");
+                gridPane.setRowIndex(startDateLabel,1);
+                gridPane.setRowIndex(startDateField,1);
+                startDateField.setVisible(true);
+                startDateLabel.setVisible(true);
+                skipButton.setText("Skip Hotel");
+                this.status = Status.HOTEL;
+                break;
+
+            case HOTEL:
+                ResultLabel.setText("Day Tours:");
+                roomsLabel.setVisible(false);
+                roomsField.setVisible(false);
+                skipButton.setVisible(false);
+                skipButton.setText("Skip Day Tours");
+                this.status = Status.DAYTOUR;
+                break;
+
+            case DAYTOUR:
+                System.out.println("error");
+        }
+
+
     }
 
-    public void skipStatus() {
-        //case status, veldur næsta og kallar á updateStatus
+    //kallar á updateStatus
+    public void handleSkip() {
+        updateStatus();
     }
 
+    //finnur hvað er valið í ResultsListView og setur það inn í Trip item
     public void addToMyTrip() {
-        //finnur hvað er valið í ResultsListView og setur það inn í Trip item
+
     }
 }
