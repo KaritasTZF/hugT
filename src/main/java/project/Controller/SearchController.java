@@ -67,7 +67,7 @@ public class SearchController {
 
     public SearchController() {
         this.flightDB = new FlightDB();
-        this.hotelDB = null;//new HotelDB();
+        this.hotelDB = new HotelDB();
         this.dayTourDB = null;//ew DayTourDB();
     }
 
@@ -157,7 +157,7 @@ public class SearchController {
 //                }
 //            }
 //        }
-        return hotelDB.getHotelList(this.location, this.startDate, this.endDate, this.people, this.maxPrice);
+        return hotelDB.getHotelList(this.location, this.startDate, this.endDate, this.people, this.rooms);
     }
 
     //Leitar eftir dayTour í dayTourDB
@@ -186,6 +186,7 @@ public class SearchController {
     public void updatePeople() {setPeople(peopleField.getValue());}
     public void updateStartDate() {setStartDate(startDateField.getValue());}
     public void updateEndDate() {setEndDate(endDateField.getValue());}
+    public void updateRooms() {setRooms(roomsField.getValue());}
 
     private enum Status {
         FROMFLIGHT, HOTEL, DAYTOUR, TOFLIGHT;
@@ -328,6 +329,7 @@ public class SearchController {
                 updateEndDate();
                 updatePeople();
                 updatePrice();
+                updateRooms();
                 // tjekka að leit sé ekki alveg tóm. people&price hafa default gildi.
                 if (location != null && endDate != null && startDate != null && endDate.isAfter(startDate)) {
                     ArrayList<Hotel> hotelsArrayList = findAvailableHotels();

@@ -29,7 +29,7 @@ public class HotelDB {
             LocalDate checkInDate,
             LocalDate checkOutDate,
             int people,
-            int maxPrice
+            int rooms
             ){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         int pplCount = people > 0 ? people : 1;
@@ -37,7 +37,12 @@ public class HotelDB {
             ArrayList<software.objects.Hotel> availableHotels = search.initialSearch(location, checkInDate.format(formatter), checkOutDate.format(formatter), pplCount);
 
             for (software.objects.Hotel hotel: availableHotels) {
-                createHotel(hotel.getName(),1,checkInDate,checkOutDate,hotel.getCheapestRoom(), hotel.getLocation());
+                ArrayList<software.objects.HotelRoom> roomsFrom4H = hotel.getRooms();
+                int roomCount = roomsFrom4H.size();
+                System.out.println(hotel.getName() + ": " + roomCount + " - " + rooms);
+                if (roomCount >= rooms) {
+                    createHotel(hotel.getName(),roomCount,checkInDate,checkOutDate,hotel.getCheapestRoom(), hotel.getLocation());
+                }
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
