@@ -23,4 +23,6 @@ public class FlightItem {
         dateLabel.setText(flight.getDate().toString());
         priceLabel.setText(String.valueOf(flight.getPrice()));
     }
+
+    public Flight getFlight() {return this.flight;}
 }
