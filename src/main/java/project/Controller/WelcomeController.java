@@ -17,7 +17,9 @@ public class WelcomeController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Search.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) toSearch.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
             stage.show();
         }catch(Exception e){
             e.printStackTrace();
@@ -29,7 +31,9 @@ public class WelcomeController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/User.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) toUser.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
             stage.show();
         }catch(Exception e){
             e.printStackTrace();

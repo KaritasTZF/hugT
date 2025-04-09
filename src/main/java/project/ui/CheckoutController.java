@@ -81,7 +81,9 @@ public class CheckoutController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Search.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) bookButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
             stage.show();
         }catch (IOException e) {
             throw new RuntimeException(e);

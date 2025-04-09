@@ -14,6 +14,7 @@ public class MainApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("TripAdmirer");
         stage.setScene(scene);
+        scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
         stage.show();
     }
 
