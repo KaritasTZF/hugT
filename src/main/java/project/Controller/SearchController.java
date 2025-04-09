@@ -15,7 +15,6 @@ import project.ui.FlightItem;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Objects;
 
 
 public class SearchController {
@@ -191,21 +190,30 @@ public class SearchController {
     //Leitar eftir dayTour í dayTourDB
     public ArrayList<DayTour> findAvailableDayTours() {
         ArrayList<DayTour> dayTourDBList = dayTourDB.getDayTourList();
-        ArrayList<DayTour> dayTourReturnList= new ArrayList<>();
+        ArrayList<DayTour> dayTourReturnList = new ArrayList<>();
 
         for (DayTour dayTour : dayTourDBList) {
-            if (Objects.equals(dayTour.getPeople(), people)) {
-                if (dayTour.getDate().isAfter(startDate) || dayTour.getDate().isEqual(startDate)) {
-                    if (dayTour.getDate().isBefore(endDate) || dayTour.getDate().isEqual(endDate)) {
-                        if (dayTour.getPrice() <= maxPrice) {
-                            dayTourReturnList.add(dayTour);
-                        }
-                    }
-                }
+            // Filter eftir staðsetningu: Athuga hvort dayTour location sé sú sama (óháð stórum/lágu stöfum)
+            if (!dayTour.getLocation().equalsIgnoreCase(location)) {
+                continue;
             }
+            // Filtera eftir dagsetningu: dayTour verður að vera á eða eftir startDate og á eða fyrir endDate
+            if (!(dayTour.getDate().isAfter(startDate) || dayTour.getDate().isEqual(startDate))) {
+                continue;
+            }
+            if (!(dayTour.getDate().isBefore(endDate) || dayTour.getDate().isEqual(endDate))) {
+                continue;
+            }
+            // Filtera eftir verði: dayTour verð verður að vera minni eða jafnt og maxPrice
+            if (dayTour.getPrice() <= maxPrice) {
+                continue;
+            }
+            // Ef allar skilyrði eru uppfyllt, bæta dayTour við í niðurstöðulistann
+            dayTourReturnList.add(dayTour);
         }
         return dayTourReturnList;
     }
+
 
     //Takka virkni
 
