@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import project.Controller.BookingController;
 import project.Controller.SearchController;
 import project.Model.DayTour;
 import project.Model.Flight;
@@ -216,6 +217,9 @@ public class SearchViewController {
                 CheckoutController controller = loader.getController();
                 controller.setUser(this.user);
                 controller.setTrip(sc.getMyTrip());
+                BookingController bookingController = new BookingController();
+                bookingController.addTrip(sc.getMyTrip());
+                controller.setBookingController(bookingController);
                 Stage stage = (Stage) fromField.getScene().getWindow();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);

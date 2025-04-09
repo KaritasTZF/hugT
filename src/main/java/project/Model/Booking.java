@@ -52,6 +52,13 @@ public class Booking {
         this.confirmationNr = confirmationNr;
     }
 
+    @Override
+    public String toString() {
+        // Þú ræður textanum
+        return "Booking #" + bookingID + " (Trip: " + trip.getTripID() + ")";
+    }
+
+
     //methods: confirmBooking(): void
     
     //methods: getBookingPrice(): double
