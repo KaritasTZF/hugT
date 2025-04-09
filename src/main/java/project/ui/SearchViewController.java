@@ -218,7 +218,7 @@ public class SearchViewController {
                 controller.setUser(this.user);
                 controller.setTrip(sc.getMyTrip());
                 BookingController bookingController = new BookingController();
-                bookingController.addTrip(sc.getMyTrip());
+                //user.getBookedTrips().add(sc.getMyTrip());
                 controller.setBookingController(bookingController);
                 Stage stage = (Stage) fromField.getScene().getWindow();
                 Scene scene = new Scene(root);
