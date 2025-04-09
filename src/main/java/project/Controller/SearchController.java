@@ -376,18 +376,24 @@ public class SearchController {
 
     //Áfram takki
     public void goToCheckout() {
-        try{
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Checkout.fxml"));
             Parent root = loader.load();
             CheckoutController controller = loader.getController();
             controller.setTrip(myTrip);
+
+            BookingController bookingController = new BookingController();
+            bookingController.addTrip(myTrip);
+
+            controller.setBookingController(bookingController);
             Stage stage = (Stage) fromField.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
-        }catch(Exception e){
+        } catch(Exception e) {
             throw new RuntimeException(e);
         }
     }
+
 
     //Back takki
     public void goToWelcome() {
@@ -401,4 +407,5 @@ public class SearchController {
             throw new RuntimeException(e);
         }
     }
+
 }

@@ -8,5 +8,7 @@
       <Button fx:id="toSearch" layoutX="54.0" layoutY="73.0" mnemonicParsing="false" onAction="#goToSearch" text="Search Trips" />
       <Button fx:id="toUser" layoutX="458.0" layoutY="73.0" mnemonicParsing="false" onAction="#goToUser" text="Manage User" />
       <Button fx:id="toBookings" layoutX="258.0" layoutY="73.0" mnemonicParsing="false" onAction="#goToBookings" text="My Bookings" />
+      <!-- Nýr "Manage Favorite" hnapp -->
+      <Button fx:id="toFavorites" layoutX="246.0" layoutY="118.0" mnemonicParsing="false" onAction="#goToFavorites" text="Manage Favorite" />
    </children>
 </AnchorPane>
