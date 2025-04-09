@@ -9,9 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import project.Model.Booking;
-import project.Model.Trip;
-import project.Model.User;
+import project.Model.*;
 import project.ui.BookingItem;
 import project.ui.WelcomeController;
 
@@ -48,8 +46,18 @@ public class BookingController {
         );
         // Bætum bókuninni í listann
         user.getBookedTrips().add(newBooking);
-        
-//TODO kalla á FHD bookings
+
+        //Bókum hjá database
+        BookH bookH = new BookH(user);
+        BookD bookD = new BookD(user);
+        for (Hotel hotel: trip.getHotelItems()) {
+            bookH.bookHotel(hotel);
+        }
+        for (DayTour dayTour: trip.getDayTourItems()) {
+            bookD.bookDayTour(dayTour);
+        }
+        //Engin bókun hjá F
+
         // Skilum nýju bókuninni
         return newBooking;
     }
