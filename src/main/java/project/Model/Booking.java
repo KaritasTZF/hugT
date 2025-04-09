@@ -1,7 +1,7 @@
 package project.Model;
 
 public class Booking {
-    private int userID;
+    private String userID;
     private Trip trip;
     private int bookingID;
     private String status;
@@ -9,7 +9,7 @@ public class Booking {
 
     //Constructor
     public Booking(
-      int userID,
+      String userID,
       Trip trip,
       int bookingID,
       String status,
@@ -23,11 +23,11 @@ public class Booking {
 
     }
 
-    public int getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 

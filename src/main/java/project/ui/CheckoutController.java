@@ -7,14 +7,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import project.Model.DayTour;
-import project.Model.Flight;
-import project.Model.Hotel;
-import project.Model.Trip;
+import project.Controller.BookingController;
+import project.Model.*;
+import project.util.Session;
 
 import java.io.IOException;
 
 public class CheckoutController {
+
     @FXML private Label totalPriceLabel;
     @FXML private Label flavorLabel;
     @FXML private Label datesLabel;
@@ -26,7 +26,19 @@ public class CheckoutController {
     @FXML private ComboBox yyField;
     @FXML private ListView<HBox> tripList;
 
+    // --- NÝTT: BookingController breyta + setter ---
+    private BookingController bookingController;
+    public void setBookingController(BookingController bookingController) {
+        this.bookingController = bookingController;
+    }
+
+    private Trip trip;
+
+
     public void setTrip(Trip trip) {
+
+        this.trip = trip;
+
         for (Flight flight:trip.getFlightItems() ) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/FlightItem.fxml"));
@@ -61,6 +73,7 @@ public class CheckoutController {
                 throw new RuntimeException(e);
             }
         }
+
         if (trip.getHotelItems() != null && !trip.getHotelItems().isEmpty()) {
             flavorLabel.setText("Enjoy your \"sunny\" trip to "+trip.getHotelItems().getFirst().getLocation()+"!");
         }
@@ -72,9 +85,75 @@ public class CheckoutController {
         }
     }
 
+    @FXML
     public void book() {
+        // Fá innslátt frá kreditkortareitunum
+        String ccNumber = ccField.getText();
+        String cvv = cvvField.getText();
+        Object mm = mmField.getValue();
+        Object yy = yyField.getValue();
 
+        // Einföld villutékkun
+        if(ccNumber == null || ccNumber.isBlank() ||
+                cvv == null || cvv.isBlank() ||
+                mm == null || yy == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Validation Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Vinsamlegast sláðu inn gildar kortaupplýsingar.");
+            alert.showAndWait();
+            return;
+        }
+
+        // Athuga að BookingController og Trip séu til staðar
+        if(bookingController == null || trip == null) {
+            System.out.println("Vantar booking controller eða trip uppsetningu.");
+            return;
+        }
+
+        // Sækum user id úr Session; hér er gert ráð fyrir að getUserId() skili int.
+        // Ef notandinn geymir userId sem String sem þarf að umbreyta, breyttu eftir þörfum.
+        String userID;
+        try {
+            userID = Session.getInstance().getCurrentUser().getUserID();
+        } catch(NumberFormatException e) {
+            System.err.println("User ID er ekki gild tala: " + Session.getInstance().getCurrentUser().getUserID());
+            return;
+        }
+        String tripID = trip.getTripID();
+
+        // Búa til bókun – kalla á BookingController til að búa til bókun
+        Booking booking = bookingController.createBooking(userID, tripID);
+        if(booking == null) {
+            System.out.println("Ekki tókst að búa til bókun.");
+            return;
+        }
+        // Staðfesta bókunina
+        Booking confirmed = bookingController.confirmBooking(booking.getBookingID());
+        if(confirmed == null) {
+            System.out.println("Bókun staðfesting mistókst.");
+            return;
+        }
+
+        // Birtum tilkynningu um að bókun hafi verið staðfest
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Bókun Tókst");
+        alert.setHeaderText(null);
+        alert.setContentText("Bókun þín hefur verið staðfest!\nStaðfestingar númer: " + confirmed.getConfirmationNr());
+        alert.showAndWait();
+
+        // Nú skiptum við yfir á Welcome.fxml
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Welcome.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) bookButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
     public void cancel() {
         try{
