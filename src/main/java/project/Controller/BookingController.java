@@ -11,7 +11,6 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import project.Model.Booking;
 import project.Model.Trip;
-import project.util.DBHelper;
 import project.util.Session;
 
 import java.util.ArrayList;
@@ -125,7 +124,7 @@ public class BookingController {
         String currentUserID = Session.getInstance().getCurrentUser().getUserID();
         // Sóttum bókunirnar úr gagnagrunninum fyrir þennan user
         //List<Booking> userBookings = DBHelper.getBookingsByUser(currentUserID);
-        List<Booking> userBookings = new List<Booking>();
+        List<Booking> userBookings = List.of();
         bookingsListView.setItems(FXCollections.observableArrayList(userBookings));
 
         // Setjum listener á val á ListView til að sýna nánari upplýsingar.
@@ -150,12 +149,12 @@ public class BookingController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Welcome.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) backButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
             stage.show();
-        } catch(Exception e) {
-            e.printStackTrace();
+        } catch(Exception e){
+            throw new RuntimeException(e);
         }
     }
-
-
 }

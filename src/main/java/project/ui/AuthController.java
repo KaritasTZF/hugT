@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import project.Model.User;
 import project.util.Session;
 
-import java.io.IOException;
 import java.util.UUID;
 
 public class AuthController {
@@ -63,6 +62,8 @@ public class AuthController {
             alert.showAndWait();
             return;
         }
+        //Búum til nýtt user
+        User user = new User("0",username,password,"");
 
         if (user != null) {
             // Notandi fannst, athugum hvort lykilorðið samsvari.
@@ -115,8 +116,8 @@ public class AuthController {
             return;
         }
 
-        // Athugum hvort notandi sé til í gagnagrunninum, til að hindra tvískráningu.
-        User user = DBHelper.getUserByUsername(username);
+        //Búum til nýtt user
+        User user = new User("1",username,password,"");
         if (user != null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Sign Up Mistókst");
@@ -131,7 +132,7 @@ public class AuthController {
         User newUser = new User(userId, username, password, email);
 
         // Vistum notandann í gagnagrunninum.
-        boolean inserted = DBHelper.insertUser(newUser);
+        boolean inserted = true;
         if (inserted) {
             Session.getInstance().setCurrentUser(newUser);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -159,10 +160,12 @@ public class AuthController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Welcome.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) signinUsernameField.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
             stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        }catch(Exception e){
+            throw new RuntimeException(e);
         }
     }
 }

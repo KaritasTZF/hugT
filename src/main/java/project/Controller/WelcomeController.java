@@ -47,7 +47,7 @@ public class WelcomeController {
             scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
             stage.show();
         }catch(Exception e){
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -59,11 +59,12 @@ public class WelcomeController {
             Parent root = loader.load();
             // Fáum tilvísun á stage-ið út frá knöppnum
             Stage stage = (Stage) toBookings.getScene().getWindow();
-            // Setjum nýja scene með Bookings.fxml
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
             stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch(Exception e){
+            throw new RuntimeException(e);
         }
     }
 
@@ -79,7 +80,9 @@ public class WelcomeController {
             // controller.set...(...);
 
             Stage stage = (Stage)toFavorites.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.Controller.BookingController" prefHeight="400.0" prefWidth="600.0">
+<AnchorPane styleClass="background" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.Controller.BookingController" prefHeight="400.0" prefWidth="600.0">
     <children>
         <!-- Titill -->
         <Label layoutX="20.0" layoutY="20.0" text="My Bookings" />

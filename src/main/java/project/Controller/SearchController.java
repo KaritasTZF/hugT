@@ -126,12 +126,14 @@ public class SearchController {
                 if (from != null && location != null && startDate != null) {
                     ArrayList<Flight> flightsArrayList = findAvailableFlights(from,location,startDate);
                     view.loadFlightsToList(view.getResultsListView(), flightsArrayList);
+                    flightsArrayList = null;
                 }
                 break;
             case Status.TOFLIGHT:
                 if (from != null && location != null && endDate != null && endDate.isAfter(startDate)) {
                     ArrayList<Flight> flightsArrayList = findAvailableFlights(location,from,endDate);
                     view.loadFlightsToList(view.getResultsListView(),flightsArrayList);
+                    flightsArrayList = null;
                 }
                 break;
             case Status.HOTEL:
@@ -139,12 +141,14 @@ public class SearchController {
                 if (location != null && endDate != null && startDate != null && endDate.isAfter(startDate)) {
                     ArrayList<Hotel> hotelsArrayList = findAvailableHotels();
                     view.loadHotelsToList(view.getResultsListView(),hotelsArrayList);
+                    hotelsArrayList = null;
                 }
                 break;
             case Status.DAYTOUR:
                 if (location != null && endDate != null && startDate != null && endDate.isAfter(startDate)) {
                     ArrayList<DayTour> dayToursArrayList = findAvailableDayTours();
                     view.loadDayToursToList(view.getResultsListView(),dayToursArrayList);
+                    dayToursArrayList = null;
                 }
                 break;
         }
