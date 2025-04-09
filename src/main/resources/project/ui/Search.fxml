@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane styleClass="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ui.SearchViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="background" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ui.SearchViewController">
    <children>
       <AnchorPane layoutX="384.0" layoutY="-6.0" prefHeight="700.0" prefWidth="619.0">
          <children>
@@ -86,7 +86,6 @@
                    </ComboBox>
 
                    <Label fx:id="roomsLabel" text="Rooms:" visible="false" GridPane.rowIndex="5" />
-                   <Slider fx:id="priceSlider" max="10000.0" value="10000.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                    <ComboBox fx:id="fromField" prefWidth="150.0" GridPane.columnIndex="1">
                        <items>
                            <FXCollections fx:factory="observableArrayList">
@@ -116,6 +115,15 @@
                    </ComboBox>
                   <Label fx:id="endDateLabel" text="End Date:" visible="false" GridPane.rowIndex="5" />
                    <DatePicker fx:id="endDateField" onAction="#updateEndDate" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <HBox fx:id="sliderHBox" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <Label fx:id="priceDisplay" text="50000 kr." />
+                        <Slider fx:id="priceSlider" onMouseReleased="#updateSlider" blockIncrement="10000.0" majorTickUnit="10000.0" max="50000.0" minorTickCount="0" showTickMarks="true" snapToTicks="true" value="50000.0">
+                           <opaqueInsets>
+                              <Insets left="4.0" />
+                           </opaqueInsets>
+                        </Slider>
+                     </children></HBox>
                </children>
                <padding>
                   <Insets bottom="20.0" left="10.0" right="20.0" top="20.0" />
