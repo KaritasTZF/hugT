@@ -4,22 +4,27 @@ import java.time.LocalDate;
 
 public class Hotel {
     // attributes hér
+    private String name;
     private int rooms;
     private int days;
     private LocalDate startDate;
     private LocalDate endDate;
-    private double price;
+    private int price;
     private String location;
 
     // Constructor
-    public Hotel(int rooms, int days, LocalDate startDate, LocalDate endDate, double price, String location) {
+    public Hotel(String name, int rooms, LocalDate startDate, LocalDate endDate, int price, String location) {
+        this.name = name;
         this.rooms = rooms;
-        this.days = days;
         this.startDate = startDate;
         this.endDate = endDate;
         this.price = price;
         this.location = location;
     }
+
+    public String getName() {return this.name;}
+
+    public void setName(String name) {this.name = name;}
 
     public int getRooms() {
         return this.rooms;
@@ -53,11 +58,11 @@ public class Hotel {
         this.endDate = endDate;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return this.price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

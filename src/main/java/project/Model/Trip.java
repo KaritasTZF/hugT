@@ -1,50 +1,29 @@
 package project.Model;
 
 import java.time.LocalDate;
-import java.util.ArrayList; //Til þess að geyma lista af object okkar
+import java.util.ArrayList;
+import java.util.UUID;
 
 public class Trip {
-    private String tripID=null;
-    private int people=0;
-    private int days=0;
-    private LocalDate startDate=null;
-    private LocalDate endDate=null;
+    private final String tripID;
+    private int people;
+    private int days;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private int price=0;
-    private ArrayList<Flight> flightItems=null; //Listi af Flight,listinn heitir flightItems (gamalt frá TripItems)
-    private ArrayList<Hotel> hotelItems=null; //Listi af Hotel, listinn heitir hotelItems (gamalt frá TripItems)
-    private ArrayList<DayTour> dayTourItems=null; //Listi af DayTour, listinn heitir dayTourItems (gamalt frá TripItems)
+    private final ArrayList<Flight> flightItems=new ArrayList<>(); //Listi af Flight,listinn heitir flightItems (gamalt frá TripItems)
+    private final ArrayList<Hotel> hotelItems=new ArrayList<>(); //Listi af Hotel, listinn heitir hotelItems (gamalt frá TripItems)
+    private final ArrayList<DayTour> dayTourItems=new ArrayList<>(); //Listi af DayTour, listinn heitir dayTourItems (gamalt frá TripItems)
 
     //Constructor to initialize Trip object
-    public Trip(
-      String tripID,
-      int people,
-      int days,
-      LocalDate startDate,
-      LocalDate endDate,
-      int price,
-      ArrayList<Flight> flightItems,
-      ArrayList<Hotel> hotelItems,
-      ArrayList<DayTour> dayTourItems
-    ) {
-        this.tripID = tripID;
-        this.people = people;
-        this.days = days;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.price = price;
-        this.flightItems = flightItems;
-        this.hotelItems = hotelItems;
-        this.dayTourItems = dayTourItems;
+    public Trip() {
+        this.tripID = UUID.randomUUID().toString();
     }
 
     //Methods: getterar ------------------------------------
     // skilar tripID
     public String getTripID() {
         return this.tripID;
-    }
-
-    public void setTripID(String tripID) {
-        this.tripID = tripID;
     }
 
     //skilar fjöldi manns
@@ -58,59 +37,81 @@ public class Trip {
 
     //skilar fjöldi dags.
     public int getDays() {
-        return this.days;
-    }
-
-    public void setDays(int days) {
-        this.days = days;
+        return days;
     }
 
     public LocalDate getStartDate() {
         return this.startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
     public LocalDate getEndDate() {
         return this.endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
     //skilar verð
-    public double getPrice() {
-        return this.price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
+    public int getPrice() {
+        return price;
     }
 
     public ArrayList<Flight> getFlightItems() {
         return this.flightItems;
     }
 
-    public void setFlightItems(ArrayList<Flight> flightItems) {
-        this.flightItems = flightItems;
-    }
-
     public ArrayList<Hotel> getHotelItems() {
         return this.hotelItems;
-    }
-
-    public void setHotelItems(ArrayList<Hotel> hotelItems) {
-        this.hotelItems = hotelItems;
     }
 
     public ArrayList<DayTour> getDayTourItems() {
         return this.dayTourItems;
     }
 
-    public void setDayTourItems(ArrayList<DayTour> dayTourItems) {
-        this.dayTourItems = dayTourItems;
+    public void addFlightItem(Flight flight) {
+        if (flight == null) {
+            System.out.println("attempted to add null flight to trip");
+        } else {
+            this.flightItems.add(flight);
+
+            //update other info
+            if (startDate == null || flight.getDate().isBefore(startDate)) {
+                startDate = flight.getDate();
+            }
+            if (endDate == null || flight.getDate().isAfter(endDate)) {
+                endDate = flight.getDate();
+            }
+            price += flight.getPrice();
+        }
+    }
+    public void addHotelItem(Hotel hotel) {
+        if (hotel == null) {
+            System.out.println("attempted to add null hotel to trip");
+        } else {
+            this.hotelItems.add(hotel);
+
+            //update other info
+            if (startDate == null ||  hotel.getStartDate().isBefore(startDate)) {
+                startDate = hotel.getStartDate();
+            }
+            if (endDate == null || hotel.getEndDate().isAfter(endDate)) {
+                endDate = hotel.getEndDate();
+            }
+            price += hotel.getPrice();
+        }
+    }
+    public void addDayTourItem(DayTour dayTour) {
+        if (dayTour == null) {
+            System.out.println("attempted to add null day tour to trip");
+        } else {
+            this.dayTourItems.add(dayTour);
+
+            //update other info
+            if (startDate == null || dayTour.getDate().isBefore(startDate)) {
+                startDate = dayTour.getDate();
+            }
+            if (endDate == null || dayTour.getDate().isAfter(endDate)) {
+                endDate = dayTour.getDate();
+            }
+            price += dayTour.getPrice();
+            if (dayTour.getPeople() > people) {people = dayTour.getPeople();}
+        }
     }
 }

@@ -1,41 +1,63 @@
 package project.Controller;
 
-import project.Model.Booking;
-import project.Model.Trip;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+import project.Model.*;
+import project.ui.BookingItem;
+import project.ui.WelcomeController;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
 import java.util.Random;
+
+
 
 public class BookingController {
 
-    // Listi til að geyma bókanir
-    private final List<Booking> bookings = new ArrayList<>();
+    @FXML private ListView<HBox>  bookingsListView;
+    @FXML private Label bookingIdLabel;
+    @FXML private Label tripLabel;
+    @FXML private Label statusLabel;
+    @FXML private Label confirmationLabel;
+    @FXML private Button backButton;
+
     // Gagnateljari til að útbúa einstakt bookingID
     private int bookingCounter = 1;
+    private User user;
 
-    private BookingController bookingController;
-
-    // Lista af Trips; notað til að "leita" að réttu Trip hlutnum.
-    private final List<Trip> trips = new ArrayList<>();
-
-    public Booking createBooking(int userID, String tripID) {
-        // Leitum að Trip með því að nota getTripById(String)
-        Trip chosenTrip = getTripById(tripID);
-        if (chosenTrip == null) {
-            System.out.println("Trip not found for ID: " + tripID);
+    public Booking createBooking(User user, Trip trip) {
+        if (trip == null) {
+            System.out.println("Trip not found for ID: " + trip.getTripID());
             return null;
         }
+
         // Smíðum nýja Booking
         Booking newBooking = new Booking(
-                userID,               // notendauðkenni
-                chosenTrip,           // Trip hlutinn
+                trip,                   // Trip hlutinn
                 bookingCounter++,     // auto-inkrement bookingID
                 "Pending",            // upphafsstöðu (Pending)
                 0                     // confirmationNr byrjar sem 0
         );
         // Bætum bókuninni í listann
-        bookings.add(newBooking);
+        user.getBookedTrips().add(newBooking);
+
+        //Bókum hjá database
+        BookH bookH = new BookH(user);
+        BookD bookD = new BookD(user);
+        for (Hotel hotel: trip.getHotelItems()) {
+            bookH.bookHotel(hotel);
+        }
+        for (DayTour dayTour: trip.getDayTourItems()) {
+            bookD.bookDayTour(dayTour);
+        }
+        //Engin bókun hjá F
+
         // Skilum nýju bókuninni
         return newBooking;
     }
@@ -55,7 +77,7 @@ public class BookingController {
     }
 
     private Booking getBookingByID(int bookingID) {
-        for (Booking b : bookings) {
+        for (Booking b : user.getBookedTrips()) {
             if (b.getBookingID() == bookingID) {
                 return b;
             }
@@ -63,8 +85,8 @@ public class BookingController {
         return null;
     }
 
-    public void setBookingController(BookingController bookingController) {
-        this.bookingController = bookingController;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     private int generateConfirmationNumber() {
@@ -72,12 +94,47 @@ public class BookingController {
         return 100000 + rand.nextInt(900000);  // Númer á bilinu 100000 til 999999
     }
 
-    private Trip getTripById(String tripID) {
-        for (Trip t : trips) {
-            if (t.getTripID().equals(tripID)) {
-                return t;
+    @FXML
+    public void showData() {
+        for (Booking booking: user.getBookedTrips() ) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/BookingItem.fxml"));
+                Parent bookingItem = loader.load();
+                BookingItem controller = loader.getController();
+                controller.setData(booking);
+                controller.setView(this);
+                bookingsListView.getItems().add((HBox) bookingItem);
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }
-        return null;
+    }
+
+    public void showBookingDetails(Booking booking) {
+        if (booking != null) {
+            bookingIdLabel.setText("Booking ID: " + booking.getBookingID());
+            // Hér er bara sýndur Trip ID; breyttu ef þú þarft að sýna meira
+            tripLabel.setText("Trip: " + booking.getTrip().getTripID());
+            statusLabel.setText("Status: " + booking.getStatus());
+            confirmationLabel.setText("Confirmation #: " + booking.getConfirmationNr());
+        }
+    }
+
+    @FXML
+    public void handleBack() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Welcome.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) backButton.getScene().getWindow();
+            WelcomeController controller = loader.getController();
+            controller.setUser(user);
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+            stage.show();
+        } catch(Exception e){
+            throw new RuntimeException(e);
+        }
     }
 }

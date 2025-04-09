@@ -1,27 +1,35 @@
 package project.Model;
 
+import project.Controller.BookingController;
+
 import java.util.ArrayList;
 
 public class User {
     private String userID;
     private String name;
     private String email;
-    private ArrayList<Trip> favoriteTrips;
+    private ArrayList<Booking> bookedTrips = new ArrayList<>();
+    private String password;
+    private BookingController bookingController;
 
     // Constructor to initialize User object
-    public User(String userID, String name, String email, ArrayList<Trip> favoriteTrips) {
+    public User(String userID, String name, String password,String email) {
         this.userID = userID;
         this.name = name;
         this.email = email;
-        this.favoriteTrips = favoriteTrips;
+        this.password = password;
     }
 
-    // method: getBooked(): List<Booking>
-    // method: getFavorite(): FavoritedTrips
+    public void setBookingController(BookingController bookingController) {
+        this.bookingController = bookingController;
+    }
+
+    public ArrayList<Booking> getBookedTrips() {
+        return bookedTrips;
+    }
 
     public String getUserID() {
         return this.userID;
-
     }
 
     public void setUserID(String userID) {
@@ -44,11 +52,12 @@ public class User {
         this.email = email;
     }
 
-    public ArrayList<Trip> getFavoriteTrips() {
-        return this.favoriteTrips;
+    public String getPassword() {
+        return password;
     }
 
-    public void setFavoriteTrips(ArrayList<Trip> favoriteTrips) {
-        this.favoriteTrips = favoriteTrips;
+    public void setPassword(String password) {
+        this.password = password;
     }
+
 }

@@ -5,7 +5,6 @@ import software.objects.Search;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class HotelDB {
@@ -21,8 +20,8 @@ public class HotelDB {
         }
     }
 
-    public void createHotel(int rooms, int days, LocalDate start, LocalDate end, int price, String location) {
-        hotelList.add(new Hotel(rooms,days,start,end,price,location));
+    public void createHotel(String name, int rooms, LocalDate start, LocalDate end, int price, String location) {
+        hotelList.add(new Hotel(name, rooms,start,end,price,location));
     }
 
     public ArrayList<Hotel> getHotelList(
@@ -30,18 +29,26 @@ public class HotelDB {
             LocalDate checkInDate,
             LocalDate checkOutDate,
             int people,
-            int maxPrice
+            int rooms
             ){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        ArrayList<software.objects.Hotel> availableHotels = search.initialSearch(location, checkInDate.format(formatter), checkOutDate.format(formatter),people);
-        //TODO laga rooms (4H gerir ráð fyrir að bóka eitt room í einu) ,
-        // checkIn/OutDate (4H leitar eftir að checkIn er nákvæmlega sama dagsetning, og gerir ekkert við checkOut)
-        // þ.a. þessi rooms, checkIn/OutDate eru placeholders
-        //ATH 4H og við erum með klasa sem heita bæði Hotel. þá er software.objects alltaf notað til að kalla á 4H Hotel.
-        for (software.objects.Hotel hotel: availableHotels) {
-            createHotel(1, (int) ChronoUnit.DAYS.between(checkInDate, checkOutDate),checkInDate,checkOutDate,hotel.getCheapestRoom(), hotel.getLocation());
+        int pplCount = people > 0 ? people : 1;
+        try {
+            ArrayList<software.objects.Hotel> availableHotels = search.initialSearch(location, checkInDate.format(formatter), checkOutDate.format(formatter), pplCount);
+
+            for (software.objects.Hotel hotel: availableHotels) {
+                ArrayList<software.objects.HotelRoom> roomsFrom4H = hotel.getRooms();
+                int roomCount = roomsFrom4H.size();
+                System.out.println(hotel.getName() + ": " + roomCount + " - " + rooms);
+                if (roomCount >= rooms) {
+                    createHotel(hotel.getName(),roomCount,checkInDate,checkOutDate,hotel.getCheapestRoom(), hotel.getLocation());
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        return hotelList;
+
+        return this.hotelList;
     }
 
 }

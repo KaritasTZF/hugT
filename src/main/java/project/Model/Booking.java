@@ -1,7 +1,6 @@
 package project.Model;
 
 public class Booking {
-    private int userID;
     private Trip trip;
     private int bookingID;
     private String status;
@@ -9,26 +8,16 @@ public class Booking {
 
     //Constructor
     public Booking(
-      int userID,
       Trip trip,
       int bookingID,
       String status,
       int confirmationNr
     ) {
-      this.userID = userID;
       this.trip = trip;
       this.bookingID = bookingID;
       this.status = status;
       this.confirmationNr = confirmationNr;
 
-    }
-
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
     }
 
     public Trip getTrip() {
@@ -62,6 +51,13 @@ public class Booking {
     public void setConfirmationNr(int confirmationNr) {
         this.confirmationNr = confirmationNr;
     }
+
+    @Override
+    public String toString() {
+        // Þú ræður textanum
+        return "Booking #" + bookingID + " (Trip: " + trip.getTripID() + ")";
+    }
+
 
     //methods: confirmBooking(): void
     

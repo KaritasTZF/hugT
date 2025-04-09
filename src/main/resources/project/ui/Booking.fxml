@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane styleClass="background" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="project.Controller.BookingController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <children>
+        <Label layoutX="20.0" layoutY="20.0" text="My Bookings" />
+
+        <SplitPane layoutX="20.0" layoutY="50.0"
+                   prefHeight="300.0" prefWidth="560.0"
+                   orientation="HORIZONTAL">
+            <items>
+                <!-- ListView fyrir bókanir -->
+                <ListView fx:id="bookingsListView" prefWidth="200.0" />
+
+                <!-- Panel fyrir upplýsingar um valda bókun -->
+                <AnchorPane prefWidth="360.0">
+                    <children>
+                        <VBox layoutX="10.0" layoutY="10.0" spacing="10.0">
+                            <children>
+                                <Label fx:id="bookingIdLabel" text="Booking ID:" />
+                                <Label fx:id="tripLabel" text="Trip:" />
+                                <Label fx:id="statusLabel" text="Status:" />
+                                <Label fx:id="confirmationLabel" text="Confirmation #:" />
+                            </children>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+
+        <Button fx:id="backButton"
+                layoutX="20.0"
+                layoutY="360.0"
+                text="Back"
+                onAction="#handleBack" />
+    </children>
+</AnchorPane>

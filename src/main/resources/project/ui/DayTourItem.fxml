@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox onMouseClicked="#handleSelection" prefHeight="22.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ui.DayTourItem">
+      <Label text="Tour: ">
+         <padding>
+            <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
+         </padding>
+      </Label>
+      <HBox prefHeight="22.0" prefWidth="280.0">
+            <Label fx:id="nameLabel" text="Horseback Riding on Black Sand Beaches">
+               <padding>
+                  <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
+               </padding>
+            </Label>
+            <Label fx:id="toLabel" alignment="CENTER_RIGHT" minWidth="50.0" text="Vík">
+               <padding>
+                  <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
+               </padding>
+            </Label>
+      </HBox>
+      <Label fx:id="priceLabel" minWidth="50.0" text="20000 kr.">
+         <padding>
+            <Insets bottom="2.0" left="6.0" right="6.0" top="2.0" />
+         </padding>
+      </Label>
+      <HBox prefHeight="22.0" prefWidth="134.0">
+            <Label fx:id="dateLabel" minWidth="50.0" text="2025-01-01">
+               <padding>
+                  <Insets bottom="2.0" left="4.0" top="2.0" />
+               </padding>
+            </Label>
+            <Label text=", at">
+               <padding>
+                  <Insets bottom="2.0" top="2.0" />
+               </padding>
+            </Label>
+            <Label fx:id="timeLabel" minWidth="50.0" text="00:00">
+               <padding>
+                  <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
+               </padding>
+            </Label>
+      </HBox>
+</HBox>

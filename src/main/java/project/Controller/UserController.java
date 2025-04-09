@@ -8,18 +8,9 @@ public class UserController {
     private BookingController bookingController; //Stofna BC fyrir samskipti við BC
 
     //Smíða Bookingcontroller f. samskipti á milli
-    public UserController() {
+    public UserController(User user, BookingController bookingController) {
+        this.user = user;
         this.bookingController = bookingController;
-    }
-
-    // Býr til notanda og vistar
-    public void createUser(User newUser) {
-        if (this.user == null) {
-            this.user = newUser;
-            System.out.println("New user created: " + newUser.getName());
-        } else {
-            System.out.println("User already exists. Doing nothing.");
-        }
     }
 
     // Sækir núverandi notanda. Skilar null ef enginn user hefur verið stofnaður.
