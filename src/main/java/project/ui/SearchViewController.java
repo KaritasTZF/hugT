@@ -37,13 +37,13 @@ public class SearchViewController {
     @FXML private ComboBox<Integer> roomsField=new ComboBox<>();
     @FXML private DatePicker startDateField;
     @FXML private DatePicker endDateField;
-    @FXML private GridPane gridPane;
     @FXML private ListView<HBox> ResultsListView;
     @FXML private ListView<HBox> MyTripListView;
     @FXML private Label totalPriceLabel;
+    @FXML private HBox sliderHBox;
+    @FXML private Label priceDisplay;
 
     private User user;
-
 
     private Flight selectedFItem;
     private Hotel selectedHItem;
@@ -61,6 +61,11 @@ public class SearchViewController {
 
     public ListView<HBox> getResultsListView() {
         return ResultsListView;
+    }
+
+    public void updateSlider()  {
+        priceDisplay.setText(priceSlider.getValue() + " kr. ");
+        updatePrice();
     }
 
     //Input TextFields
