@@ -5,10 +5,15 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="background" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ui.WelcomeController">
    <children>
+      <!-- Stór titill með nafn notanda, uppfært í controller -->
+      <Label fx:id="welcomeLabel" layoutX="20.0" layoutY="20.0" style="-fx-font-size: 24px; -fx-font-weight: bold;" text="VELKOMINN!" />
+      <!-- Undirtitill -->
+      <Label fx:id="subtitleLabel" layoutX="20.0" layoutY="60.0" style="-fx-font-size: 18px;" text="FERÐALAGIÐ HEFST HÉR" />
+
       <Button fx:id="toSearch" layoutX="55.0" layoutY="200.0" mnemonicParsing="false" onAction="#goToSearch" text="Search Trips" />
       <Button fx:id="toUser" layoutX="459.0" layoutY="200.0" mnemonicParsing="false" onAction="#goToUser" text="Manage User" />
-      <Button fx:id="toBookings" layoutX="259.0" layoutY="200.0" mnemonicParsing="false" onAction="#goToBookings" text="My Bookings" />
-      <!-- Nýr "Manage Favorite" hnapp -->
-      <Button fx:id="toFavorites" layoutX="247.0" layoutY="245.0" mnemonicParsing="false" onAction="#goToFavorites" text="Manage Favorite" visible="false" />
+      <Button fx:id="toBookings" layoutX="245.0" layoutY="200.0" mnemonicParsing="false" onAction="#goToBookings" text="My Bookings" />
+      <!-- Nýr FavTrips hnapp -->
+      <Button fx:id="toFavTrips" layoutX="247.0" layoutY="245.0" mnemonicParsing="false" onAction="#goToFavTrips" text="My FavTrips" />
    </children>
 </AnchorPane>

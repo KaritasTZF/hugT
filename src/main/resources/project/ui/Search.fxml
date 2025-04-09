@@ -14,6 +14,7 @@
                <children>
                   <Label fx:id="ResultLabel" layoutX="7.0" layoutY="5.0" text="Flights" />
                   <Button layoutX="7.0" layoutY="267.0" mnemonicParsing="false" onAction="#addToMyTrip" text="Add to Trip" />
+                   <Button layoutX="140.0" layoutY="267.0" mnemonicParsing="false" onAction="#addToFavoriteTrips" text="Add to Favorites" />
                   <ListView fx:id="ResultsListView" layoutY="23.0" prefHeight="236.0" prefWidth="525.0" />
                </children>
             </AnchorPane>

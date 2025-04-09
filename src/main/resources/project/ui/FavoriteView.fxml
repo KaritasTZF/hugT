@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="project.ui.FavoriteViewController"
+            prefWidth="600" prefHeight="400">
+    <children>
+        <Label fx:id="favoriteLabel"
+               layoutX="20.0"
+               layoutY="20.0"
+               text="Hér birtast uppáhaldsferðir!"
+               style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+        <!-- Vístum t.d. niðurstöðurnar í ListView -->
+        <ListView fx:id="favoriteTripsList"
+                  layoutX="20.0"
+                  layoutY="60.0"
+                  prefHeight="300.0"
+                  prefWidth="560.0" />
+    </children>
+</AnchorPane>

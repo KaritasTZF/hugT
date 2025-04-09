@@ -9,11 +9,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import project.Controller.BookingController;
+import project.Controller.FavoriteController;
 import project.Controller.SearchController;
-import project.Model.DayTour;
-import project.Model.Flight;
-import project.Model.Hotel;
-import project.Model.User;
+import project.Model.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,6 +37,7 @@ public class SearchViewController {
     @FXML private DatePicker endDateField;
     @FXML private GridPane gridPane;
     @FXML private ListView<HBox> ResultsListView;
+
     @FXML private ListView<HBox> MyTripListView;
     @FXML private Label totalPriceLabel;
 
@@ -207,6 +206,31 @@ public class SearchViewController {
         sc.addToMyTrip(selectedFItem,selectedHItem,selectedDTItem);
         updateMyTripList();
     }
+    private FavoriteController favoriteController;
+
+    public void setFavoriteController(FavoriteController favoriteController) {
+        this.favoriteController = favoriteController;
+    }
+
+
+//    @FXML
+//    private void addToFavoriteTrips() {
+//        // Finndu hvaða trip er valið í ResultsListView
+//        Trip selectedTrip = ResultsListView.getSelectionModel().getSelectedItem();
+//        if (selectedTrip == null) {
+//            System.out.println("No trip selected to favorite!");
+//            return;
+//        }
+//
+//        // Hér þarfðu að tengjast FavoriteController eða kalla á eitthvað sem sér um að bæta trip í uppáhöld
+//        // Dæmi:
+//        if (favoriteController != null) {
+//            favoriteController.addTripToFavorites(selectedTrip);
+//        } else {
+//            System.out.println("favoriteController is null – cannot add to favorites!");
+//        }
+//    }
+
 
     //Áfram takki
     public void goToCheckout() {

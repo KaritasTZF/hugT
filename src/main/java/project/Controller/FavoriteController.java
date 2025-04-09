@@ -16,6 +16,8 @@ public class FavoriteController {
         this.favoritedTrips = null;
     }
 
+
+
     // Bæta ferð í uppáhalds
     public void addTripToFavorites(Trip trip) {
         if (this.favoritedTrips != null) {
@@ -41,4 +43,6 @@ public class FavoriteController {
         }
         return new ArrayList<>(); // skila tómu ef ekkert er til
     }
+
+
 }

@@ -5,24 +5,38 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import project.Controller.BookingController;
+import project.Controller.FavoriteController;
 import project.Model.User;
 
 public class WelcomeController {
-    @FXML Button toSearch;
-    @FXML Button toUser;
-    @FXML Button toBookings;
-    @FXML Button toFavorites;
+    @FXML private Button toSearch;
+    @FXML private Button toUser;
+    @FXML private Button toBookings;
+    @FXML private Button toFavTrips;  // breytt í toFavTrips, eins og í FXML
+
+    // Bættu við Label reitum fyrir titlana
+    @FXML private Label welcomeLabel;
+    @FXML private Label subtitleLabel;
+
     private User user;
+
+    private FavoriteController favoriteController;
 
     public void setUser(User user) {
         this.user = user;
         System.out.println("Welcome set user " + user.getUserID());
+
+        // Uppfæra welcomeLabel með nafni notanda og notum stóra stafi í textanum
+        welcomeLabel.setText("VELKOMINN " + user.getName().toUpperCase() + "!");
+        // Ef þörf er á að uppfæra undirtitilinn (hér látið hann vera stöðugur):
+        subtitleLabel.setText("FERÐALAGIÐ HEFST HÉR");
     }
 
     public void goToSearch() {
-        try{
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Search.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) toSearch.getScene().getWindow();
@@ -32,13 +46,13 @@ public class WelcomeController {
             SearchViewController controller = loader.getController();
             controller.setUser(user);
             stage.show();
-        }catch(Exception e){
+        } catch(Exception e) {
             e.printStackTrace();
         }
     }
 
     public void goToUser() {
-        try{
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/User.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) toUser.getScene().getWindow();
@@ -48,7 +62,7 @@ public class WelcomeController {
             stage.setScene(scene);
             scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
             stage.show();
-        }catch(Exception e){
+        } catch(Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -59,7 +73,6 @@ public class WelcomeController {
             // Hlaða upp Bookings.fxml
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Booking.fxml"));
             Parent root = loader.load();
-            // Fáum tilvísun á stage-ið út frá knöppnum
             Stage stage = (Stage) toBookings.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -68,29 +81,32 @@ public class WelcomeController {
             controller.setUser(user);
             controller.showData();
             stage.show();
-        } catch(Exception e){
+        } catch(Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     @FXML
-    public void goToFavorites() {
+    public void goToFavTrips() {
         try {
-            // Hleður upp nýrri FXML-skrá fyrir "Manage Favorite" skjáinn
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/FavoriteManager.fxml"));
+            // 1) Hlaða upp FavoriteView.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/FavoriteView.fxml"));
             Parent root = loader.load();
 
-            // Ef þú vilt setja controller fyrir FavoriteManager, þá getur þú gert það hér.
-            // FavoriteManagerController controller = loader.getController();
-            // controller.set...(...);
+            FavoriteViewController favViewController = loader.getController();
 
-            Stage stage = (Stage)toFavorites.getScene().getWindow();
+            favViewController.setFavoriteController(favoriteController);
+
+            // 4) Sækjum stage og birtum „Favorite“-viðmótið
+            Stage stage = (Stage) toFavTrips.getScene().getWindow();
             Scene scene = new Scene(root);
-            stage.setScene(scene);
             scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+            stage.setScene(scene);
             stage.show();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 }
