@@ -7,13 +7,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane styleClass="background" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.Controller.BookingController" prefHeight="400.0" prefWidth="600.0">
+<AnchorPane styleClass="background" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="project.Controller.BookingController"
+            prefHeight="400.0" prefWidth="600.0">
+
     <children>
-        <!-- Titill -->
         <Label layoutX="20.0" layoutY="20.0" text="My Bookings" />
 
-        <!-- SplitPane: Vinstri hluti sýnir ListView, hægri hluti sýnir bókunaupplýsingar -->
-        <SplitPane layoutX="20.0" layoutY="50.0" prefHeight="300.0" prefWidth="560.0" orientation="HORIZONTAL">
+        <SplitPane layoutX="20.0" layoutY="50.0"
+                   prefHeight="300.0" prefWidth="560.0"
+                   orientation="HORIZONTAL">
             <items>
                 <!-- ListView fyrir bókanir -->
                 <ListView fx:id="bookingsListView" prefWidth="200.0" />
@@ -34,7 +37,10 @@
             </items>
         </SplitPane>
 
-        <!-- "Back" takkinn til að snúa aftur, t.d. í Welcome.fxml -->
-        <Button fx:id="backButton" layoutX="20.0" layoutY="360.0" text="Back" onAction="#handleBack" />
+        <Button fx:id="backButton"
+                layoutX="20.0"
+                layoutY="360.0"
+                text="Back"
+                onAction="#handleBack" />
     </children>
 </AnchorPane>

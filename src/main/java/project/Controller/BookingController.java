@@ -1,6 +1,7 @@
 package project.Controller;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,7 +12,6 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import project.Model.Booking;
 import project.Model.Trip;
-import project.util.Session;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +30,8 @@ public class BookingController {
 
     // Listi til að geyma bókanir
     private final List<Booking> bookings = new ArrayList<>();
+    private final ObservableList<Booking> bookingObservableList = FXCollections.observableArrayList();
+
     // Gagnateljari til að útbúa einstakt bookingID
     private int bookingCounter = 1;
 
@@ -66,6 +68,7 @@ public class BookingController {
         );
         // Bætum bókuninni í listann
         bookings.add(newBooking);
+        bookingObservableList.add(newBooking);
         
 //TODO kalla á FHD bookings
         boolean inserted = true; 
@@ -120,14 +123,13 @@ public class BookingController {
 
     @FXML
     public void initialize() {
-        // Sóttum innskráðan notanda
-        String currentUserID = Session.getInstance().getCurrentUser().getUserID();
-        // Sóttum bókunirnar úr gagnagrunninum fyrir þennan user
-        //List<Booking> userBookings = DBHelper.getBookingsByUser(currentUserID);
-        List<Booking> userBookings = List.of();
-        bookingsListView.setItems(FXCollections.observableArrayList(userBookings));
+        // Ef þú ert með bókanir í 'bookings' sem eiga að sjást strax:
+        bookingObservableList.addAll(bookings);
 
-        // Setjum listener á val á ListView til að sýna nánari upplýsingar.
+        // Tengjum ObservableList við ListView
+        bookingsListView.setItems(bookingObservableList);
+
+        // Setjum listener sem uppfærir hægra megin UI (bookingIdLabel, tripLabel, etc.)
         bookingsListView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldBooking, newBooking) -> showBookingDetails(newBooking)
         );
@@ -157,4 +159,5 @@ public class BookingController {
             throw new RuntimeException(e);
         }
     }
+
 }
