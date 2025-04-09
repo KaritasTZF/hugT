@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="background" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.Controller.WelcomeController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="background" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ui.WelcomeController">
    <children>
       <Button fx:id="toSearch" layoutX="55.0" layoutY="200.0" mnemonicParsing="false" onAction="#goToSearch" text="Search Trips" />
       <Button fx:id="toUser" layoutX="459.0" layoutY="200.0" mnemonicParsing="false" onAction="#goToUser" text="Manage User" />

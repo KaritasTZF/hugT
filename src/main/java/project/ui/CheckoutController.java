@@ -9,7 +9,6 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import project.Controller.BookingController;
 import project.Model.*;
-import project.util.Session;
 
 import java.io.IOException;
 
@@ -25,15 +24,21 @@ public class CheckoutController {
     @FXML private ComboBox mmField;
     @FXML private ComboBox yyField;
     @FXML private ListView<HBox> tripList;
-
-    // --- NÝTT: BookingController breyta + setter ---
-    private BookingController bookingController;
-    public void setBookingController(BookingController bookingController) {
-        this.bookingController = bookingController;
-    }
-
+    private User user;
     private Trip trip;
 
+    private BookingController bookingController;
+
+    public void setBookingController(BookingController bookingController) {
+        this.bookingController = bookingController;
+        bookingController.setUser(user);
+        System.out.println("Booking set user " + user.getUserID());
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+        System.out.println("Checkout set user " + user.getUserID());
+    }
 
     public void setTrip(Trip trip) {
 
@@ -75,14 +80,15 @@ public class CheckoutController {
         }
 
         if (trip.getHotelItems() != null && !trip.getHotelItems().isEmpty()) {
-            flavorLabel.setText("Enjoy your \"sunny\" trip to "+trip.getHotelItems().getFirst().getLocation()+"!");
+            flavorLabel.setText("Enjoy your sunny trip to "+trip.getHotelItems().getFirst().getLocation()+"!");
         }
         totalPriceLabel.setText("Total price: "+trip.getPrice()+" kr.");
         if (trip.getStartDate() != null) {
-            datesLabel.setText("From "+trip.getStartDate()+" to "+trip.getEndDate()+", "+trip.getDays()+" days.");
+            datesLabel.setText("From "+trip.getStartDate()+" to "+trip.getEndDate()+".");
         } else {
             datesLabel.setVisible(false);
         }
+        setBookingController(new BookingController());
     }
 
     @FXML
@@ -105,25 +111,14 @@ public class CheckoutController {
             return;
         }
 
-        // Athuga að BookingController og Trip séu til staðar
-        if(bookingController == null || trip == null) {
-            System.out.println("Vantar booking controller eða trip uppsetningu.");
+        // Athuga að Trip sé til staðar
+        if(trip == null) {
+            System.out.println("Vantar trip uppsetningu.");
             return;
         }
-
-        // Sækum user id úr Session; hér er gert ráð fyrir að getUserId() skili int.
-        // Ef notandinn geymir userId sem String sem þarf að umbreyta, breyttu eftir þörfum.
-        String userID;
-        try {
-            userID = Session.getInstance().getCurrentUser().getUserID();
-        } catch(NumberFormatException e) {
-            System.err.println("User ID er ekki gild tala: " + Session.getInstance().getCurrentUser().getUserID());
-            return;
-        }
-        String tripID = trip.getTripID();
 
         // Búa til bókun – kalla á BookingController til að búa til bókun
-        Booking booking = bookingController.createBooking(userID, tripID);
+        Booking booking = bookingController.createBooking(user, trip);
         if(booking == null) {
             System.out.println("Ekki tókst að búa til bókun.");
             return;
@@ -142,15 +137,20 @@ public class CheckoutController {
         alert.setContentText("Bókun þín hefur verið staðfest!\nStaðfestingar númer: " + confirmed.getConfirmationNr());
         alert.showAndWait();
 
-        // Nú skiptum við yfir á Welcome.fxml
+        // Nú skiptum við yfir á Booking.fxml
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Welcome.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Booking.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) bookButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+            BookingController controller = loader.getController();
+            controller.setUser(user);
+            controller.showData();
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -163,6 +163,8 @@ public class CheckoutController {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+            SearchViewController controller = loader.getController();
+            controller.setUser(user);
             stage.show();
         }catch (IOException e) {
             throw new RuntimeException(e);

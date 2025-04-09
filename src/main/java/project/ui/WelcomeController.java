@@ -1,27 +1,25 @@
-package project.Controller;
+package project.ui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import project.Model.Booking;
+import project.Controller.BookingController;
+import project.Model.User;
 
 public class WelcomeController {
     @FXML Button toSearch;
     @FXML Button toUser;
     @FXML Button toBookings;
     @FXML Button toFavorites;
-    @FXML private ListView<Booking> bookingsListView;
-    @FXML private Label bookingIdLabel;
-    @FXML private Label tripLabel;
-    @FXML private Label statusLabel;
-    @FXML private Label confirmationLabel;
-    @FXML private Button backButton;
+    private User user;
 
+    public void setUser(User user) {
+        this.user = user;
+        System.out.println("Welcome set user " + user.getUserID());
+    }
 
     public void goToSearch() {
         try{
@@ -31,6 +29,8 @@ public class WelcomeController {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+            SearchViewController controller = loader.getController();
+            controller.setUser(user);
             stage.show();
         }catch(Exception e){
             e.printStackTrace();
@@ -62,6 +62,9 @@ public class WelcomeController {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+            BookingController controller = loader.getController();
+            controller.setUser(user);
+            controller.showData();
             stage.show();
         } catch(Exception e){
             throw new RuntimeException(e);

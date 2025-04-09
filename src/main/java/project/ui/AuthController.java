@@ -36,13 +36,7 @@ public class AuthController {
     @FXML
     private TabPane authTabPane;
 
-    // Ef þú notar returnScene fyrir öryggisatriði, getum við yfirgefið hana og alltaf farið í Welcome.fxml.
-    private Scene returnScene;
-
-    // Ef þú vilt halda áfram að nota returnScene getur þú sett hana annars en hér notum við Welcome.fxml
-    public void setReturnScene(Scene scene) {
-        this.returnScene = scene;
-    }
+    private User user; //user to log in
 
     /**
      * Event handler fyrir Sign In takkan.
@@ -63,7 +57,7 @@ public class AuthController {
             return;
         }
         //Búum til nýtt user
-        User user = new User("0",username,password,"");
+        user = new User("0",username,password,"");
 
         if (user != null) {
             // Notandi fannst, athugum hvort lykilorðið samsvari.
@@ -117,7 +111,8 @@ public class AuthController {
         }
 
         //Búum til nýtt user
-        User user = new User("1",username,password,"");
+        user = new User("0",username,password,"");
+
         if (user != null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Sign Up Mistókst");
@@ -160,6 +155,8 @@ public class AuthController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Welcome.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) signinUsernameField.getScene().getWindow();
+            WelcomeController controller = loader.getController();
+            controller.setUser(user);
             Scene scene = new Scene(root);
             stage.setScene(scene);
             scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());

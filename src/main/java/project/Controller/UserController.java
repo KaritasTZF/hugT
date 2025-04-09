@@ -5,10 +5,12 @@ import project.Model.User;
 public class UserController {
 
     private User user;
-    private BookingController bookingController = new BookingController(); //Stofna BC fyrir samskipti við BC
+    private BookingController bookingController; //Stofna BC fyrir samskipti við BC
 
     //Smíða Bookingcontroller f. samskipti á milli
-    public UserController() {
+    public UserController(User user, BookingController bookingController) {
+        this.user = user;
+        this.bookingController = bookingController;
     }
 
     // Sækir núverandi notanda. Skilar null ef enginn user hefur verið stofnaður.

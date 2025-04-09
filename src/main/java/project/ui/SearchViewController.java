@@ -12,6 +12,7 @@ import project.Controller.SearchController;
 import project.Model.DayTour;
 import project.Model.Flight;
 import project.Model.Hotel;
+import project.Model.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,6 +41,9 @@ public class SearchViewController {
     @FXML private ListView<HBox> MyTripListView;
     @FXML private Label totalPriceLabel;
 
+    private User user;
+
+
     private Flight selectedFItem;
     private Hotel selectedHItem;
     private DayTour selectedDTItem;
@@ -47,6 +51,11 @@ public class SearchViewController {
     private final SearchController sc = new SearchController(this);
 
     public SearchViewController() {
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+        System.out.println("Search set user " + user.getUserID());
     }
 
     public ListView<HBox> getResultsListView() {
@@ -205,6 +214,7 @@ public class SearchViewController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Checkout.fxml"));
                 Parent root = loader.load();
                 CheckoutController controller = loader.getController();
+                controller.setUser(this.user);
                 controller.setTrip(sc.getMyTrip());
                 Stage stage = (Stage) fromField.getScene().getWindow();
                 Scene scene = new Scene(root);
@@ -223,6 +233,8 @@ public class SearchViewController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Welcome.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) fromField.getScene().getWindow();
+            WelcomeController controller = loader.getController();
+            controller.setUser(user);
             Scene scene = new Scene(root);
             stage.setScene(scene);
             scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());

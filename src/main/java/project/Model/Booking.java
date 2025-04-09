@@ -1,7 +1,6 @@
 package project.Model;
 
 public class Booking {
-    private String userID;
     private Trip trip;
     private int bookingID;
     private String status;
@@ -9,26 +8,16 @@ public class Booking {
 
     //Constructor
     public Booking(
-      String userID,
       Trip trip,
       int bookingID,
       String status,
       int confirmationNr
     ) {
-      this.userID = userID;
       this.trip = trip;
       this.bookingID = bookingID;
       this.status = status;
       this.confirmationNr = confirmationNr;
 
-    }
-
-    public String getUserID() {
-        return userID;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
     }
 
     public Trip getTrip() {
