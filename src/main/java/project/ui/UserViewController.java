@@ -30,6 +30,10 @@ public class UserViewController {
 
     private User user;
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @FXML
     public void initialize() {
         // Sæki notanda t.d. úr Session
@@ -67,8 +71,9 @@ public class UserViewController {
             Parent root = loader.load();
             Stage stage = (Stage) proceedButton.getScene().getWindow();
             Scene scene = new Scene(root);
+            WelcomeController controller = loader.getController();
+            controller.setUser(user);
             stage.setScene(scene);
-            // T.d. setja CSS
             scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
             stage.show();
         } catch(Exception e){

@@ -42,6 +42,8 @@ public class WelcomeController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/User.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) toUser.getScene().getWindow();
+            UserViewController controller = loader.getController();
+            controller.setUser(user);
             Scene scene = new Scene(root);
             stage.setScene(scene);
             scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
