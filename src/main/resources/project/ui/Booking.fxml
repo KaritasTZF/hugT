@@ -22,7 +22,7 @@
                 <ListView fx:id="bookingsListView" prefWidth="200.0" />
 
                 <!-- Panel fyrir upplýsingar um valda bókun -->
-                <AnchorPane prefWidth="360.0">
+                <AnchorPane prefWidth="360.0" styleClass="panel">
                     <children>
                         <VBox layoutX="10.0" layoutY="10.0" spacing="10.0">
                             <children>
