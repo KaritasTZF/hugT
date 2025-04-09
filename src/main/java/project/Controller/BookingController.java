@@ -67,8 +67,9 @@ public class BookingController {
         );
         // Bætum bókuninni í listann
         bookings.add(newBooking);
-
-        boolean inserted = DBHelper.insertBooking(newBooking);
+        
+//TODO kalla á FHD bookings
+        boolean inserted = true; 
         if (!inserted) {
             System.out.println("Could not insert booking into the database.");
             return null;
@@ -123,7 +124,8 @@ public class BookingController {
         // Sóttum innskráðan notanda
         String currentUserID = Session.getInstance().getCurrentUser().getUserID();
         // Sóttum bókunirnar úr gagnagrunninum fyrir þennan user
-        List<Booking> userBookings = DBHelper.getBookingsByUser(currentUserID);
+        //List<Booking> userBookings = DBHelper.getBookingsByUser(currentUserID);
+        List<Booking> userBookings = new List<Booking>();
         bookingsListView.setItems(FXCollections.observableArrayList(userBookings));
 
         // Setjum listener á val á ListView til að sýna nánari upplýsingar.
