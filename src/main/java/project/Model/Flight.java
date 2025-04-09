@@ -6,18 +6,18 @@ import java.time.LocalTime;
 public class Flight {
     private String from;
     private String to;
-    private int availableSeats;
+    private int people;
     private LocalTime startTime;
     private LocalTime endTime;
     private LocalDate date;
     private int price;
 
     // Constructor
-    public Flight(String from, String to, LocalDate date, int availableSeats, LocalTime startTime, LocalTime endTime, int price) {
+    public Flight(String from, String to, LocalDate date, int people, LocalTime startTime, LocalTime endTime, int price) {
         this.from = from;
         this.to = to;
         this.date = date;
-        this.availableSeats = availableSeats;
+        this.people = people;
         this.startTime = startTime;
         this.endTime = endTime;
         this.price = price;
@@ -39,12 +39,12 @@ public class Flight {
         this.to = to;
     }
 
-    public int getavailableSeats() {
-        return this.availableSeats;
+    public int getPeople() {
+        return this.people;
     }
 
-    public void setavailableSeats(int availableSeats) {
-        this.availableSeats = availableSeats;
+    public void setPeople(int people) {
+        this.people = people;
     }
 
     public LocalTime getStartTime() {

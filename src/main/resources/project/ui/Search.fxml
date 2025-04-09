@@ -6,40 +6,38 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.Controller.SearchController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ui.SearchViewController">
    <children>
       <AnchorPane layoutX="384.0" layoutY="-6.0" prefHeight="700.0" prefWidth="619.0">
          <children>
             <AnchorPane layoutX="73.0" layoutY="53.0" prefHeight="330.0" prefWidth="526.0">
                <children>
                   <Label fx:id="ResultLabel" layoutX="7.0" layoutY="5.0" text="Flights" />
-                  <Button fx:id="AddToTripButton" layoutX="7.0" layoutY="267.0" mnemonicParsing="false" onAction="#addToMyTrip" text="Add to Trip" />
-                  <Button fx:id="skipButton" layoutX="113.0" layoutY="267.0" mnemonicParsing="false" onAction="#handleSkip" text="Skip" />
-                  <ListView fx:id="ResultsListView" layoutY="23.0" prefHeight="236.0" prefWidth="526.0" />
+                  <Button layoutX="7.0" layoutY="267.0" mnemonicParsing="false" onAction="#addToMyTrip" text="Add to Trip" />
+                  <ListView fx:id="ResultsListView" layoutY="23.0" prefHeight="236.0" prefWidth="525.0" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="73.0" layoutY="383.0" prefHeight="278.0" prefWidth="526.0">
                <children>
                   <Label layoutX="6.0" layoutY="13.0" text="My Trip" />
-                  <Button fx:id="checkoutButton" layoutX="13.0" layoutY="238.0" mnemonicParsing="false" onAction="#goToCheckout" text="Checkout" />
-                  <ListView fx:id="MyTripListView" layoutY="31.0" prefHeight="200.0" prefWidth="526.0" />
+                  <Button fx:id="checkoutButton" layoutX="13.0" layoutY="238.0" mnemonicParsing="false" onAction="#goToCheckout" text="Checkout" visible="false" />
+                  <ListView fx:id="MyTripListView" layoutY="31.0" prefHeight="200.0" prefWidth="525.0" />
                   <Label fx:id="totalPriceLabel" layoutX="397.0" layoutY="242.0" text="Total Price: 0 kr," />
                </children>
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="6.0" prefHeight="429.0" prefWidth="370.0">
+      <AnchorPane layoutX="14.0" layoutY="52.0" prefHeight="470.0" prefWidth="370.0">
          <children>
-            <GridPane fx:id="gridPane" hgap="10.0" layoutX="14.0" layoutY="54.0" prefHeight="329.0" prefWidth="355.0" vgap="10.0">
+            <GridPane fx:id="gridPane" hgap="10.0" layoutX="14.0" layoutY="54.0" prefHeight="246.0" prefWidth="355.0" vgap="10.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -51,6 +49,9 @@
                   <Label fx:id="priceLabel" text="Max price:" GridPane.rowIndex="3" />
                   <Label fx:id="peopleLabel" text="People:" GridPane.rowIndex="4" />
                    <ComboBox fx:id="peopleField" onAction="#updatePeople" promptText="1" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                       <value>
+                           <Integer fx:value="1" />
+                       </value>
                        <items>
                            <FXCollections fx:factory="observableArrayList">
                                <Integer fx:value="1" />
@@ -66,12 +67,19 @@
                    </ComboBox>
                    <DatePicker fx:id="startDateField" onAction="#updateStartDate" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                    <ComboBox fx:id="roomsField" promptText="1" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                       <value>
+                           <Integer fx:value="1" />
+                       </value>
                        <items>
                            <FXCollections fx:factory="observableArrayList">
                                <Integer fx:value="1" />
                                <Integer fx:value="2" />
                                <Integer fx:value="3" />
                                <Integer fx:value="4" />
+                               <Integer fx:value="5" />
+                               <Integer fx:value="6" />
+                               <Integer fx:value="7" />
+                               <Integer fx:value="8" />
                            </FXCollections>
                        </items>
                    </ComboBox>
@@ -113,9 +121,10 @@
                </padding>
             </GridPane>
             <Label layoutX="26.0" layoutY="45.0" text="Please fill in your requirements." />
-            <Button fx:id="searchButton" layoutX="304.0" layoutY="384.0" mnemonicParsing="false" onAction="#onSearch" text="Search" />
-            <Button fx:id="backButton" mnemonicParsing="false" onAction="#goToWelcome" text="Back" />
+            <Button fx:id="searchButton" layoutX="304.0" layoutY="313.0" mnemonicParsing="false" onAction="#onSearch" text="Search" />
+            <Button fx:id="skipButton" layoutX="314.0" layoutY="348.0" mnemonicParsing="false" onAction="#handleSkip" text="Next" />
          </children>
       </AnchorPane>
+      <Button fx:id="backButton" layoutX="8.0" layoutY="13.0" mnemonicParsing="false" onAction="#goToWelcome" text="Back" />
    </children>
 </AnchorPane>

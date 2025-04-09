@@ -18,7 +18,6 @@ public class CheckoutController {
     @FXML private Label totalPriceLabel;
     @FXML private Label flavorLabel;
     @FXML private Label datesLabel;
-    @FXML private Label peopleLabel;
     @FXML private TextField ccField;
     @FXML private TextField cvvField;
     @FXML private Button bookButton;
@@ -75,8 +74,15 @@ public class CheckoutController {
             }
         }
 
-        totalPriceLabel.setText("Total price: " + trip.getPrice() + "kr.");
-
+        if (trip.getHotelItems() != null && !trip.getHotelItems().isEmpty()) {
+            flavorLabel.setText("Enjoy your \"sunny\" trip to "+trip.getHotelItems().getFirst().getLocation()+"!");
+        }
+        totalPriceLabel.setText("Total price: "+trip.getPrice()+" kr.");
+        if (trip.getStartDate() != null) {
+            datesLabel.setText("From "+trip.getStartDate()+" to "+trip.getEndDate()+", "+trip.getDays()+" days.");
+        } else {
+            datesLabel.setVisible(false);
+        }
     }
 
     @FXML

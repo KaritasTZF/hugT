@@ -4,46 +4,50 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox onMouseClicked="#handleSelection" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ui.HotelItem">
+<HBox onMouseClicked="#handleSelection" prefHeight="22.0" prefWidth="525.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ui.HotelItem">
    <children>
       <Label text="Hotel: ">
          <padding>
-            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+            <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
          </padding>
       </Label>
       <Label fx:id="nameLabel" text="name">
          <padding>
-            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+            <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
          </padding>
       </Label>
       <Label fx:id="locLabel" minWidth="50.0" text="loc">
          <padding>
-            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+            <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
          </padding>
       </Label>
-      <Label fx:id="startDateLabel" minWidth="50.0" text="startDate">
-         <padding>
-            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-         </padding>
-      </Label>
-      <Label fx:id="endDateLabel" minWidth="50.0" text="endDate">
-         <padding>
-            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-         </padding>
-      </Label>
-      <Label fx:id="peopleLabel" minWidth="50.0" text="people">
-         <padding>
-            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-         </padding>
-      </Label>
+      <HBox prefHeight="22.0" prefWidth="160.0">
+         <children>
+            <Label fx:id="startDateLabel" minWidth="50.0" text="2025-01-01">
+               <padding>
+                  <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
+               </padding>
+            </Label>
+            <Label text="to">
+               <padding>
+                  <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
+               </padding>
+            </Label>
+            <Label fx:id="endDateLabel" minWidth="50.0" text="2025-01-01">
+               <padding>
+                  <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
       <Label fx:id="priceLabel" minWidth="50.0" text="price">
          <padding>
-            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+            <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
          </padding>
       </Label>
       <Label fx:id="roomsLabel" text="r">
          <padding>
-            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+            <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
          </padding>
       </Label>
    </children>

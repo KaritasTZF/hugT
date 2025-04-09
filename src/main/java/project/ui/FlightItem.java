@@ -2,38 +2,35 @@ package project.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import project.Controller.SearchController;
 import project.Model.Flight;
 
 public class FlightItem {
     @FXML private Label fromLabel;
     @FXML private Label toLabel;
-    @FXML private Label depLabel;
-    @FXML private Label arrLabel;
+    @FXML private Label timeLabel;
     @FXML private Label dateLabel;
     @FXML private Label priceLabel;
 
     private Flight flight;
-    private SearchController sc;
+    private SearchViewController view;
 
     public void setData(Flight flight) {
         this.flight = flight;
         fromLabel.setText(flight.getFrom());
         toLabel.setText(flight.getTo());
-        depLabel.setText(flight.getStartTime().toString());
-        arrLabel.setText(flight.getEndTime().toString());
+        timeLabel.setText(STR."\{flight.getStartTime().toString()} - \{flight.getEndTime().toString()}");
         dateLabel.setText(flight.getDate().toString());
-        priceLabel.setText(String.valueOf(flight.getPrice()));
+        priceLabel.setText(STR."\{flight.getPrice()} kr.");
     }
-    public void setSc(SearchController sc) {
-        this.sc = sc;
+    public void setView(SearchViewController view) {
+        this.view = view;
     }
 
     public Flight getFlight() {return this.flight;}
 
     public void handleSelection() {
-        if (sc !=null) {
-            this.sc.handleFlightSelection(this.flight);
+        if (view !=null) {
+            this.view.handleFlightSelection(this.flight);
         }
     }
 }

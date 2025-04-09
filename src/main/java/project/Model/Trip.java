@@ -1,7 +1,6 @@
 package project.Model;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -12,9 +11,9 @@ public class Trip {
     private LocalDate startDate;
     private LocalDate endDate;
     private int price=0;
-    private ArrayList<Flight> flightItems=new ArrayList<>(); //Listi af Flight,listinn heitir flightItems (gamalt frá TripItems)
-    private ArrayList<Hotel> hotelItems=new ArrayList<>(); //Listi af Hotel, listinn heitir hotelItems (gamalt frá TripItems)
-    private ArrayList<DayTour> dayTourItems=new ArrayList<>(); //Listi af DayTour, listinn heitir dayTourItems (gamalt frá TripItems)
+    private final ArrayList<Flight> flightItems=new ArrayList<>(); //Listi af Flight,listinn heitir flightItems (gamalt frá TripItems)
+    private final ArrayList<Hotel> hotelItems=new ArrayList<>(); //Listi af Hotel, listinn heitir hotelItems (gamalt frá TripItems)
+    private final ArrayList<DayTour> dayTourItems=new ArrayList<>(); //Listi af DayTour, listinn heitir dayTourItems (gamalt frá TripItems)
 
     //Constructor to initialize Trip object
     public Trip() {
@@ -50,7 +49,7 @@ public class Trip {
     }
 
     //skilar verð
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
@@ -58,68 +57,61 @@ public class Trip {
         return this.flightItems;
     }
 
-    public void setFlightItems(ArrayList<Flight> flightItems) {
-        this.flightItems = flightItems;
-    }
-
     public ArrayList<Hotel> getHotelItems() {
         return this.hotelItems;
-    }
-
-    public void setHotelItems(ArrayList<Hotel> hotelItems) {
-        this.hotelItems = hotelItems;
     }
 
     public ArrayList<DayTour> getDayTourItems() {
         return this.dayTourItems;
     }
 
-    public void setDayTourItems(ArrayList<DayTour> dayTourItems) {
-        this.dayTourItems = dayTourItems;
-    }
-
-    //Helper; all attributes are defined by the F/D/H lists
-    private void updateInfo() {
-        startDate = flightItems.getFirst().getDate();
-        endDate = startDate;
-        price = 0;
-        for (Flight f: flightItems) {
-            price += f.getPrice();
-            if (f.getDate().isBefore(startDate)) {
-                startDate = f.getDate();
-            } else if (f.getDate().isAfter(endDate)) {
-                endDate = f.getDate();
-            }
-        }
-        for (Hotel h: hotelItems) {
-            price +=h.getPrice();
-            if (h.getStartDate().isBefore(startDate)) {
-                startDate = h.getStartDate();
-            } else if (h.getEndDate().isAfter(endDate)) {
-                endDate = h.getEndDate();
-            }
-        }
-        for (DayTour dt: dayTourItems) {
-            price += dt.getPrice();
-            if (dt.getDate().isBefore(startDate)) {
-                startDate = dt.getDate();
-            } else if (dt.getDate().isAfter(endDate)) {
-                endDate = dt.getDate();
-            }
-        }
-        this.days = (int) ChronoUnit.DAYS.between(startDate,endDate);
-    }
-
     public void addFlightItem(Flight flight) {
-        this.flightItems.add(flight);
-        updateInfo();
+        if (flight == null) {
+            System.out.println("attempted to add null flight to trip");
+        } else {
+            this.flightItems.add(flight);
+
+            //update other info
+            if (startDate == null || flight.getDate().isBefore(startDate)) {
+                startDate = flight.getDate();
+            }
+            if (endDate == null || flight.getDate().isAfter(endDate)) {
+                endDate = flight.getDate();
+            }
+            price += flight.getPrice();
+        }
     }
     public void addHotelItem(Hotel hotel) {
-        this.hotelItems.add(hotel);
-        updateInfo();
+        if (hotel == null) {
+            System.out.println("attempted to add null hotel to trip");
+        } else {
+            this.hotelItems.add(hotel);
+
+            //update other info
+            if (startDate == null ||  hotel.getStartDate().isBefore(startDate)) {
+                startDate = hotel.getStartDate();
+            }
+            if (endDate == null || hotel.getEndDate().isAfter(endDate)) {
+                endDate = hotel.getEndDate();
+            }
+            price += hotel.getPrice();
+        }
     }
     public void addDayTourItem(DayTour dayTour) {
-        this.dayTourItems.add(dayTour);
-        updateInfo();
+        if (dayTour == null) {
+            System.out.println("attempted to add null day tour to trip");
+        } else {
+            this.dayTourItems.add(dayTour);
+
+            //update other info
+            if (startDate == null || dayTour.getDate().isBefore(startDate)) {
+                startDate = dayTour.getDate();
+            }
+            if (endDate == null || dayTour.getDate().isAfter(endDate)) {
+                endDate = dayTour.getDate();
+            }
+            price += dayTour.getPrice();
+            if (dayTour.getPeople() > people) {people = dayTour.getPeople();}
+        }
     }
 }
