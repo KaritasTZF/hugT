@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ui.BookedTripsController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="My Booked Trips">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ListView layoutX="14.0" layoutY="41.0" prefHeight="307.0" prefWidth="244.0" />
+      <ListView layoutX="342.0" layoutY="41.0" prefHeight="307.0" prefWidth="244.0" />
+      <Label fx:id="tripLabel" layoutX="342.0" layoutY="19.0" text="Trip" />
+      <Button fx:id="backButton" layoutX="181.0" layoutY="7.0" mnemonicParsing="false" text="Back" onAction="#goToWelcome" />
+   </children>
+</AnchorPane>
