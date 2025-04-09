@@ -89,23 +89,19 @@ public class WelcomeController {
     @FXML
     public void goToFavTrips() {
         try {
-            // 1) Hlaða upp FavoriteView.fxml
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/FavoriteView.fxml"));
             Parent root = loader.load();
-
-            FavoriteViewController favViewController = loader.getController();
-
-            favViewController.setFavoriteController(favoriteController);
-
-            // 4) Sækjum stage og birtum „Favorite“-viðmótið
-            Stage stage = (Stage) toFavTrips.getScene().getWindow();
+            Stage stage = (Stage) toBookings.getScene().getWindow();
             Scene scene = new Scene(root);
-            scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
             stage.setScene(scene);
+            scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+            FavoriteViewController controller = loader.getController();
+            controller.setUser(user);
+            controller.setFavoriteController(new FavoriteController(user));
+            controller.showData();
             stage.show();
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch(Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

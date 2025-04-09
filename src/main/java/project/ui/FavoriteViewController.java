@@ -1,10 +1,18 @@
 package project.ui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import project.Controller.FavoriteController;
 import project.Model.Trip;
+import project.Model.User;
+
+import java.io.IOException;
 
 public class FavoriteViewController {
 
@@ -12,31 +20,47 @@ public class FavoriteViewController {
     private Label favoriteLabel;
 
     @FXML
-    private ListView<String> favoriteTripsList;
-    // Hér gæti líka verið: ListView<Trip> ef þú vilt sýna Trip-hluti beint
-    // en þá þarftu að skilgreina CellFactory eða toString() til að birta texta
+    private ListView<HBox> favoriteTripsList;
 
     private FavoriteController favoriteController;
+    private User user;
 
-    /**
-     * Kallar á þetta þegar þú ert búinn að búa til FavoriteViewController gegnum FXMLLoader
-     */
     public void setFavoriteController(FavoriteController favoriteController) {
         this.favoriteController = favoriteController;
-        updateFavoriteTrips();
+    }
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    /**
-     * Uppfærir ListView til að birta núverandi uppáhaldsferðir
-     */
-    public void updateFavoriteTrips() {
-        if (favoriteController == null) {
-            return;
+    public void showData() {
+        for (Trip trip: user.getFavoriteTrips()) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/TripItem.fxml"));
+                Parent favoriteItem = loader.load();
+                TripItem controller = loader.getController();
+                controller.setView(this);
+                controller.setData(trip);
+                favoriteTripsList.getItems().add((HBox) favoriteItem);
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
-        favoriteTripsList.getItems().clear();
-        for (Trip trip : favoriteController.getAllFavoriteTrips()) {
-            // Birta til dæmis tripID eða einhverjar upplýsingar um ferðina
-            favoriteTripsList.getItems().add("Ferð nr. " + trip.getTripID());
+    }
+
+    public void goToWelcome() {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Welcome.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) favoriteLabel.getScene().getWindow();
+            WelcomeController controller = loader.getController();
+            controller.setUser(user);
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+            stage.show();
+        }catch(Exception e){
+            throw new RuntimeException(e);
         }
     }
 }

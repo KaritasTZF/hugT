@@ -9,9 +9,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import project.Controller.BookingController;
-import project.Controller.FavoriteController;
 import project.Controller.SearchController;
-import project.Model.*;
+import project.Model.DayTour;
+import project.Model.Flight;
+import project.Model.Hotel;
+import project.Model.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ public class SearchViewController {
     //Changing fxml elements
     @FXML
     private Button checkoutButton;
+    @FXML private Button addToFavButton;
     @FXML private Button skipButton;
     @FXML private Label ResultLabel=new Label("Flights: Departure - Arrival, Date, Time, Price");
     @FXML private Label fromLabel;
@@ -176,6 +179,7 @@ public class SearchViewController {
                 roomsField.setVisible(false);
                 skipButton.setVisible(false);
                 checkoutButton.setVisible(true);
+                addToFavButton.setVisible(true);
                 sc.setStatus(SearchController.Status.DAYTOUR);
                 break;
 
@@ -211,30 +215,12 @@ public class SearchViewController {
         sc.addToMyTrip(selectedFItem,selectedHItem,selectedDTItem);
         updateMyTripList();
     }
-    private FavoriteController favoriteController;
 
-    public void setFavoriteController(FavoriteController favoriteController) {
-        this.favoriteController = favoriteController;
+    @FXML
+    private void addToFavoriteTrips() {
+        user.getFavoriteTrips().add(sc.getMyTrip());
+        goToWelcome();
     }
-
-
-//    @FXML
-//    private void addToFavoriteTrips() {
-//        // Finndu hvaða trip er valið í ResultsListView
-//        Trip selectedTrip = ResultsListView.getSelectionModel().getSelectedItem();
-//        if (selectedTrip == null) {
-//            System.out.println("No trip selected to favorite!");
-//            return;
-//        }
-//
-//        // Hér þarfðu að tengjast FavoriteController eða kalla á eitthvað sem sér um að bæta trip í uppáhöld
-//        // Dæmi:
-//        if (favoriteController != null) {
-//            favoriteController.addTripToFavorites(selectedTrip);
-//        } else {
-//            System.out.println("favoriteController is null – cannot add to favorites!");
-//        }
-//    }
 
 
     //Áfram takki

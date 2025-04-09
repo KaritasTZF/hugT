@@ -3,22 +3,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.12"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="project.ui.FavoriteViewController"
-            prefWidth="600" prefHeight="400">
+<AnchorPane prefHeight="400" prefWidth="600" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ui.FavoriteViewController">
     <children>
-        <Label fx:id="favoriteLabel"
-               layoutX="20.0"
-               layoutY="20.0"
-               text="Hér birtast uppáhaldsferðir!"
-               style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+        <Label fx:id="favoriteLabel" layoutX="20.0" layoutY="50.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Hér birtast uppáhaldsferðir!" />
 
         <!-- Vístum t.d. niðurstöðurnar í ListView -->
-        <ListView fx:id="favoriteTripsList"
-                  layoutX="20.0"
-                  layoutY="60.0"
-                  prefHeight="300.0"
-                  prefWidth="560.0" />
+        <ListView fx:id="favoriteTripsList" layoutX="20.0" layoutY="85.0" prefHeight="275.0" prefWidth="560.0" />
+      <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToWelcome" text="Back" />
     </children>
 </AnchorPane>

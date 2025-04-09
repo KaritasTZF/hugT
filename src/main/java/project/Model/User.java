@@ -1,16 +1,14 @@
 package project.Model;
 
-import project.Controller.BookingController;
-
 import java.util.ArrayList;
 
 public class User {
     private String userID;
     private String name;
     private String email;
-    private ArrayList<Booking> bookedTrips = new ArrayList<>();
+    private final ArrayList<Booking> bookedTrips = new ArrayList<>();
+    private final ArrayList<Trip> favoriteTrips = new ArrayList<>();
     private String password;
-    private BookingController bookingController;
 
     // Constructor to initialize User object
     public User(String userID, String name, String password,String email) {
@@ -20,12 +18,11 @@ public class User {
         this.password = password;
     }
 
-    public void setBookingController(BookingController bookingController) {
-        this.bookingController = bookingController;
-    }
-
     public ArrayList<Booking> getBookedTrips() {
         return bookedTrips;
+    }
+    public  ArrayList<Trip> getFavoriteTrips() {
+        return favoriteTrips;
     }
 
     public String getUserID() {
