@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FlightDB {
-    private final ArrayList<Flight> flightList= new ArrayList<>();;
+    private final ArrayList<Flight> flightList= new ArrayList<>();
 
     public FlightDB() {
 

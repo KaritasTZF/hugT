@@ -5,14 +5,12 @@
 <?import javafx.scene.layout.*?>
 
 <HBox onMouseClicked="#handleSelection" prefHeight="22.0" prefWidth="525.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ui.DayTourItem">
-   <children>
       <Label text="Tour: ">
          <padding>
             <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
          </padding>
       </Label>
       <HBox prefHeight="22.0" prefWidth="280.0">
-         <children>
             <Label fx:id="nameLabel" text="Horseback Riding on Black Sand Beaches">
                <padding>
                   <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
@@ -23,7 +21,6 @@
                   <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
                </padding>
             </Label>
-         </children>
       </HBox>
       <Label fx:id="priceLabel" minWidth="50.0" text="20000 kr.">
          <padding>
@@ -31,7 +28,6 @@
          </padding>
       </Label>
       <HBox prefHeight="22.0" prefWidth="134.0">
-         <children>
             <Label fx:id="dateLabel" minWidth="50.0" text="2025-01-01">
                <padding>
                   <Insets bottom="2.0" left="4.0" top="2.0" />
@@ -47,7 +43,5 @@
                   <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
                </padding>
             </Label>
-         </children>
       </HBox>
-   </children>
 </HBox>

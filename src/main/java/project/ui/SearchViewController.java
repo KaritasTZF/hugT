@@ -27,8 +27,6 @@ public class SearchViewController {
     @FXML private Label toLabel;
     @FXML private Label startDateLabel;
     @FXML private Label endDateLabel;
-    @FXML private Label priceLabel;
-    @FXML private Label peopleLabel;
     @FXML private Label roomsLabel;
     @FXML private ComboBox<String> fromField;
     @FXML private ComboBox<String> toField;
@@ -46,23 +44,13 @@ public class SearchViewController {
     private Hotel selectedHItem;
     private DayTour selectedDTItem;
 
-    private SearchController sc = new SearchController(this);
+    private final SearchController sc = new SearchController(this);
 
     public SearchViewController() {
     }
 
     public ListView<HBox> getResultsListView() {
         return ResultsListView;
-    }
-
-    public Flight getSelectedFlight() {
-        return selectedFItem;
-    }
-    public Hotel getSelectedHotel() {
-        return selectedHItem;
-    }
-    public DayTour getSelectedDayTour() {
-        return selectedDTItem;
     }
 
     //Input TextFields
@@ -145,10 +133,10 @@ public class SearchViewController {
                 ResultLabel.setText("Return flights: ");
                 startDateLabel.setVisible(false);
                 startDateField.setVisible(false);
-                gridPane.setRowIndex(fromField,1);
-                gridPane.setRowIndex(toField,0);
-                gridPane.setRowIndex(endDateLabel,2);
-                gridPane.setRowIndex(endDateField,2);
+                GridPane.setRowIndex(fromField,1);
+                GridPane.setRowIndex(toField,0);
+                GridPane.setRowIndex(endDateLabel,2);
+                GridPane.setRowIndex(endDateField,2);
                 endDateLabel.setVisible(true);
                 endDateField.setVisible(true);
                 sc.setStatus(SearchController.Status.TOFLIGHT);
@@ -161,8 +149,8 @@ public class SearchViewController {
                 fromField.setVisible(false);
                 toLabel.setVisible(false);
                 fromLabel.setText("Location:");
-                gridPane.setRowIndex(startDateLabel,1);
-                gridPane.setRowIndex(startDateField,1);
+                GridPane.setRowIndex(startDateLabel,1);
+                GridPane.setRowIndex(startDateField,1);
                 startDateField.setVisible(true);
                 startDateLabel.setVisible(true);
                 sc.setStatus(SearchController.Status.HOTEL);

@@ -121,10 +121,10 @@
                </padding>
             </GridPane>
             <Label layoutX="26.0" layoutY="45.0" text="Please fill in your requirements." />
-            <Button fx:id="searchButton" layoutX="304.0" layoutY="313.0" mnemonicParsing="false" onAction="#onSearch" text="Search" />
-            <Button fx:id="skipButton" layoutX="314.0" layoutY="348.0" mnemonicParsing="false" onAction="#handleSkip" text="Next" />
+            <Button layoutX="304.0" layoutY="313.0" mnemonicParsing="false" onAction="#onSearch" text="Search" />
+            <Button fx:id="skipButton" layoutX="315.0" layoutY="348.0" mnemonicParsing="false" onAction="#handleSkip" text="Next" />
          </children>
       </AnchorPane>
-      <Button fx:id="backButton" layoutX="8.0" layoutY="13.0" mnemonicParsing="false" onAction="#goToWelcome" text="Back" />
+      <Button layoutX="8.0" layoutY="13.0" mnemonicParsing="false" onAction="#goToWelcome" text="Back" />
    </children>
 </AnchorPane>

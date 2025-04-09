@@ -18,15 +18,13 @@ public class FlightItem {
         this.flight = flight;
         fromLabel.setText(flight.getFrom());
         toLabel.setText(flight.getTo());
-        timeLabel.setText(STR."\{flight.getStartTime().toString()} - \{flight.getEndTime().toString()}");
+        timeLabel.setText(flight.getStartTime().toString() +" - "+ flight.getEndTime().toString());
         dateLabel.setText(flight.getDate().toString());
-        priceLabel.setText(STR."\{flight.getPrice()} kr.");
+        priceLabel.setText(flight.getPrice()+" kr.");
     }
     public void setView(SearchViewController view) {
         this.view = view;
     }
-
-    public Flight getFlight() {return this.flight;}
 
     public void handleSelection() {
         if (view !=null) {

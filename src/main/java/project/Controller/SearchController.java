@@ -114,7 +114,7 @@ public class SearchController {
     }
 
     public enum Status {
-        FROMFLIGHT, HOTEL, DAYTOUR, TOFLIGHT;
+        FROMFLIGHT, HOTEL, DAYTOUR, TOFLIGHT
     }
 
     //Takka virkni

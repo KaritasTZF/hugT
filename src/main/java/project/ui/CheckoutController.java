@@ -83,8 +83,8 @@ public class CheckoutController {
             Stage stage = (Stage) bookButton.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
-        }catch(Exception e){
-            e.printStackTrace();
+        }catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

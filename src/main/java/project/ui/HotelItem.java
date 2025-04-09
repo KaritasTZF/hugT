@@ -21,8 +21,8 @@ public class HotelItem {
         locLabel.setText(hotel.getLocation());
         startDateLabel.setText(hotel.getStartDate().toString());
         endDateLabel.setText(hotel.getEndDate().toString());
-        priceLabel.setText(String.valueOf(hotel.getPrice())+" kr.");
-        roomsLabel.setText(STR."\{String.valueOf(hotel.getRooms())} rooms");
+        priceLabel.setText(String.valueOf(hotel.getPrice())+ " kr.");
+        roomsLabel.setText(String.valueOf(hotel.getRooms())+ " rooms");
     }
     public void setView(SearchViewController view) {
         this.view = view;

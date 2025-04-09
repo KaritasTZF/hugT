@@ -7,7 +7,6 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ui.CheckoutController">
-   <children>
       <ListView fx:id="tripList" layoutX="24.0" layoutY="57.0" prefHeight="135.0" prefWidth="552.0" />
       <Label layoutX="22.0" layoutY="30.0" text="Trip checkout">
          <font>
@@ -56,5 +55,4 @@
       </ComboBox>
       <Button fx:id="bookButton" layoutX="532.0" layoutY="347.0" mnemonicParsing="false" onAction="#book" text="Book" />
       <Button fx:id="cancelButton" layoutX="24.0" layoutY="347.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
-   </children>
 </AnchorPane>
