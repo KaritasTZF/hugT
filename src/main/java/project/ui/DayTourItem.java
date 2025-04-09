@@ -18,9 +18,9 @@ public class DayTourItem {
         this.dayTour = dayTour;
         toLabel.setText(dayTour.getLocation());
         dateLabel.setText(dayTour.getDate().toString());
-        priceLabel.setText(String.valueOf(dayTour.getPrice()));
-        //timeLabel.setText(String.valueOf(dayTour.getTime()));
-        //nameLabel.setText(dayTour.getName());
+        priceLabel.setText(String.valueOf(dayTour.getPrice())+" kr.");
+        timeLabel.setText(String.valueOf(dayTour.getSchedule()));
+        nameLabel.setText(dayTour.getName());
     }
     public void setView(SearchViewController view) {
         this.view = view;

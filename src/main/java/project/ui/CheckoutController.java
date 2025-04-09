@@ -18,7 +18,6 @@ public class CheckoutController {
     @FXML private Label totalPriceLabel;
     @FXML private Label flavorLabel;
     @FXML private Label datesLabel;
-    @FXML private Label peopleLabel;
     @FXML private TextField ccField;
     @FXML private TextField cvvField;
     @FXML private Button bookButton;
@@ -70,11 +69,6 @@ public class CheckoutController {
             datesLabel.setText("From "+trip.getStartDate()+" to "+trip.getEndDate()+", "+trip.getDays()+" days.");
         } else {
             datesLabel.setVisible(false);
-        }
-        if (trip.getPeople()>1) {
-            peopleLabel.setText("An "+trip.getPeople()+"-person trip.");
-        } else {
-            peopleLabel.setText("A "+trip.getPeople()+"-person trip.");
         }
     }
 

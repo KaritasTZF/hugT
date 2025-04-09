@@ -14,7 +14,6 @@
                <children>
                   <Label fx:id="ResultLabel" layoutX="7.0" layoutY="5.0" text="Flights" />
                   <Button layoutX="7.0" layoutY="267.0" mnemonicParsing="false" onAction="#addToMyTrip" text="Add to Trip" />
-                  <Button fx:id="skipButton" layoutX="113.0" layoutY="267.0" mnemonicParsing="false" onAction="#handleSkip" text="Next" />
                   <ListView fx:id="ResultsListView" layoutY="23.0" prefHeight="236.0" prefWidth="525.0" />
                </children>
             </AnchorPane>
@@ -28,18 +27,17 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="6.0" prefHeight="429.0" prefWidth="370.0">
+      <AnchorPane layoutX="14.0" layoutY="52.0" prefHeight="470.0" prefWidth="370.0">
          <children>
-            <GridPane fx:id="gridPane" hgap="10.0" layoutX="14.0" layoutY="54.0" prefHeight="329.0" prefWidth="355.0" vgap="10.0">
+            <GridPane fx:id="gridPane" hgap="10.0" layoutX="14.0" layoutY="54.0" prefHeight="246.0" prefWidth="355.0" vgap="10.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -123,9 +121,10 @@
                </padding>
             </GridPane>
             <Label layoutX="26.0" layoutY="45.0" text="Please fill in your requirements." />
-            <Button fx:id="searchButton" layoutX="304.0" layoutY="384.0" mnemonicParsing="false" onAction="#onSearch" text="Search" />
-            <Button fx:id="backButton" mnemonicParsing="false" onAction="#goToWelcome" text="Back" />
+            <Button fx:id="searchButton" layoutX="304.0" layoutY="313.0" mnemonicParsing="false" onAction="#onSearch" text="Search" />
+            <Button fx:id="skipButton" layoutX="314.0" layoutY="348.0" mnemonicParsing="false" onAction="#handleSkip" text="Next" />
          </children>
       </AnchorPane>
+      <Button fx:id="backButton" layoutX="8.0" layoutY="13.0" mnemonicParsing="false" onAction="#goToWelcome" text="Back" />
    </children>
 </AnchorPane>

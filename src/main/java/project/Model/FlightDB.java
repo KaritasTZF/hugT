@@ -15,8 +15,8 @@ public class FlightDB {
 
     }
 
-    public void createFlight(String from, String to, LocalDate date, int availableSeats, LocalTime startTime, LocalTime endTime, int price) {
-        flightList.add(new Flight(from,to, date, availableSeats,startTime,endTime,price));
+    public void createFlight(String from, String to, LocalDate date, int people, LocalTime startTime, LocalTime endTime, int price) {
+        flightList.add(new Flight(from,to, date, people,startTime,endTime,price));
     }
 
     public ArrayList<Flight> getFlightList(String from, String to, LocalDate date){
@@ -36,7 +36,7 @@ public class FlightDB {
                 LocalTime endTime = LocalTime.parse(splitString[3].trim(),formatter);
 
                 //TODO er ekki að implementa Seats alveg strax, set 100 á alla. 4F er ekki með price, setjum eins 20000 á allt
-                createFlight(fromResult,toResult,date,100,startTime,endTime,20000);
+                createFlight(fromResult,toResult,date,1,startTime,endTime,20000);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);

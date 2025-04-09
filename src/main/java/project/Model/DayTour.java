@@ -5,26 +5,29 @@ import java.time.LocalDateTime;
 
 public class DayTour {
     // attributes hér
+    private String name;
     private int people;
     private LocalDate date;
     private LocalDateTime timeStart;
     private LocalDateTime timeEnd;
+    private String schedule;
     private int price;
     private String location;
 
     // Constructor
     public DayTour(
+            String name,
       int people, 
-      LocalDate date, 
-      LocalDateTime timeStart, 
-      LocalDateTime timeEnd, 
+      LocalDate date,
+      String schedule,
       int price,
       String location
       ) {
+        this.name = name;
         this.people = people;
         this.date = date;
-        this.timeStart = timeStart;
-        this.timeEnd = timeEnd;
+        this.schedule=schedule;
+        //lesa úr schedule með substring
         this.price = price;
         this.location = location;
     }
@@ -76,4 +79,9 @@ public class DayTour {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    public String getSchedule() { return schedule;}
+    public void setSchedule(String schedule) {this.schedule = schedule;}
+    public String getName() {return name;}
+    public void setName(String name) {this.name =name;}
 }
