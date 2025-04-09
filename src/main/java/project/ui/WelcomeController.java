@@ -8,7 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import project.Controller.BookingController;
-import project.Controller.FavoriteController;
 import project.Model.User;
 
 public class WelcomeController {
@@ -22,8 +21,6 @@ public class WelcomeController {
     @FXML private Label subtitleLabel;
 
     private User user;
-
-    private FavoriteController favoriteController;
 
     public void setUser(User user) {
         this.user = user;
@@ -97,7 +94,6 @@ public class WelcomeController {
             scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
             FavoriteViewController controller = loader.getController();
             controller.setUser(user);
-            controller.setFavoriteController(new FavoriteController(user));
             controller.showData();
             stage.show();
         } catch(Exception e) {

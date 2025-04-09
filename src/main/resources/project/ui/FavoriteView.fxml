@@ -5,10 +5,12 @@
 
 <AnchorPane prefHeight="400" prefWidth="600" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ui.FavoriteViewController">
     <children>
-        <Label fx:id="favoriteLabel" layoutX="20.0" layoutY="50.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Hér birtast uppáhaldsferðir!" />
+        <Label fx:id="favoriteLabel" layoutX="20.0" layoutY="50.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="My Favorite Trips" />
 
         <!-- Vístum t.d. niðurstöðurnar í ListView -->
-        <ListView fx:id="favoriteTripsList" layoutX="20.0" layoutY="85.0" prefHeight="275.0" prefWidth="560.0" />
+        <ListView fx:id="favoriteTripsList" layoutX="20.0" layoutY="85.0" prefHeight="253.0" prefWidth="560.0" />
       <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToWelcome" text="Back" />
+      <Button fx:id="checkoutButton" layoutX="513.0" layoutY="355.0" mnemonicParsing="false" onAction="#checkout" text="Checkout" />
+      <Button fx:id="removeButton" layoutX="364.0" layoutY="355.0" mnemonicParsing="false" onAction="#removeFromFavorites" text="Remove from Favorites" />
     </children>
 </AnchorPane>

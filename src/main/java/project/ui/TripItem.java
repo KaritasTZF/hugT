@@ -30,4 +30,10 @@ public class TripItem {
         endateLabel.setText(trip.getEndDate().toString());
         priceLabel.setText(String.valueOf(trip.getPrice())+" kr.");
     }
+
+    public void handleSelection() {
+        if (view !=null) {
+            this.view.handleSelection(this.trip);
+        }
+    }
 }

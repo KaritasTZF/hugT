@@ -8,11 +8,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import project.Controller.FavoriteController;
+import project.Controller.BookingController;
 import project.Model.Trip;
 import project.Model.User;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class FavoriteViewController {
 
@@ -22,12 +23,10 @@ public class FavoriteViewController {
     @FXML
     private ListView<HBox> favoriteTripsList;
 
-    private FavoriteController favoriteController;
+    @FXML private Trip selectedTrip;
+
     private User user;
 
-    public void setFavoriteController(FavoriteController favoriteController) {
-        this.favoriteController = favoriteController;
-    }
     public void setUser(User user) {
         this.user = user;
     }
@@ -48,6 +47,10 @@ public class FavoriteViewController {
         }
     }
 
+    public void handleSelection(Trip trip) {
+        this.selectedTrip = trip;
+    }
+
     public void goToWelcome() {
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Welcome.fxml"));
@@ -62,5 +65,32 @@ public class FavoriteViewController {
         }catch(Exception e){
             throw new RuntimeException(e);
         }
+    }
+
+    public void checkout() {
+        if (selectedTrip !=null){
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Checkout.fxml"));
+                Parent root = loader.load();
+                CheckoutController controller = loader.getController();
+                controller.setUser(this.user);
+                controller.setTrip(selectedTrip);
+                BookingController bookingController = new BookingController();
+                controller.setBookingController(bookingController);
+                Stage stage = (Stage) favoriteLabel.getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+                stage.show();
+            }catch(Exception e){
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public void removeFromFavorites() {
+        user.getFavoriteTrips().removeIf(trip -> Objects.equals(trip.getTripID(), selectedTrip.getTripID()));
+        selectedTrip = null;
+        goToWelcome();
     }
 }
