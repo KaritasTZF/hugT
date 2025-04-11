@@ -1,41 +1,79 @@
 package project.Controller;
 
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import project.Model.User;
+import project.ui.WelcomeController;
+import project.util.Session;
+
 
 public class UserController {
+    @FXML
+    private TextField nameField;
+
+    @FXML
+    private TextField emailField;
+
+    @FXML
+    private PasswordField passwordField;
+
+    @FXML
+    private Button continueButton;
+
+    @FXML
+    private Button proceedButton;
 
     private User user;
-    private BookingController bookingController; //Stofna BC fyrir samskipti við BC
 
-    //Smíða Bookingcontroller f. samskipti á milli
-    public UserController(User user, BookingController bookingController) {
+    public void setUser(User user) {
         this.user = user;
-        this.bookingController = bookingController;
     }
 
-    // Sækir núverandi notanda. Skilar null ef enginn user hefur verið stofnaður.
-    public User getUser() {
-        return this.user;
-    }
+    @FXML
+    public void initialize() {
+        // Sæki notanda t.d. úr Session
+        this.user = Session.getInstance().getCurrentUser();
 
-    public void deleteUser() {
-        if (this.user != null) {
-            this.user = null;
-            System.out.println("User deleted.");
-        } else {
-            System.out.println("No user to delete.");
+        // Ef user er ekki null, birtum upplýsingar
+        if (user != null) {
+            nameField.setText(user.getName());
+            emailField.setText(user.getEmail());
+            passwordField.setText(user.getPassword());
         }
     }
 
-    public void updateUser(User updatedUser) {
-        if (this.user != null) {
-            // Setja inn ný gildi ef vill
-            this.user.setName(updatedUser.getName());
-            this.user.setEmail(updatedUser.getEmail());
-            // o.s.frv.
-            System.out.println("User updated.");
-        } else {
-            System.out.println("No user to update.");
+    @FXML
+    public void handleProceed() {
+        // Uppfærum user með nýju gögnum úr TextField/PasswordField
+        if (user != null) {
+            user.setName(nameField.getText());
+            user.setEmail(emailField.getText());
+            user.setPassword(passwordField.getText());
+        }
+
+        // Hér gætirðu farið í næsta scene eða gert eitthvað annað
+        goToWelcome();
+    }
+
+    public void goToWelcome() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Welcome.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) proceedButton.getScene().getWindow();
+            Scene scene = new Scene(root);
+            WelcomeController controller = loader.getController();
+            controller.setUser(user);
+            stage.setScene(scene);
+            scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+            stage.show();
+        } catch(Exception e){
+            throw new RuntimeException(e);
         }
     }
 }

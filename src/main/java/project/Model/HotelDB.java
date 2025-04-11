@@ -9,9 +9,10 @@ import java.util.ArrayList;
 
 public class HotelDB {
     private final ArrayList<Hotel> hotelList = new ArrayList<>();
-    private Search search; //frá 4H
+    private final Search search; //frá 4H
 
     public HotelDB() {
+        //Tengjum 4H database og leitarvél 4H
         try {
             Database db = new Database();
             search = new Search(db.getHotels());
@@ -31,15 +32,18 @@ public class HotelDB {
             int people,
             int rooms
             ){
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         int pplCount = people > 0 ? people : 1;
+
         try {
+            //Leitum í 4H fyrir location, dags., manns
             ArrayList<software.objects.Hotel> availableHotels = search.initialSearch(location, checkInDate.format(formatter), checkOutDate.format(formatter), pplCount);
 
+            // Check how rooms and select the cheapest by default
             for (software.objects.Hotel hotel: availableHotels) {
                 ArrayList<software.objects.HotelRoom> roomsFrom4H = hotel.getRooms();
                 int roomCount = roomsFrom4H.size();
-                System.out.println(hotel.getName() + ": " + roomCount + " - " + rooms);
                 if (roomCount >= rooms) {
                     createHotel(hotel.getName(),roomCount,checkInDate,checkOutDate,hotel.getCheapestRoom(), hotel.getLocation());
                 }

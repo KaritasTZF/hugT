@@ -16,8 +16,6 @@ import project.ui.WelcomeController;
 import java.io.IOException;
 import java.util.Random;
 
-
-
 public class BookingController {
 
     @FXML private ListView<HBox>  bookingsListView;
@@ -47,9 +45,9 @@ public class BookingController {
         // Bætum bókuninni í listann
         user.getBookedTrips().add(newBooking);
 
-        //Bókum hjá database
-        BookH bookH = new BookH(user);
-        BookD bookD = new BookD(user);
+        //Bókum hjá database 4H og 4D
+        HotelBookInDB bookH = new HotelBookInDB(user);
+        DayTourBookInDB bookD = new DayTourBookInDB(user);
         for (Hotel hotel: trip.getHotelItems()) {
             bookH.bookHotel(hotel);
         }

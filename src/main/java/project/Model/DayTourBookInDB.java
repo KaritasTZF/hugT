@@ -6,9 +6,9 @@ import com.example.hbv4d.objects.TourDAO;
 
 import java.util.Objects;
 
-public class BookD {
+public class DayTourBookInDB {
     private User user;
-    public BookD(User user) {
+    public DayTourBookInDB(User user) {
         this.user = user;
     }
     public void bookDayTour(DayTour dayTour) {

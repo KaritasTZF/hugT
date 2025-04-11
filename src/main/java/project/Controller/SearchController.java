@@ -9,19 +9,23 @@ import java.util.ArrayList;
 
 public class SearchController {
     //Search parameters
-    private String from;            // flights only
-    private String location;        // virkar sem to fyrir flight
+    private String from;            // flights only (from fyrir fyrsta flight, to fyrir seinna)
+    private String location;        // virkar sem to/from fyrir flight
     private LocalDate startDate;    // ATH 4H tekur bara 3 checkIn dagsetningsar, sjá Readme þeirra
     private LocalDate endDate;      //
-    private int maxPrice;           // D&H; 4F er ekki með verð
-    private int people;             // Flights only; 4D notar ekki fjöldi manns
+    private int maxPrice;           // D&H; 4F er ekki með verð. Notum 20 000 kr fyrir öll flight
+    private int people;             // Hotels only; D&F hugsa bara um eina manneskju
     private int rooms;              // hotels only
 
+    // Öll database hinna hópanna
     private final FlightDB flightDB;
     private final HotelDB hotelDB;
     private final DayTourDB dayTourDB;
-    private Status status = Status.FROMFLIGHT;
-    private final Trip myTrip=new Trip();
+
+    private Status status = Status.FROMFLIGHT;  //Enum til að fylgjast með skref leitarvélsins
+    private final Trip myTrip=new Trip();       // Constructum trip object
+
+    // view handlar allt varðandi javafx; SearchController handlar leitina og logic
     private final SearchViewController view;
 
     public SearchController(SearchViewController view) {
@@ -30,6 +34,7 @@ public class SearchController {
         this.dayTourDB = new DayTourDB();
         this.view = view;
     }
+
 
     //setterar og getterar
     public void setFrom(String from) {
@@ -84,7 +89,8 @@ public class SearchController {
         this.status = status;
     }
 
-    //Searching methods
+    // Searching methods ----------------------------------------------------------------------------------------------
+    //Þessi föll sækja í D/F/H DB klasanna sem sækja í 4D/4F/4H gagnagrunna
 
     //Leitar eftir flug í flightDB
     public ArrayList<Flight> findAvailableFlights(String fromLoc, String toLoc, LocalDate date) {
@@ -122,27 +128,31 @@ public class SearchController {
         return dayTourReturnList;
     }
 
+    //-----------------------------------------------------------------------------------------------------------------
+    // Skilgreinum hjálpar enum okkar sem fylgist með hvað er verið að leita af - Flight (Til/Frá), Hotel eða Day Tour
+
     public enum Status {
         FROMFLIGHT, HOTEL, DAYTOUR, TOFLIGHT
     }
 
-    //Takka virkni
+    //Við takka á view -------------------------------------------------------------------------------------------------
 
-    // Við search takki, ákveður hvað að search-a
+    // Við search takki, ákveður hvað að search-a og hvort inputtið sé gilt
     public void onSearch() {
         switch(status) {
             case Status.FROMFLIGHT:
                 if (from != null && location != null && startDate != null) {
                     ArrayList<Flight> flightsArrayList = findAvailableFlights(from,location,startDate);
+                    //Kallar á SearchViewController til að sýna listann
                     view.loadFlightsToList(view.getResultsListView(), flightsArrayList);
-                    flightsArrayList = null;
+                } else {
+                    System.out.println("ATH from, to, dags.");
                 }
                 break;
             case Status.TOFLIGHT:
                 if (from != null && location != null && endDate != null && endDate.isAfter(startDate)) {
                     ArrayList<Flight> flightsArrayList = findAvailableFlights(location,from,endDate);
                     view.loadFlightsToList(view.getResultsListView(),flightsArrayList);
-                    flightsArrayList = null;
                 }
                 break;
             case Status.HOTEL:
@@ -150,20 +160,18 @@ public class SearchController {
                 if (location != null && endDate != null && startDate != null && endDate.isAfter(startDate)) {
                     ArrayList<Hotel> hotelsArrayList = findAvailableHotels();
                     view.loadHotelsToList(view.getResultsListView(),hotelsArrayList);
-                    hotelsArrayList = null;
                 }
                 break;
             case Status.DAYTOUR:
                 if (location != null && endDate != null && startDate != null && endDate.isAfter(startDate)) {
                     ArrayList<DayTour> dayToursArrayList = findAvailableDayTours();
                     view.loadDayToursToList(view.getResultsListView(),dayToursArrayList);
-                    dayToursArrayList = null;
                 }
                 break;
         }
     }
 
-    //við Add takkinn. Finnur hvað er valið í ResultsListView og setur það inn í Trip item
+    //við Add takkinn, kallað frá view. Finnur hvað er valið í ResultsListView og setur það inn í Trip item
     public void addToMyTrip(Flight selectedFItem, Hotel selectedHItem, DayTour selectedDTItem) {
         switch (status) {
             case FROMFLIGHT, TOFLIGHT:

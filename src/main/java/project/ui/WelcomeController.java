@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import project.Controller.BookingController;
+import project.Controller.UserController;
 import project.Model.User;
 
 public class WelcomeController {
@@ -24,10 +25,9 @@ public class WelcomeController {
 
     public void setUser(User user) {
         this.user = user;
-        System.out.println("Welcome set user " + user.getUserID());
 
         // Uppfæra welcomeLabel með nafni notanda og notum stóra stafi í textanum
-        welcomeLabel.setText("VELKOMINN " + user.getName().toUpperCase() + "!");
+        welcomeLabel.setText("VELKOMIN/N " + user.getName().toUpperCase() + "!");
         // Ef þörf er á að uppfæra undirtitilinn (hér látið hann vera stöðugur):
         subtitleLabel.setText("FERÐALAGIÐ HEFST HÉR");
     }
@@ -44,7 +44,7 @@ public class WelcomeController {
             controller.setUser(user);
             stage.show();
         } catch(Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -53,7 +53,7 @@ public class WelcomeController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/User.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) toUser.getScene().getWindow();
-            UserViewController controller = loader.getController();
+            UserController controller = loader.getController();
             controller.setUser(user);
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -88,13 +88,13 @@ public class WelcomeController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/FavoriteView.fxml"));
             Parent root = loader.load();
-            Stage stage = (Stage) toBookings.getScene().getWindow();
+            Stage stage = (Stage) toFavTrips.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
             FavoriteViewController controller = loader.getController();
-            controller.setUser(user);
-            controller.showData();
+            controller.setUser(user); // Pass user through to next page
+            controller.showData(); //
             stage.show();
         } catch(Exception e) {
             throw new RuntimeException(e);

@@ -17,20 +17,17 @@ import java.util.Objects;
 
 public class FavoriteViewController {
 
-    @FXML
-    private Label favoriteLabel;
+    @FXML private Label favoriteLabel;
 
-    @FXML
-    private ListView<HBox> favoriteTripsList;
-
-    @FXML private Trip selectedTrip;
+    @FXML private ListView<HBox> favoriteTripsList; // The javafx ListView element; items defined in TripItem
+    @FXML private Trip selectedTrip; //trip selected, passed from TripItem
 
     private User user;
-
     public void setUser(User user) {
         this.user = user;
     }
 
+    //Workaround of constructor; always called upon when switching to Favorites page. Shows the list of trips
     public void showData() {
         for (Trip trip: user.getFavoriteTrips()) {
             try {
@@ -47,6 +44,7 @@ public class FavoriteViewController {
         }
     }
 
+    //Called by TripItem when its entry is selected
     public void handleSelection(Trip trip) {
         this.selectedTrip = trip;
     }
@@ -57,7 +55,8 @@ public class FavoriteViewController {
             Parent root = loader.load();
             Stage stage = (Stage) favoriteLabel.getScene().getWindow();
             WelcomeController controller = loader.getController();
-            controller.setUser(user);
+            controller.setUser(user); //Pass user through to new scene & controller
+            //CSS
             Scene scene = new Scene(root);
             stage.setScene(scene);
             scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
@@ -67,16 +66,22 @@ public class FavoriteViewController {
         }
     }
 
-    public void checkout() {
+    // go to book the selected trip
+    public void goToCheckout() {
         if (selectedTrip !=null){
             try{
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Checkout.fxml"));
                 Parent root = loader.load();
+
                 CheckoutController controller = loader.getController();
-                controller.setUser(this.user);
-                controller.setTrip(selectedTrip);
+                controller.setUser(this.user); //Pass user through to new scene & controller
+                controller.setTrip(selectedTrip); // pass trip to checkout screen
+
+                // create and set booking controller for the checkout screen
                 BookingController bookingController = new BookingController();
                 controller.setBookingController(bookingController);
+
+                //put CSS in
                 Stage stage = (Stage) favoriteLabel.getScene().getWindow();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
@@ -88,6 +93,7 @@ public class FavoriteViewController {
         }
     }
 
+    //Remove selected trip from favorites list
     public void removeFromFavorites() {
         user.getFavoriteTrips().removeIf(trip -> Objects.equals(trip.getTripID(), selectedTrip.getTripID()));
         selectedTrip = null;

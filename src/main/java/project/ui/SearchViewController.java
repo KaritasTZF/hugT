@@ -58,7 +58,6 @@ public class SearchViewController {
 
     public void setUser(User user) {
         this.user = user;
-        System.out.println("Search set user " + user.getUserID());
     }
 
     public ListView<HBox> getResultsListView() {
@@ -73,7 +72,7 @@ public class SearchViewController {
     //Input TextFields
     public void updateFrom() {sc.setFrom(fromField.getValue());}
     public void updateTo() {sc.setLocation(toField.getValue());}
-    public void updatePrice() {sc.setMaxPrice((int) priceSlider.getValue());}
+    public void updatePrice() {sc.setMaxPrice((int) priceSlider.getValue());System.out.println(sc.getMaxPrice());}
     public void updatePeople() {sc.setPeople(peopleField.getValue());}
     public void updateStartDate() {sc.setStartDate(startDateField.getValue());}
     public void updateEndDate() {sc.setEndDate(endDateField.getValue());}
@@ -225,22 +224,21 @@ public class SearchViewController {
 
     //Áfram takki
     public void goToCheckout() {
-        if (MyTripListView.getItems() !=null){
-            try{
+        if (MyTripListView.getItems() != null) {
+            try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Checkout.fxml"));
                 Parent root = loader.load();
                 CheckoutController controller = loader.getController();
                 controller.setUser(this.user);
                 controller.setTrip(sc.getMyTrip());
                 BookingController bookingController = new BookingController();
-                //user.getBookedTrips().add(sc.getMyTrip());
                 controller.setBookingController(bookingController);
                 Stage stage = (Stage) fromField.getScene().getWindow();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
                 stage.show();
-            }catch(Exception e){
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }
