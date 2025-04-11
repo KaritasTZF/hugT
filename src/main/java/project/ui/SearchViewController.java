@@ -94,7 +94,7 @@ public class SearchViewController {
     public void loadFlightsToList(ListView<HBox> listView, ArrayList<Flight> flightArrayList) {
         for (Flight flight: flightArrayList ) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/FlightItem.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/listItems/FlightItem.fxml"));
                 Parent flightItem = loader.load();
                 FlightItem controller = loader.getController();
                 controller.setData(flight);
@@ -110,7 +110,7 @@ public class SearchViewController {
         for (Hotel hotel: hotelArrayList) {
             System.out.println(hotel.getName());
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/HotelItem.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/listItems/HotelItem.fxml"));
                 Parent hotelItem = loader.load();
                 HotelItem controller = loader.getController();
                 controller.setData(hotel);
@@ -124,7 +124,7 @@ public class SearchViewController {
     public void loadDayToursToList(ListView<HBox> listView, ArrayList<DayTour> dayTourArrayList) {
         for (DayTour dayTour: dayTourArrayList) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/DayTourItem.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/listItems/DayTourItem.fxml"));
                 Parent dayTourItem =loader.load();
                 DayTourItem controller =loader.getController();
                 controller.setData(dayTour);

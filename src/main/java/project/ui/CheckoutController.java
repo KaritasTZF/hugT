@@ -49,7 +49,7 @@ public class CheckoutController {
 
         for (Flight flight:trip.getFlightItems() ) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/FlightItem.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/listItems/FlightItem.fxml"));
                 Parent flightItem = loader.load();
                 FlightItem controller = loader.getController();
                 controller.setData(flight);
@@ -61,7 +61,7 @@ public class CheckoutController {
         }
         for (Hotel hotel: trip.getHotelItems()) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/HotelItem.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/listItems/HotelItem.fxml"));
                 Parent hotelItem = loader.load();
                 HotelItem controller = loader.getController();
                 controller.setData(hotel);
@@ -72,7 +72,7 @@ public class CheckoutController {
         }
         for (DayTour dayTour: trip.getDayTourItems()) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/DayTourItem.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/listItems/DayTourItem.fxml"));
                 Parent dayTourItem =loader.load();
                 DayTourItem controller =loader.getController();
                 controller.setData(dayTour);

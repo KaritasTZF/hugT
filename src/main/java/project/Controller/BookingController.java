@@ -96,7 +96,7 @@ public class BookingController {
     public void showData() {
         for (Booking booking: user.getBookedTrips() ) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/BookingItem.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/listItems/BookingItem.fxml"));
                 Parent bookingItem = loader.load();
                 BookingItem controller = loader.getController();
                 controller.setData(booking);

@@ -32,7 +32,7 @@ public class FavoriteViewController {
     public void showData() {
         for (Trip trip: user.getFavoriteTrips()) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/TripItem.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/listItems/TripItem.fxml"));
                 Parent favoriteItem = loader.load();
                 TripItem controller = loader.getController();
                 controller.setView(this);
