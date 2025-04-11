@@ -96,32 +96,28 @@ public class SearchController {
         return hotelDB.getHotelList(this.location, this.startDate, this.endDate, this.people, this.rooms);
     }
 
-    //Leitar eftir dayTour í dayTourDB
+    //Leitar eftir dayTour í dayTourDB - við getum ekki notað leitarfall hóps D
     public ArrayList<DayTour> findAvailableDayTours() {
         ArrayList<DayTour> dayTourDBList = dayTourDB.getDayTourList();
         ArrayList<DayTour> dayTourReturnList= new ArrayList<>();
 
+        // Passa íslensku stafi; 4D tekur bara við "Vik" og ekki "Vík". Stafir sem koma til sögu í gagnagrunn 4D eru: á,í,ó,ö,Þ
+        String engLocation = location.replace("á","a").replace("í","i").replaceAll("[öó]","o").replace("Þ","Th");
+
         for (DayTour dayTour : dayTourDBList) {
-            // Filter eftir staðsetningu: Athuga hvort dayTour location sé sú sama (óháð stórum/lágu stöfum)
-            if (!dayTour.getLocation().equalsIgnoreCase(location)) {
-                continue;
+            // Filter eftir staðsetningu: Athuga hvort dayTour location sé sú sama
+            if (dayTour.getLocation().trim().equals(engLocation.trim())) {
+                // Filtera eftir dagsetningu: dayTour verður að vera á eða eftir startDate og á eða fyrir endDate
+                if ((dayTour.getDate().isAfter(startDate) || dayTour.getDate().isEqual(startDate))) {
+                    if ((dayTour.getDate().isBefore(endDate) || dayTour.getDate().isEqual(endDate))) {
+                        //Filtera eftir verði: dayTour verð verður að vera minni eða jafnt og maxPrice
+                        if (dayTour.getPrice() <= maxPrice) {
+                            // Ef skilyrðin eru uppfyllt, bætum við dayTour við í niðurstöðulistann
+                            dayTourReturnList.add(dayTour);
+                        }
+                    }
+                }
             }
-
-            // Filtera eftir dagsetningu: dayTour verður að vera á eða eftir startDate og á eða fyrir endDate
-            if (!(dayTour.getDate().isAfter(startDate) || dayTour.getDate().isEqual(startDate))) {
-                continue;
-            }
-            if (!(dayTour.getDate().isBefore(endDate) || dayTour.getDate().isEqual(endDate))) {
-                continue;
-            }
-
-            // Filtera eftir verði: dayTour verð verður að vera minni eða jafnt og maxPrice
-            if (dayTour.getPrice() <= maxPrice) {
-                continue;
-            }
-
-            // Ef allar skilyrði eru uppfyllt, bæta dayTour við í niðurstöðulistann
-            dayTourReturnList.add(dayTour);
         }
         return dayTourReturnList;
     }
