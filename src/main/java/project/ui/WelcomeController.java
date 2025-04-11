@@ -55,6 +55,7 @@ public class WelcomeController {
             Stage stage = (Stage) toUser.getScene().getWindow();
             UserController controller = loader.getController();
             controller.setUser(user);
+            controller.showData();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());

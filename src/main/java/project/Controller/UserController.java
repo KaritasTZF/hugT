@@ -10,36 +10,25 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import project.Model.User;
 import project.ui.WelcomeController;
-import project.util.Session;
 
 
 public class UserController {
-    @FXML
-    private TextField nameField;
+    // input fields
+    @FXML private TextField nameField;
+    @FXML private TextField emailField;
+    @FXML private PasswordField passwordField;
 
-    @FXML
-    private TextField emailField;
-
-    @FXML
-    private PasswordField passwordField;
-
-    @FXML
-    private Button continueButton;
-
-    @FXML
-    private Button proceedButton;
+    @FXML private Button proceedButton; // update info
 
     private User user;
 
+    // constructor workaround. alltaf kallað þegar skipt er á User síðu (þe frá welcome)
     public void setUser(User user) {
         this.user = user;
     }
 
-    @FXML
-    public void initialize() {
-        // Sæki notanda t.d. úr Session
-        this.user = Session.getInstance().getCurrentUser();
-
+    // constructor workaround. alltaf kallað þegar skipt er á User síðu (þe frá welcome)
+    public void showData() {
         // Ef user er ekki null, birtum upplýsingar
         if (user != null) {
             nameField.setText(user.getName());
@@ -48,7 +37,6 @@ public class UserController {
         }
     }
 
-    @FXML
     public void handleProceed() {
         // Uppfærum user með nýju gögnum úr TextField/PasswordField
         if (user != null) {
@@ -57,7 +45,6 @@ public class UserController {
             user.setPassword(passwordField.getText());
         }
 
-        // Hér gætirðu farið í næsta scene eða gert eitthvað annað
         goToWelcome();
     }
 

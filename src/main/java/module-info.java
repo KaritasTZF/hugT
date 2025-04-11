@@ -11,8 +11,4 @@ module project {
     exports project.Model;
     exports project.Controller;
     exports project.ui;
-    exports project.util;
-    opens project.util to javafx.fxml;
-//    exports project;
-//    opens project to javafx.fxml;
 }

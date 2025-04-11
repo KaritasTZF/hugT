@@ -10,9 +10,6 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import project.Model.User;
-import project.util.Session;
-
-import java.util.UUID;
 
 public class AuthController {
 
@@ -38,10 +35,7 @@ public class AuthController {
 
     private User user; //user to log in
 
-    /**
-     * Event handler fyrir Sign In takkan.
-     */
-    @FXML
+    //Event handler fyrir Sign In takkan.
     public void handleSignIn() {
         String username = signinUsernameField.getText();
         String password = signinPasswordField.getText();
@@ -56,43 +50,25 @@ public class AuthController {
             alert.showAndWait();
             return;
         }
-        //Búum til nýtt user
-        user = new User("0",username,password,"");
+        //Búum til nýtt user - dummy info fyrir demo
+        user = new User("0",username,password,"something@hi.is");
 
         if (user != null) {
             // Notandi fannst, athugum hvort lykilorðið samsvari.
-            if (true) {
-                Session.getInstance().setCurrentUser(user);
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Sign In Tókst");
-                alert.setHeaderText(null);
-                alert.setContentText("Velkomin/nn " + username + "!");
-                alert.showAndWait();
 
-                // Fara í Welcome.fxml
-                goToWelcome();
-            } else {
-                // Lykilorðið er rangt.
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Sign In Mistókst");
-                alert.setHeaderText(null);
-                alert.setContentText("Rangt lykilorð. Reyndu aftur.");
-                alert.showAndWait();
-            }
-        } else {
-            // Notandi fannst ekki í gagnagrunninum.
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Notandi Ekki Finndur");
+            alert.setTitle("Sign In Tókst");
             alert.setHeaderText(null);
-            alert.setContentText("Notandi með þetta notendanafn fannst ekki. Vinsamlegast notaðu Sign Up til að búa til aðgang.");
+            alert.setContentText("Velkomin/nn " + username + "!");
             alert.showAndWait();
+
+            // Fara í Welcome.fxml
+            goToWelcome();
+
         }
     }
 
-    /**
-     * Event handler fyrir Sign Up takkan.
-     */
-    @FXML
+    //Event handler fyrir Sign Up takkan.
     public void handleSignUp() {
         String username = signupUsernameField.getText();
         String password = signupPasswordField.getText();
@@ -110,53 +86,37 @@ public class AuthController {
             return;
         }
 
-        //Búum til nýtt user
-        user = new User("0",username,password,"");
-
-        if (user != null) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Sign Up Mistókst");
-            alert.setHeaderText(null);
-            alert.setContentText("Notandi með þetta notendanafn er þegar til.");
-            alert.showAndWait();
-            return;
-        }
+        //Búum til nýtt user - dummy info fyrir demo
+        user = new User("0",username,"1234","");
 
         // Búa til einstakt userId fyrir nýja skráningu
-        String userId = UUID.randomUUID().toString();
-        User newUser = new User(userId, username, password, email);
+        //String userId = UUID.randomUUID().toString();
+        //User newUser = new User(userId, username, password, email);
 
-        // Vistum notandann í gagnagrunninum.
-        boolean inserted = true;
-        if (inserted) {
-            Session.getInstance().setCurrentUser(newUser);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Sign Up Tókst");
-            alert.setHeaderText(null);
-            alert.setContentText("Skráning tókst! Velkomin/nn " + username + "!");
-            alert.showAndWait();
+        //user = newUser;
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Sign Up Tókst");
+        alert.setHeaderText(null);
+        alert.setContentText("Skráning tókst! Velkomin/nn " + username + "!");
+        alert.showAndWait();
 
-            // Fara í Welcome.fxml
-            goToWelcome();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Sign Up Mistókst");
-            alert.setHeaderText(null);
-            alert.setContentText("Ekki tókst að búa til aðgang. Reyndu aftur síðar.");
-            alert.showAndWait();
-        }
+        // Fara í Welcome.fxml
+        goToWelcome();
+
     }
 
-    /**
-     * Aðferð til að hlaða Welcome.fxml og skipta yfir á nýja scene.
-     */
+    //Aðferð til að hlaða Welcome.fxml og skipta yfir á nýja scene.
     private void goToWelcome() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/Welcome.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) signinUsernameField.getScene().getWindow();
+
+            //pass current User through to new scene
             WelcomeController controller = loader.getController();
             controller.setUser(user);
+
+            //CSS
             Scene scene = new Scene(root);
             stage.setScene(scene);
             scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
