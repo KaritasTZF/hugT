@@ -14,6 +14,9 @@ import project.Model.DayTour;
 import project.Model.Flight;
 import project.Model.Hotel;
 import project.Model.User;
+import project.ui.listItems.DayTourItem;
+import project.ui.listItems.FlightItem;
+import project.ui.listItems.HotelItem;
 
 import java.io.IOException;
 import java.util.ArrayList;

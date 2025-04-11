@@ -1,23 +1,26 @@
-package project.ui;
+package project.ui.listItems;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import project.Controller.BookingController;
-import project.Model.Booking;
 import project.Model.Trip;
+import project.ui.FavoriteViewController;
 
-public class BookingItem {
+public class TripItem {
+
     @FXML private Label locLabel;
     @FXML private Label startDateLabel;
     @FXML private Label endateLabel;
     @FXML private Label priceLabel;
 
-    private Booking booking;
-    private BookingController view;
+    private FavoriteViewController view;
+    private Trip trip;
 
-    public void setData(Booking booking) {
-        this.booking = booking;
-        Trip trip = booking.getTrip();
+    public void setView(FavoriteViewController view) {
+        this.view = view;
+    }
+
+    public void setData(Trip trip) {
+        this.trip = trip;
         if (trip.getHotelItems() != null && !trip.getHotelItems().isEmpty()) {
             locLabel.setText(trip.getHotelItems().getFirst().getLocation());
         } else {
@@ -29,13 +32,9 @@ public class BookingItem {
         priceLabel.setText(String.valueOf(trip.getPrice())+" kr.");
     }
 
-    public void setView(BookingController view) {
-        this.view = view;
-    }
-
     public void handleSelection() {
         if (view !=null) {
-            this.view.showBookingDetails(booking);
+            this.view.handleSelection(this.trip);
         }
     }
 }

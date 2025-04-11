@@ -1,8 +1,9 @@
-package project.ui;
+package project.ui.listItems;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import project.Model.DayTour;
+import project.ui.SearchViewController;
 
 public class DayTourItem {
     @FXML private Label nameLabel;

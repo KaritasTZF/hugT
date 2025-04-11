@@ -1,8 +1,9 @@
-package project.ui;
+package project.ui.listItems;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import project.Model.Flight;
+import project.ui.SearchViewController;
 
 public class FlightItem {
     @FXML private Label fromLabel;

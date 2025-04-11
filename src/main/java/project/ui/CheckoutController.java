@@ -9,6 +9,9 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import project.Controller.BookingController;
 import project.Model.*;
+import project.ui.listItems.DayTourItem;
+import project.ui.listItems.FlightItem;
+import project.ui.listItems.HotelItem;
 
 import java.io.IOException;
 

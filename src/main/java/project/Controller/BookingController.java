@@ -10,7 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import project.Model.*;
-import project.ui.BookingItem;
+import project.ui.listItems.BookingItem;
 import project.ui.WelcomeController;
 
 import java.io.IOException;
@@ -112,7 +112,6 @@ public class BookingController {
     public void showBookingDetails(Booking booking) {
         if (booking != null) {
             bookingIdLabel.setText("Booking ID: " + booking.getBookingID());
-            // Hér er bara sýndur Trip ID; breyttu ef þú þarft að sýna meira
             tripLabel.setText("Trip: " + booking.getTrip().getTripID());
             statusLabel.setText("Status: " + booking.getStatus());
             confirmationLabel.setText("Confirmation #: " + booking.getConfirmationNr());

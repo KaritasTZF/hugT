@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import project.Controller.BookingController;
 import project.Model.Trip;
 import project.Model.User;
+import project.ui.listItems.TripItem;
 
 import java.io.IOException;
 import java.util.Objects;
