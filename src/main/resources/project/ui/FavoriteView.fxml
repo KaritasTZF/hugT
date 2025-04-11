@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400" prefWidth="600" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ui.FavoriteViewController">
+<AnchorPane styleClass="background" prefHeight="400" prefWidth="600" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ui.FavoriteViewController">
     <children>
         <Label fx:id="favoriteLabel" layoutX="20.0" layoutY="50.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="My Favorite Trips" />
         <ListView fx:id="favoriteTripsList" layoutX="20.0" layoutY="85.0" prefHeight="253.0" prefWidth="560.0" />
