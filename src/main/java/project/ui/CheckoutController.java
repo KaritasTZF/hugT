@@ -23,7 +23,6 @@ public class CheckoutController {
     @FXML private TextField ccField;
     @FXML private TextField cvvField;
     @FXML private Button bookButton;
-    @FXML private Button cancelButton;
     @FXML private ComboBox mmField;
     @FXML private ComboBox yyField;
     @FXML private ListView<HBox> tripList;

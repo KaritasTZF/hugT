@@ -46,7 +46,6 @@ public class SearchViewController {
 
     @FXML private ListView<HBox> MyTripListView;
     @FXML private Label totalPriceLabel;
-    @FXML private HBox sliderHBox;
     @FXML private Label priceDisplay;
     @FXML private Label reqLabel;
 

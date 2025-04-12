@@ -150,7 +150,7 @@ public class SearchController {
                 if (from != null && location != null && startDate != null) {
                     view.setRequirementsTextColor(false); // makes text black
                     ArrayList<Flight> flightsArrayList = findAvailableFlights(from,location,startDate);
-                    if (flightsArrayList.isEmpty() || flightsArrayList == null) {
+                    if (flightsArrayList.isEmpty()) {
                         view.setResultsLabel("Flights: No results");
                     } else {
                         view.setResultsLabel("Flights:");

@@ -31,7 +31,6 @@ public class BookingController {
 
     public Booking createBooking(User user, Trip trip) {
         if (trip == null) {
-            System.out.println("Trip not found for ID: " + trip.getTripID());
             return null;
         }
 
