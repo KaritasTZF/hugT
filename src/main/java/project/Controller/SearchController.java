@@ -94,7 +94,13 @@ public class SearchController {
 
     //Leitar eftir flug í flightDB
     public ArrayList<Flight> findAvailableFlights(String fromLoc, String toLoc, LocalDate date) {
-        return flightDB.getFlightList(fromLoc, toLoc, date);
+        // þetta hefði verið price filter ef F væri með verð. eins og er eru öll flug 20000 þa þetta er filterið
+        if (maxPrice >= 20000) {
+            return flightDB.getFlightList(fromLoc, toLoc, date);
+        } else {
+            return new ArrayList<>();
+        }
+
     }
 
     //Leitar eftir hotel í hotelDB
@@ -142,30 +148,61 @@ public class SearchController {
         switch(status) {
             case Status.FROMFLIGHT:
                 if (from != null && location != null && startDate != null) {
+                    view.setRequirementsTextColor(false); // makes text black
                     ArrayList<Flight> flightsArrayList = findAvailableFlights(from,location,startDate);
-                    //Kallar á SearchViewController til að sýna listann
-                    view.loadFlightsToList(view.getResultsListView(), flightsArrayList);
+                    if (flightsArrayList.isEmpty() || flightsArrayList == null) {
+                        view.setResultsLabel("Flights: No results");
+                    } else {
+                        view.setResultsLabel("Flights:");
+                        //Kallar á SearchViewController til að sýna listann
+                        view.loadFlightsToList(view.getResultsListView(), flightsArrayList);
+                    }
                 } else {
-                    System.out.println("ATH from, to, dags.");
+                    view.setRequirementsTextColor(true); // makes it red
                 }
                 break;
             case Status.TOFLIGHT:
                 if (from != null && location != null && endDate != null && endDate.isAfter(startDate)) {
+                    view.setRequirementsTextColor(false); // makes text black
                     ArrayList<Flight> flightsArrayList = findAvailableFlights(location,from,endDate);
-                    view.loadFlightsToList(view.getResultsListView(),flightsArrayList);
+                    if (flightsArrayList.isEmpty()) {
+                        view.setResultsLabel("Flights: No results");
+                    } else {
+                        view.setResultsLabel("Return flights:");
+                        //Kallar á SearchViewController til að sýna listann
+                        view.loadFlightsToList(view.getResultsListView(), flightsArrayList);
+                    }
                 }
                 break;
             case Status.HOTEL:
                 // tjekka að leit sé ekki alveg tóm. people&price hafa default gildi.
                 if (location != null && endDate != null && startDate != null && endDate.isAfter(startDate)) {
+                    view.setRequirementsTextColor(false); // makes text black
                     ArrayList<Hotel> hotelsArrayList = findAvailableHotels();
-                    view.loadHotelsToList(view.getResultsListView(),hotelsArrayList);
+                    if (hotelsArrayList.isEmpty()) {
+                        view.setResultsLabel("Hotels: No results");
+                    } else {
+                        view.setResultsLabel("Hotels:");
+                        //Kallar á SearchViewController til að sýna listann
+                        view.loadHotelsToList(view.getResultsListView(),hotelsArrayList);
+                    }
+                }else {
+                    view.setRequirementsTextColor(true); // makes it red
                 }
                 break;
             case Status.DAYTOUR:
                 if (location != null && endDate != null && startDate != null && endDate.isAfter(startDate)) {
+                    view.setRequirementsTextColor(false); // makes text black
                     ArrayList<DayTour> dayToursArrayList = findAvailableDayTours();
-                    view.loadDayToursToList(view.getResultsListView(),dayToursArrayList);
+                    if (dayToursArrayList.isEmpty()) {
+                        view.setResultsLabel("Day tours: No results");
+                    } else {
+                        view.setResultsLabel("Day tours:");
+                        //Kallar á SearchViewController til að sýna listann
+                        view.loadDayToursToList(view.getResultsListView(),dayToursArrayList);
+                    }
+                }else {
+                    view.setRequirementsTextColor(true); // makes it red
                 }
                 break;
         }

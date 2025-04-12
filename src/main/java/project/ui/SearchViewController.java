@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import project.Controller.BookingController;
 import project.Controller.SearchController;
@@ -47,6 +48,7 @@ public class SearchViewController {
     @FXML private Label totalPriceLabel;
     @FXML private HBox sliderHBox;
     @FXML private Label priceDisplay;
+    @FXML private Label reqLabel;
 
     private User user;
 
@@ -67,15 +69,12 @@ public class SearchViewController {
         return ResultsListView;
     }
 
-    public void updateSlider()  {
-        priceDisplay.setText(priceSlider.getValue() + " kr. ");
-        updatePrice();
-    }
+
 
     //Input TextFields
     public void updateFrom() {sc.setFrom(fromField.getValue());}
     public void updateTo() {sc.setLocation(toField.getValue());}
-    public void updatePrice() {sc.setMaxPrice((int) priceSlider.getValue());System.out.println(sc.getMaxPrice());}
+    public void updatePrice() {sc.setMaxPrice((int) priceSlider.getValue());}
     public void updatePeople() {sc.setPeople(peopleField.getValue());}
     public void updateStartDate() {sc.setStartDate(startDateField.getValue());}
     public void updateEndDate() {sc.setEndDate(endDateField.getValue());}
@@ -89,6 +88,8 @@ public class SearchViewController {
         updateEndDate();
         updateRooms();
     }
+
+    // ----------------------------------------------------------------------------------------------------------------
 
     // to load flights onto list
     public void loadFlightsToList(ListView<HBox> listView, ArrayList<Flight> flightArrayList) {
@@ -141,6 +142,9 @@ public class SearchViewController {
     public void handleHotelSelection(Hotel hotel) {selectedHItem = hotel;}
     public void handleDayTourSelection(DayTour dayTour) {selectedDTItem = dayTour;}
 
+    // ----------------------------------------------------------------------------------------------------------------
+    // Hjálparföll fyrir display dót, þeas listar og birta/sýna réttu inputs osfv
+
     //Helper, change Input fields, ResultsListView, ResultsLabel
     private void updateStatus() {
         ResultsListView.getItems().clear();
@@ -149,7 +153,7 @@ public class SearchViewController {
         selectedHItem = null;
         switch (sc.getStatus()) {
             case FROMFLIGHT:
-                ResultLabel.setText("Return flights: ");
+                setResultsLabel("Return flights: ");
                 startDateLabel.setVisible(false);
                 startDateField.setVisible(false);
                 GridPane.setRowIndex(fromField,1);
@@ -158,11 +162,12 @@ public class SearchViewController {
                 GridPane.setRowIndex(endDateField,2);
                 endDateLabel.setVisible(true);
                 endDateField.setVisible(true);
+                updateSliderMax(20000);
                 sc.setStatus(SearchController.Status.TOFLIGHT);
                 break;
 
             case TOFLIGHT:
-                ResultLabel.setText("Hotels:");
+                setResultsLabel("Hotels:");
                 roomsField.setVisible(true);
                 roomsLabel.setVisible(true);
                 fromField.setVisible(false);
@@ -172,24 +177,24 @@ public class SearchViewController {
                 GridPane.setRowIndex(startDateField,1);
                 startDateField.setVisible(true);
                 startDateLabel.setVisible(true);
+                updateSliderMax(50000);
                 sc.setStatus(SearchController.Status.HOTEL);
                 break;
 
             case HOTEL:
-                ResultLabel.setText("Day Tours:");
+                setResultsLabel("Day Tours:");
                 roomsLabel.setVisible(false);
                 roomsField.setVisible(false);
                 skipButton.setVisible(false);
                 checkoutButton.setVisible(true);
                 addToFavButton.setVisible(true);
                 sc.setStatus(SearchController.Status.DAYTOUR);
+                updateSliderMax(40000);
                 break;
 
             case DAYTOUR:
                 System.out.println("error");
         }
-
-
     }
 
     //Helper, add items to MyTrip list
@@ -201,29 +206,59 @@ public class SearchViewController {
         totalPriceLabel.setText("Total Price: "+ sc.getMyTrip().getPrice()+" kr.");
     }
 
-    //sc.onSearch kallar svo á loadDFHlist föllin hér
+    // hjalpar fall sem price sliderinn kallar á
+    public void updateSlider()  {
+        priceDisplay.setText(priceSlider.getValue() + " kr. ");
+        updatePrice();
+    }
+
+    public void updateSliderMax(int maxPrice) {
+        priceSlider.setMax(maxPrice);
+        priceSlider.setValue(maxPrice);
+        updateSlider();
+    }
+
+    // to make the "Please fill in requirements" label text red or black
+    // True = red (on), false = black (off)
+    public void setRequirementsTextColor(Boolean bool) {
+        if (bool) {
+            reqLabel.setTextFill(Color.color(1,0,0));
+        } else {
+            reqLabel.setTextFill(Color.color(0,0,0));
+        }
+    }
+
+    // Display a "no search results" message / reset
+    public void setResultsLabel(String message) {
+        ResultLabel.setText(message);
+    }
+
+    // ----------------------------------------------------------------------------------------------------------------
+    // Takkar
+
+    //sc.onSearch kallar svo á loadDFHlist föllin hér fyrir ofan
     public void onSearch() {
         ResultsListView.getItems().clear();
         updateAllParams();
         sc.onSearch();
     }
 
-    //Skip takkinn. Kallar á updateStatus
+    //Skip/Next takkinn. Kallar á updateStatus
     public void handleSkip() {
         updateStatus();
     }
 
+    //Add item to trip takkinn.
     public void  addToMyTrip() {
         sc.addToMyTrip(selectedFItem,selectedHItem,selectedDTItem);
         updateMyTripList();
     }
 
-    @FXML
-    private void addToFavoriteTrips() {
+    // add trip to favorites takkinn
+    public void addToFavoriteTrips() {
         user.getFavoriteTrips().add(sc.getMyTrip());
         goToWelcome();
     }
-
 
     //Áfram takki
     public void goToCheckout() {
