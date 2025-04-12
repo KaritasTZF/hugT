@@ -108,7 +108,6 @@ public class SearchViewController {
     }
     public void loadHotelsToList(ListView<HBox> listView, ArrayList<Hotel> hotelArrayList) {
         for (Hotel hotel: hotelArrayList) {
-            System.out.println(hotel.getName());
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/ui/listItems/HotelItem.fxml"));
                 Parent hotelItem = loader.load();

@@ -66,9 +66,7 @@ public class Trip {
     }
 
     public void addFlightItem(Flight flight) {
-        if (flight == null) {
-            System.out.println("attempted to add null flight to trip");
-        } else {
+        if (flight != null) {
             this.flightItems.add(flight);
 
             //update other info
@@ -82,9 +80,7 @@ public class Trip {
         }
     }
     public void addHotelItem(Hotel hotel) {
-        if (hotel == null) {
-            System.out.println("attempted to add null hotel to trip");
-        } else {
+        if (hotel != null) {
             this.hotelItems.add(hotel);
 
             //update other info
@@ -98,9 +94,7 @@ public class Trip {
         }
     }
     public void addDayTourItem(DayTour dayTour) {
-        if (dayTour == null) {
-            System.out.println("attempted to add null day tour to trip");
-        } else {
+        if (dayTour != null) {
             this.dayTourItems.add(dayTour);
 
             //update other info

@@ -21,7 +21,6 @@ public class DayTourDB {
         //Fá öll 4D tours (þau eru ekki með filter)
         try {
             ObservableList<Tour> tours = TourDAO.listTours();
-            System.out.println("DB init "+tours.size());
             //Breytum 4D "Tour" objects í okkar DayTour objects. TourDAO tengist SQL.
             for (Tour tour : tours) {
                 createDayTour(tour.getTourName(), tour.getDate(), tour.getSchedule(), tour.getPrice(), tour.getCity());

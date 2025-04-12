@@ -34,12 +34,10 @@ public class CheckoutController {
     public void setBookingController(BookingController bookingController) {
         this.bookingController = bookingController;
         bookingController.setUser(user);
-        System.out.println("Booking set user " + user.getUserID());
     }
 
     public void setUser(User user) {
         this.user = user;
-        System.out.println("Checkout set user " + user.getUserID());
     }
 
     public void setTrip(Trip trip) {
@@ -115,7 +113,7 @@ public class CheckoutController {
 
         // Athuga að Trip sé til staðar
         if(trip == null) {
-            System.out.println("Vantar trip uppsetningu.");
+            System.out.println("Vantar trip.");
             return;
         }
 
