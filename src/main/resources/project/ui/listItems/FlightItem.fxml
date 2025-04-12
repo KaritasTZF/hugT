@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 
 <HBox onMouseClicked="#handleSelection" prefHeight="22.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ui.listItems.FlightItem">
-      <Label text="Flight: ">
+      <Label prefHeight="22.0" prefWidth="45.0" text="Flight: ">
          <HBox.margin>
             <Insets />
          </HBox.margin>
@@ -13,7 +13,7 @@
             <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
          </padding>
       </Label>
-      <HBox prefHeight="22.0" prefWidth="200">
+      <HBox maxWidth="250.0" prefHeight="22.0" prefWidth="250.0">
          <Label fx:id="fromLabel" minWidth="50.0" text="Vestmannaeyjar">
             <padding>
                <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
@@ -31,28 +31,32 @@
             </HBox.margin>
          </Label>
       </HBox>
-      <Label fx:id="dateLabel" minWidth="50.0" text="2025-01-01">
-         <padding>
-            <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
-         </padding>
-         <HBox.margin>
-            <Insets />
-         </HBox.margin>
-      </Label>
-      <Label fx:id="timeLabel" minWidth="50.0" text="00:00-00:00">
-         <padding>
-            <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
-         </padding>
-         <HBox.margin>
-            <Insets />
-         </HBox.margin>
-      </Label>
-      <Label fx:id="priceLabel" minWidth="50.0" text="20000 kr.">
-         <padding>
-            <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
-         </padding>
-         <HBox.margin>
-            <Insets />
-         </HBox.margin>
-      </Label>
+   <HBox alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="200.0">
+      <children>
+            <Label fx:id="dateLabel" alignment="CENTER_RIGHT" minWidth="50.0" text="2025-01-01">
+               <padding>
+                  <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="timeLabel" alignment="CENTER_RIGHT" minWidth="50.0" text="00:00-00:00">
+               <padding>
+                  <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="priceLabel" alignment="CENTER_RIGHT" minWidth="50.0" text="20000 kr.">
+               <padding>
+                  <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+      </children>
+   </HBox>
 </HBox>
