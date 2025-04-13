@@ -49,7 +49,7 @@ Akureyri, Reykjavík and Vestmannaeyjar.
 | Vopnafjörður      | Vopnafjörður      |                |                |
 
 - It seems that the H team misspelled Borgarnes in their database and so there are two entries in the T team's list.
-- Both "Höfn" and "Höfn í Hornafirði" appear as seperate locations - this was not noticed until the time of writing.
+- Both "Höfn" and "Höfn í Hornafirði" appear as seperate locations - this was not noticed until the time of writing and so also appears as two entries.
 
 In any case, it is possible within the T team's project to book things in different locations.
 
