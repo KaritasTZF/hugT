@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox onMouseClicked="#handleSelection" prefHeight="22.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ui.listItems.TripItem">
+    <children>
+        <Label text="Trip:">
+            <padding>
+                <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
+            </padding>
+            <HBox.margin>
+                <Insets />
+            </HBox.margin>
+        </Label>
+        <Label fx:id="locLabel" text="location">
+            <HBox.margin>
+                <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
+            </HBox.margin></Label>
+        <Label fx:id="startDateLabel" text="2000-00-00">
+            <HBox.margin>
+                <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
+            </HBox.margin></Label>
+        <Label fx:id="endateLabel" text="2000-00-00">
+            <HBox.margin>
+                <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
+            </HBox.margin></Label>
+        <Label fx:id="priceLabel" text="100000 kr.">
+            <HBox.margin>
+                <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
+            </HBox.margin></Label>
+    </children>
+</HBox>

@@ -1,0 +1,58 @@
+.root {
+    -light-blue: #aeedff;
+    -blue:#7bd6df;
+    -white:#FFFFFF;
+    -darkblue:#34606d;
+}
+
+.background {
+    -fx-background-color: -light-blue;
+}
+
+Button {
+    -fx-background-color: -darkblue;
+    -fx-border-radius: 0;
+    -fx-border: 0;
+    -fx-text-fill: -white;
+}
+Button:hover {
+    -fx-background-color: -white;
+    -fx-text-fill: -darkblue;
+}
+.tab {
+    -fx-background-color: -blue;
+    -fx-border-radius: 5;
+    -fx-border: 0;
+    -fx-text-fill: -white;
+}
+.tab:hover {
+    -fx-background-color: -white;
+    -fx-text-fill: -darkblue;
+}
+
+ComboBox {
+    -fx-background-color: -darkblue;
+    -fx-border-radius: 0;
+    -fx-border: 0;
+    -fx-text-fill: -white;
+    -fx-color: -white;
+
+}
+ComboBox:hover {
+    -fx-background-color: -white;
+    -fx-border-color: -darkblue;
+    -fx-text-fill: -darkblue;
+}
+Label {
+    -fx-text-fill: -darkblue;
+}
+
+TextField {
+    -fx-accent: -blue;
+    -fx-background-color: -white;
+    -fx-color: -darkblue;
+}
+
+.panel {
+    -fx-background-color: -blue;
+}

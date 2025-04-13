@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.hbv4d.ui.WishlistController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <children>
+        <Label layoutX="200.0" layoutY="20.0" text="Your Wishlist" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+        <ListView fx:id="wishlistListView" layoutX="50.0" layoutY="60.0" prefHeight="250.0" prefWidth="500.0" />
+        <Button onAction="#onRemoveFromWishlist" layoutX="200.0" layoutY="330.0" prefWidth="200.0" text="Remove from Wishlist"  />
+        <Button layoutX="20.0" layoutY="360.0" prefWidth="80.0" text="Back" onAction="#onBack"  />
+    </children>
+</AnchorPane>
+

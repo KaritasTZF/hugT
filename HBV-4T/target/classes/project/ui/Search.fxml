@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="945.0" styleClass="background" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ui.SearchViewController">
+   <children>
+      <AnchorPane layoutX="384.0" layoutY="-6.0" prefHeight="672.0" prefWidth="567.0">
+         <children>
+            <AnchorPane layoutX="14.0" layoutY="55.0" prefHeight="330.0" prefWidth="526.0">
+               <children>
+                  <Label fx:id="ResultLabel" layoutX="7.0" layoutY="5.0" text="Flights" />
+                  <Button layoutX="7.0" layoutY="267.0" mnemonicParsing="false" onAction="#addToMyTrip" text="Add to Trip" />
+                  <ListView fx:id="ResultsListView" layoutY="23.0" prefHeight="236.0" prefWidth="525.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="14.0" layoutY="385.0" prefHeight="278.0" prefWidth="526.0">
+               <children>
+                  <Label layoutX="6.0" layoutY="13.0" text="My Trip" />
+                  <Button fx:id="checkoutButton" layoutX="13.0" layoutY="238.0" mnemonicParsing="false" onAction="#goToCheckout" text="Checkout" visible="false" />
+                  <ListView fx:id="MyTripListView" layoutY="31.0" prefHeight="200.0" prefWidth="525.0" />
+                  <Label fx:id="totalPriceLabel" layoutX="397.0" layoutY="242.0" text="Total Price: 0 kr," />
+                   <Button fx:id="addToFavButton" layoutX="89.0" layoutY="238.0" mnemonicParsing="false" onAction="#addToFavoriteTrips" text="Add to Favorites" visible="false" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="14.0" layoutY="52.0" prefHeight="470.0" prefWidth="370.0">
+         <children>
+            <GridPane hgap="10.0" layoutX="14.0" layoutY="54.0" prefHeight="246.0" prefWidth="355.0" vgap="10.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="fromLabel" text="From:" GridPane.rowIndex="0" />
+                  <Label fx:id="toLabel" text="To:" GridPane.rowIndex="1" />
+                  <Label fx:id="startDateLabel" text="Start Date:" GridPane.rowIndex="2" />
+                  <Label fx:id="priceLabel" text="Max price:" GridPane.rowIndex="3" />
+                  <Label fx:id="peopleLabel" text="People:" GridPane.rowIndex="4" />
+                   <ComboBox fx:id="peopleField" onAction="#updatePeople" promptText="1" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                       <value>
+                           <Integer fx:value="1" />
+                       </value>
+                       <items>
+                           <FXCollections fx:factory="observableArrayList">
+                               <Integer fx:value="1" />
+                               <Integer fx:value="2" />
+                               <Integer fx:value="3" />
+                               <Integer fx:value="4" />
+                               <Integer fx:value="5" />
+                               <Integer fx:value="6" />
+                               <Integer fx:value="7" />
+                               <Integer fx:value="8" />
+                           </FXCollections>
+                       </items>
+                   </ComboBox>
+                   <DatePicker fx:id="startDateField" onAction="#updateStartDate" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                   <ComboBox fx:id="roomsField" promptText="1" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                       <value>
+                           <Integer fx:value="1" />
+                       </value>
+                       <items>
+                           <FXCollections fx:factory="observableArrayList">
+                               <Integer fx:value="1" />
+                               <Integer fx:value="2" />
+                               <Integer fx:value="3" />
+                               <Integer fx:value="4" />
+                               <Integer fx:value="5" />
+                               <Integer fx:value="6" />
+                               <Integer fx:value="7" />
+                               <Integer fx:value="8" />
+                           </FXCollections>
+                       </items>
+                   </ComboBox>
+
+                   <Label fx:id="roomsLabel" text="Rooms:" visible="false" GridPane.rowIndex="5" />
+                   <ComboBox fx:id="fromField" prefWidth="150.0" GridPane.columnIndex="1">
+                       <items>
+                           <FXCollections fx:factory="observableArrayList">
+                               <String fx:value="Akureyri" />
+                               <String fx:value="Blönduós" />
+                               <String fx:value="Borganes" />
+                               <String fx:value="Borgarnes" />
+                               <String fx:value="Egilsstaðir" />
+                               <String fx:value="Flúðir" />
+                               <String fx:value="Grindavík" />
+                               <String fx:value="Höfn í Hornafirði" />
+                               <String fx:value="Hvolsvöllur" />
+                               <String fx:value="Ísafjörður" />
+                               <String fx:value="Keflavík" />
+                               <String fx:value="Mývatnssveit" />
+                               <String fx:value="Ólafsvík" />
+                               <String fx:value="Reykjavík" />
+                               <String fx:value="Sauðárkrókur" />
+                               <String fx:value="Selfoss" />
+                               <String fx:value="Siglufjörður" />
+                               <String fx:value="Snæfellsnes" />
+                               <String fx:value="Vatnajökull" />
+                               <String fx:value="Vestmannaeyjar" />
+                               <String fx:value="Vík" />
+                               <String fx:value="Vopnafjörður" />
+                           </FXCollections>
+                       </items>
+                   </ComboBox>
+
+                   <ComboBox fx:id="toField" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                       <items>
+                           <FXCollections fx:factory="observableArrayList">
+                               <String fx:value="Akureyri" />
+                               <String fx:value="Blönduós" />
+                               <String fx:value="Borganes" />
+                               <String fx:value="Borgarnes" />
+                               <String fx:value="Egilsstaðir" />
+                               <String fx:value="Flúðir" />
+                               <String fx:value="Grindavík" />
+                               <String fx:value="Höfn í Hornafirði" />
+                               <String fx:value="Hvolsvöllur" />
+                               <String fx:value="Ísafjörður" />
+                               <String fx:value="Keflavík" />
+                               <String fx:value="Mývatnssveit" />
+                               <String fx:value="Ólafsvík" />
+                               <String fx:value="Reykjavík" />
+                               <String fx:value="Sauðárkrókur" />
+                               <String fx:value="Selfoss" />
+                               <String fx:value="Siglufjörður" />
+                               <String fx:value="Snæfellsnes" />
+                               <String fx:value="Vatnajökull" />
+                               <String fx:value="Vestmannaeyjar" />
+                               <String fx:value="Vík" />
+                               <String fx:value="Vopnafjörður" />
+                           </FXCollections>
+                       </items>
+                   </ComboBox>
+                  <Label fx:id="endDateLabel" text="End Date:" visible="false" GridPane.rowIndex="5" />
+                   <DatePicker fx:id="endDateField" onAction="#updateEndDate" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <HBox fx:id="sliderHBox" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <Label fx:id="priceDisplay" text="20000 kr." />
+                        <Slider fx:id="priceSlider" blockIncrement="10000.0" majorTickUnit="5000.0" max="20000.0" minorTickCount="0" onMouseReleased="#updateSlider" showTickMarks="true" snapToTicks="true" value="50000.0">
+                           <opaqueInsets>
+                              <Insets left="4.0" />
+                           </opaqueInsets>
+                        </Slider>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="10.0" right="20.0" top="20.0" />
+               </padding>
+            </GridPane>
+            <Label fx:id="reqLabel" layoutX="26.0" layoutY="45.0" text="Please fill in your requirements." />
+            <Button layoutX="304.0" layoutY="313.0" mnemonicParsing="false" onAction="#onSearch" text="Search" />
+            <Button fx:id="skipButton" layoutX="315.0" layoutY="348.0" mnemonicParsing="false" onAction="#handleSkip" text="Next" />
+         </children>
+      </AnchorPane>
+      <Button layoutX="8.0" layoutY="13.0" mnemonicParsing="false" onAction="#goToWelcome" text="Back" />
+   </children>
+</AnchorPane>

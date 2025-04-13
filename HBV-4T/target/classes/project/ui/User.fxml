@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="background" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.Controller.UserController">
+   <children>
+      <VBox alignment="CENTER" layoutX="50.0" layoutY="50.0" spacing="10.0">
+         <children>
+            <!-- Titill -->
+            <Label text="Notandaupplýsingar">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </VBox.margin>
+            </Label>
+
+            <!-- Nafn -->
+            <Label text="Nafn:" />
+            <TextField fx:id="nameField" editable="true" />
+
+            <!-- Netfang -->
+            <Label text="Netfang:" />
+            <TextField fx:id="emailField" editable="true" />
+
+            <!-- Lykilorð -->
+            <Label text="Lykilorð:" />
+            <PasswordField fx:id="passwordField" editable="true" />
+
+            <!-- Proceed takki -->
+            <Button fx:id="proceedButton" onAction="#handleProceed" text="Update" />
+         </children>
+      </VBox>
+      <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToWelcome" text="Back" />
+   </children>
+</AnchorPane>

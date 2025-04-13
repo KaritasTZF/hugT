@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- Note: The fx:controller attribute has been removed -->
+<VBox xmlns:fx="http://javafx.com/fxml/1" 
+      xmlns="http://javafx.com/javafx/21" 
+      spacing="10">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+    
+    <GridPane fx:id="seatGrid" prefHeight="400.0" prefWidth="400.0">
+       <columnConstraints>
+         <ColumnConstraints minWidth="10" prefWidth="100"/>
+         <ColumnConstraints minWidth="10" prefWidth="100"/>
+         <ColumnConstraints minWidth="10" prefWidth="100"/>
+         <ColumnConstraints minWidth="10" prefWidth="100"/>
+         <ColumnConstraints minWidth="10" prefWidth="100"/>
+       </columnConstraints>
+       <rowConstraints>
+         <RowConstraints minHeight="10" prefHeight="30"/>
+         <RowConstraints minHeight="10" prefHeight="30"/>
+         <RowConstraints minHeight="10" prefHeight="30"/>
+         <RowConstraints minHeight="10" prefHeight="30"/>
+         <RowConstraints minHeight="10" prefHeight="30"/>
+         <RowConstraints minHeight="10" prefHeight="30"/>
+         <RowConstraints minHeight="10" prefHeight="30"/>
+         <RowConstraints minHeight="10" prefHeight="30"/>
+         <RowConstraints minHeight="10" prefHeight="30"/>
+         <RowConstraints minHeight="10" prefHeight="30"/>
+       </rowConstraints>
+       <children>
+         <!-- Column 0 -->
+         <Button text="" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+         <Button text="" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+         <Button text="" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+         <Button text="" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+         <Button text="" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+         <Button text="" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+         <Button text="" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+         <Button text="" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+         <Button text="" GridPane.columnIndex="0" GridPane.rowIndex="8"/>
+         <Button text="" GridPane.columnIndex="0" GridPane.rowIndex="9"/>
+         
+         <!-- Column 1 -->
+         <Button text="" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+         <Button text="" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+         <Button text="" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+         <Button text="" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+         <Button text="" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+         <Button text="" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+         <Button text="" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+         <Button text="" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+         <Button text="" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+         <Button text="" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
+         
+         <!-- Column 2 is skipped for spacing -->
+         
+         <!-- Column 3 -->
+         <Button text="" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+         <Button text="" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+         <Button text="" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+         <Button text="" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+         <Button text="" GridPane.columnIndex="3" GridPane.rowIndex="4"/>
+         <Button text="" GridPane.columnIndex="3" GridPane.rowIndex="5"/>
+         <Button text="" GridPane.columnIndex="3" GridPane.rowIndex="6"/>
+         <Button text="" GridPane.columnIndex="3" GridPane.rowIndex="7"/>
+         <Button text="" GridPane.columnIndex="3" GridPane.rowIndex="8"/>
+         <Button text="" GridPane.columnIndex="3" GridPane.rowIndex="9"/>
+         
+         <!-- Column 4 -->
+         <Button text="" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
+         <Button text="" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
+         <Button text="" GridPane.columnIndex="4" GridPane.rowIndex="2"/>
+         <Button text="" GridPane.columnIndex="4" GridPane.rowIndex="3"/>
+         <Button text="" GridPane.columnIndex="4" GridPane.rowIndex="4"/>
+         <Button text="" GridPane.columnIndex="4" GridPane.rowIndex="5"/>
+         <Button text="" GridPane.columnIndex="4" GridPane.rowIndex="6"/>
+         <Button text="" GridPane.columnIndex="4" GridPane.rowIndex="7"/>
+         <Button text="" GridPane.columnIndex="4" GridPane.rowIndex="8"/>
+         <Button text="" GridPane.columnIndex="4" GridPane.rowIndex="9"/>
+       </children>
+    </GridPane>
+    
+    <HBox spacing="10">
+        <Button fx:id="saveButton" text="Vista val" onAction="#handleSave"/>
+        <Button fx:id="exitButton" text="Til baka" onAction="#handleExit"/>
+    </HBox>
+</VBox>

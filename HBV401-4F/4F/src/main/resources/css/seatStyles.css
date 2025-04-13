@@ -1,0 +1,48 @@
+.button {
+    background-color: transparent;
+    font-size: 14px;
+    min-width: 40px;
+    min-height: 40px;
+    padding: 5px;
+    text-align: center;
+    cursor: pointer;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+    color: black;
+
+    -fx-background-color: transparent;
+    -fx-font-size: 14px;
+    -fx-min-width: 40px;
+    -fx-min-height: 40px;
+    -fx-padding: 5px;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-text-fill: black;
+}
+
+.seat-available {
+    background-color: green;
+    color: white;
+    
+    -fx-background-color: green;
+    -fx-text-fill: white;
+}
+
+.seat-selected {
+    background-color: yellow;
+    color: black;
+    
+    -fx-background-color: yellow;
+    -fx-text-fill: black;
+}
+
+.seat-unavailable {
+    background-color: red;
+    color: white;
+    
+    -fx-background-color: red;
+    -fx-text-fill: white;
+}
